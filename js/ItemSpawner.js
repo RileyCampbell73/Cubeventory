@@ -21,7 +21,8 @@ function spawnGenericItem(name, weight) {
             name: 'fillShape',
             stroke: "black",
             strokeWidth: 1,
-            isColliding: false
+            isColliding: false,
+            fillColour: 'lightblue'
         }));
 
         Item.add(new Konva.Text({
@@ -53,7 +54,8 @@ function spawnGenericItem(name, weight) {
                 name: 'fillShape',
                 stroke: "black",
                 strokeWidth: 1,
-                isColliding: false
+                isColliding: false,
+                fillColour: 'lightblue'
             }));
             weight--;
             if (weight <= 0)
@@ -73,7 +75,8 @@ function spawnGenericItem(name, weight) {
                     name: 'fillShape',
                     stroke: "black",
                     strokeWidth: 1,
-                    isColliding: false
+                    isColliding: false,
+                    fillColour: 'lightblue'
                 }));
             }
             else if (under1lb < .5 && under1lb != 0) {
@@ -86,7 +89,8 @@ function spawnGenericItem(name, weight) {
                     name: 'fillShape',
                     stroke: "black",
                     strokeWidth: 1,
-                    isColliding: false
+                    isColliding: false,
+                    fillColour: 'lightblue'
                 }));
             }
 
@@ -94,9 +98,6 @@ function spawnGenericItem(name, weight) {
         }
         rowCount++;
     }
-
-
-
     Item.add(new Konva.Text({
         text: name,
         fontSize: 14,
@@ -132,7 +133,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 100,
@@ -143,7 +145,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 200,
@@ -154,7 +157,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 0,
@@ -165,7 +169,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 100,
@@ -176,7 +181,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 100,
@@ -187,7 +193,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 100,
@@ -198,7 +205,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
         x: 100,
@@ -209,7 +217,8 @@ function spawnMaul() {
         strokeWidth: 1,
         fill: 'green',
         name: 'fillShape',
-        isColliding: false
+        isColliding: false,
+        fillColour: 'green'
     }));
 
     Maul.add(new Konva.Text({

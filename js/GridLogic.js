@@ -4,6 +4,7 @@
 
 // });
 
+
 function createGridLayer() {
   var gridLayer = new Konva.Layer({ id: 'gridLayer' });
   for (let x = 0; x < 15; x++) {
@@ -320,17 +321,15 @@ function InitializeCollisionSnapping() {
         group.find('Rect').forEach(function (rect) {
           //rect.setAttr('isColliding', false)
           if (haveIntersection(rect.getClientRect(), square.getClientRect())) {
-            //target.find('.fillShape').fill('red');
             rect.fill('red')
             rect.setAttr('isColliding', true)
             square.fill('red')
             square.setAttr('isColliding', true)
           } else {
-            //target.find('.fillShape').fill('grey');
             if (!rect.getAttr('isColliding'))
-              rect.fill('grey')
+              rect.fill(rect.getAttr('fillColour'))
             if (!square.getAttr('isColliding'))
-              square.fill('grey')
+              square.fill(square.getAttr('fillColour'))
           }
         })
       })
@@ -347,3 +346,4 @@ function InitializeCollisionSnapping() {
   }
 
 }
+
