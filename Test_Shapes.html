@@ -1,0 +1,110 @@
+<head>
+  <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+  <script src="js/GridLogic.js"></script>
+  <script src="js/ItemSpawner.js"></script>
+</head>
+
+<body>
+  <div id="container"></div>
+  <div id="menu">
+    <div>
+      <button id="rotate-button">Rotate</button>
+      <button id="flip-button">Flip</button>
+      <button id="delete-button">Delete</button>
+    </div>
+  </div>
+</body>
+
+
+
+
+<script>
+
+  //TODO
+  //have some other graphic to tell when something is colliding? - May wanna use red colour. 
+  //Yeah use an image or something.
+  //Enforce snapping more - when v close to grid, 5 or 10 px away, have it snap to grid
+  //The GUIDELINE_OFFSET accomplishes this without enforcing it on DragEnd
+
+  //get into GitHub
+
+  //Future:
+  //change cube physical size. too large?
+  //Save feature
+  //spawn items from PHB
+  //needs searchable combobox - JQuery has one
+  //Custom Items
+  //pretty it up - colour the areas and label them
+  //have grid size dependant on strength
+
+
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  var GUIDELINE_OFFSET = 10;
+
+  // first we need to create a stage
+  var stage = new Konva.Stage({
+    container: 'container',
+    width: width,
+    height: height,
+  });
+
+  stage.add(createGridLayer());
+  stage.draw();
+
+  // create layer for shapes
+  var layer = new Konva.Layer();
+  // add the layer to the stage
+  stage.add(layer);
+
+
+  layer.add(spawnMaul());
+  layer.add(spawnGenericItem('string', 1))
+  //layer.add (spawnGenericItem('string', .25))
+  // layer.add (spawnGenericItem('2', 2))
+  // layer.add (spawnGenericItem('3', 3))
+  // layer.add (spawnGenericItem('4', 4))
+  // layer.add (spawnGenericItem('5', 5))
+  // layer.add (spawnGenericItem('6', 6))
+  // layer.add (spawnGenericItem('7', 7))
+  // layer.add (spawnGenericItem('8', 8))
+  //  layer.add (spawnGenericItem('9', 9))
+  // layer.add (spawnGenericItem('10', 10))
+
+  InitializeMenu();
+  InitializeCollisionSnapping()
+
+
+
+
+</script>
+
+<style>
+  /* body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f0f0f0;
+    } */
+
+  #menu {
+    display: none;
+    position: absolute;
+    width: 60px;
+    background-color: white;
+    box-shadow: 0 0 5px grey;
+    border-radius: 3px;
+  }
+
+  #menu button {
+    width: 100%;
+    background-color: white;
+    border: none;
+    margin: 0;
+    padding: 10px;
+  }
+
+  #menu button:hover {
+    background-color: lightgray;
+  }
+</style>
