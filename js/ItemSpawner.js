@@ -1,10 +1,12 @@
 //Need place to spawn stuff.
 
 
-function spawnGenericItem(name, weight) {
+function spawnGenericItem(name, weight, colour) {
 
-    //first make a grouip, everything will be a group.
+    if (colour === undefined)
+        colour = 'lightblue'
 
+    //first make a group, everything will be a group.
     var Item = new Konva.Group({
         x: 0,
         y: 0,
@@ -17,12 +19,12 @@ function spawnGenericItem(name, weight) {
             y: 0,
             width: 39,
             height: 39,
-            fill: 'lightblue', //need to use colour depending on itemtype
+            fill: colour, //need to use colour depending on itemtype
             name: 'fillShape',
             stroke: "black",
             strokeWidth: 1,
             isColliding: false,
-            fillColour: 'lightblue'
+            fillColour: colour
         }));
 
         Item.add(new Konva.Text({
@@ -50,12 +52,12 @@ function spawnGenericItem(name, weight) {
                 y: rowCount * 80,
                 width: 79,
                 height: 79,
-                fill: 'lightblue', //need to use colour depending on itemtype
+                fill: colour, 
                 name: 'fillShape',
                 stroke: "black",
                 strokeWidth: 1,
                 isColliding: false,
-                fillColour: 'lightblue'
+                fillColour: colour
             }));
             weight--;
             if (weight <= 0)
@@ -71,12 +73,12 @@ function spawnGenericItem(name, weight) {
                     y: rowCount * 80,
                     width: 39,
                     height: 79,
-                    fill: 'lightblue', //need to use colour depending on itemtype
+                    fill: colour, 
                     name: 'fillShape',
                     stroke: "black",
                     strokeWidth: 1,
                     isColliding: false,
-                    fillColour: 'lightblue'
+                    fillColour: colour
                 }));
             }
             else if (under1lb < .5 && under1lb != 0) {
@@ -85,12 +87,12 @@ function spawnGenericItem(name, weight) {
                     y: rowCount * 80,
                     width: 39,
                     height: 39,
-                    fill: 'lightblue', //need to use colour depending on itemtype
+                    fill: colour, 
                     name: 'fillShape',
                     stroke: "black",
                     strokeWidth: 1,
                     isColliding: false,
-                    fillColour: 'lightblue'
+                    fillColour: colour
                 }));
             }
 
