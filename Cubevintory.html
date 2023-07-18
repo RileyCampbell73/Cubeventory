@@ -22,15 +22,16 @@
 
   //TODO
   //have some other graphic to tell when something is colliding? - May wanna use red colour. 
-    //Yeah use an image or something.
-      //image tuirned out to be dead end
+  //  Yeah use an image or something.
+  //    image turned out to be dead end
+  //    For now, we store the intended colour to be reverted to. Want a different solution.
 
   //Future:
   //change cube physical size. too large?
   //figure out where to put text in object.
   //Save feature
   //spawn items from PHB
-    //needs searchable combobox - JQuery has one
+  //  needs searchable combobox - JQuery has one
   //Custom Items
   //pretty it up - colour the areas and label them
   //have grid size dependant on strength
@@ -56,9 +57,10 @@
   stage.add(layer);
 
 
-  layer.add(spawnMaul());
-  layer.add(spawnGenericItem('string', 1))
-  //layer.add (spawnGenericItem('string', .25))
+ // layer.add(spawnMaul());
+  //layer.add(spawnGenericItem('string', 1))
+
+  // layer.add (spawnGenericItem('string', .25))
   // layer.add (spawnGenericItem('2', 2))
   // layer.add (spawnGenericItem('3', 3))
   // layer.add (spawnGenericItem('4', 4))
@@ -68,6 +70,39 @@
   // layer.add (spawnGenericItem('8', 8))
   //  layer.add (spawnGenericItem('9', 9))
   // layer.add (spawnGenericItem('10', 10))
+
+  //explorers pack contents
+  // layer.add (spawnGenericItem('backpack', 5))
+  // layer.add (spawnGenericItem('bedroll', 7))
+  // layer.add (spawnGenericItem('mess kit', 1))
+  // layer.add (spawnGenericItem('tinderbox', 1))
+
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+  // layer.add (spawnGenericItem('torch', 1))
+
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+  // layer.add (spawnGenericItem('rations', 2))
+
+  // layer.add (spawnGenericItem('waterskin', 5))
+  // layer.add (spawnGenericItem('hempen rope', 10))
+
+
 
   InitializeMenu();
   InitializeCollisionSnapping()

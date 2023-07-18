@@ -10,10 +10,10 @@ function createGridLayer() {
   for (let x = 0; x < 15; x++) {
     for (let y = 0; y < 10; y++) { // this is dependant on strength
       var rect = new Konva.Rect({
-        x: x * 100,
-        y: y * 100,
-        width: 99,
-        height: 99,
+        x: x * 80,
+        y: y * 80,
+        width: 79,
+        height: 79,
         fill: 'white',
         stroke: 'black',
         strokeWidth: 1,
@@ -78,9 +78,9 @@ function InitializeCollisionSnapping() {
     var vertical = [0, stage.width()];
     var horizontal = [0, stage.height()];
 
-    for (let i = 0; i < 20; i++) {//change top be dynamic to stage size.
-      vertical.push(i * 50);
-      horizontal.push(i * 50);
+    for (let i = 0; i < 30; i++) {//change top be dynamic to stage size.
+      vertical.push(i * 40);
+      horizontal.push(i * 40);
     }
     return {
       vertical: vertical.flat(),

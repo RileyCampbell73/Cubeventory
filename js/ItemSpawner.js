@@ -15,8 +15,8 @@ function spawnGenericItem(name, weight) {
         Item.add(new Konva.Rect({
             x: 0,
             y: 0,
-            width: 49,
-            height: 49,
+            width: 39,
+            height: 39,
             fill: 'lightblue', //need to use colour depending on itemtype
             name: 'fillShape',
             stroke: "black",
@@ -46,10 +46,10 @@ function spawnGenericItem(name, weight) {
 
         for (i = 0; i < rowlength; i++) {
             Item.add(new Konva.Rect({
-                x: i * 100,
-                y: rowCount * 100,
-                width: 99,
-                height: 99,
+                x: i * 80,
+                y: rowCount * 80,
+                width: 79,
+                height: 79,
                 fill: 'lightblue', //need to use colour depending on itemtype
                 name: 'fillShape',
                 stroke: "black",
@@ -67,10 +67,10 @@ function spawnGenericItem(name, weight) {
             if (under1lb >= .5) {
                 i++;
                 Item.add(new Konva.Rect({
-                    x: i * 100,
-                    y: rowCount * 100,
-                    width: 49,
-                    height: 99,
+                    x: i * 80,
+                    y: rowCount * 80,
+                    width: 39,
+                    height: 79,
                     fill: 'lightblue', //need to use colour depending on itemtype
                     name: 'fillShape',
                     stroke: "black",
@@ -81,10 +81,10 @@ function spawnGenericItem(name, weight) {
             }
             else if (under1lb < .5 && under1lb != 0) {
                 Item.add(new Konva.Rect({
-                    x: i * 100,
-                    y: rowCount * 100,
-                    width: 49,
-                    height: 49,
+                    x: i * 80,
+                    y: rowCount * 80,
+                    width: 39,
+                    height: 39,
                     fill: 'lightblue', //need to use colour depending on itemtype
                     name: 'fillShape',
                     stroke: "black",
@@ -127,8 +127,8 @@ function spawnMaul() {
     Maul.add(new Konva.Rect({
         x: 0,
         y: 0,
-        width: 99,
-        height: 99,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -137,10 +137,10 @@ function spawnMaul() {
         fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
-        x: 100,
+        x: 80,
         y: 0,
-        width: 99,
-        height: 99,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -149,10 +149,10 @@ function spawnMaul() {
         fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
-        x: 200,
+        x: 160,
         y: 0,
-        width: 99,
-        height: 99,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -162,9 +162,9 @@ function spawnMaul() {
     }));
     Maul.add(new Konva.Rect({
         x: 0,
-        y: 100,
-        width: 99,
-        height: 99,
+        y: 80,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -173,10 +173,10 @@ function spawnMaul() {
         fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
-        x: 100,
-        y: 100,
-        width: 99,
-        height: 99,
+        x: 80,
+        y: 80,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -185,10 +185,10 @@ function spawnMaul() {
         fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
-        x: 100,
-        y: 200,
-        width: 99,
-        height: 99,
+        x: 80,
+        y: 160,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -197,10 +197,10 @@ function spawnMaul() {
         fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
-        x: 100,
-        y: 300,
-        width: 99,
-        height: 99,
+        x: 80,
+        y: 240,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
@@ -209,10 +209,10 @@ function spawnMaul() {
         fillColour: 'green'
     }));
     Maul.add(new Konva.Rect({
-        x: 100,
-        y: 400,
-        width: 99,
-        height: 99,
+        x: 80,
+        y: 320,
+        width: 79,
+        height: 79,
         stroke: 'black',
         strokeWidth: 1,
         fill: 'green',
