@@ -41,22 +41,22 @@ function InitializeMenu() {
 
   document.getElementById('flip-button').addEventListener('click', () => {
 
-    var scaleX = currentShape.parent.scaleX();
+    var scaleX = currentShape.parent.parent.scaleX();
     if (scaleX > 0){
-      currentShape.parent.scaleX(-Math.abs(currentShape.scaleX()))
+      currentShape.parent.parent.scaleX(-Math.abs(currentShape.scaleX()))
 
-      //var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
-      
-      //text.setAttr('x', text.getAttr('x') - 80)
-      //text.setAttr('y', text.getAttr('y') + 80)
+      var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
+      text.scaleX(-Math.abs(text.scaleX()))
+      text.setAttr('x', text.getAttr('x') + 80)
+      text.setAttr('y', text.getAttr('y') + 80)
     }
     else{
-      currentShape.parent.scaleX(Math.abs(currentShape.scaleX()))
+      currentShape.parent.parent.scaleX(Math.abs(currentShape.scaleX()))
 
-      //var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0]
-     
-      //text.setAttr('x', text.getAttr('x') + 80)
-      //text.setAttr('y', text.getAttr('y') - 80)
+      var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
+      text.scaleX(Math.abs(text.scaleX()))
+      text.setAttr('x', text.getAttr('x') - 80)
+      text.setAttr('y', text.getAttr('y') - 80)
 
     }
 

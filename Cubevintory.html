@@ -31,9 +31,6 @@
   //  currently set to 80
   //  Make this const somewhere
 
-  //figure out where to put text in object.
-  // somewhat done, need to get flipping and rotating working
-
   //Need designated place to spawn items outside grid
 
   //pretty it up - colour the areas and label them
@@ -44,6 +41,8 @@
 
   //FUTURE
   //Custom Items
+  //Bag of Holding and other tools to aid in Encumberance
+  //  Like a mule or horse.
   
 
   //BUGS
@@ -83,7 +82,7 @@
 
 
 
-  //  layer.add (spawnGenericItem('string', .25))
+    layer.add (spawnGenericItem('string', .25))
   //  layer.add (spawnGenericItem('string', .5))
 
     //  layer.add (spawnGenericItem('1.25', 1.25))
@@ -128,12 +127,12 @@
   // layer.add (spawnGenericItem('10', 10))
 
   //explorers pack contents
-  // layer.add (spawnGenericItem('backpack', 5, 'brown'))//can give hex code or rgb(0,255,0)
-  // layer.add (spawnGenericItem('bedroll', 7, 'brown'))
-  // layer.add (spawnGenericItem('mess kit', 1, 'silver'))
-  // layer.add (spawnGenericItem('tinderbox', 1, 'lightblack'))
+  layer.add (spawnGenericItem('backpack', 5, 'brown'))//can give hex code or rgb(0,255,0)
+  layer.add (spawnGenericItem('bedroll', 7, 'brown'))
+  layer.add (spawnGenericItem('mess kit', 1, 'silver'))
+  layer.add (spawnGenericItem('tinderbox', 1, 'grey'))
 
-  //layer.add (spawnGenericItem('torch', 1, 'orange'))
+  layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
@@ -144,7 +143,7 @@
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
 
-  //layer.add (spawnGenericItem('rations', 2, 'yellow'))
+  layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
@@ -155,8 +154,8 @@
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
 
-  // layer.add (spawnGenericItem('waterskin', 5))
-  // layer.add (spawnGenericItem('hempen rope', 10, 'brown'))
+   layer.add (spawnGenericItem('waterskin', 5))
+   layer.add (spawnGenericItem('hempen rope', 10, 'brown'))
 
 
 
