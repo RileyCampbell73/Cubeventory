@@ -32,16 +32,24 @@
   //  Make this const somewhere
 
   //figure out where to put text in object.
-  //Save feature
-  //spawn items from PHB
-  //  needs searchable combobox - JQuery has one
-  //Custom Items
+  // somewhat done, need to get flipping and rotating working
+
+  //Need designated place to spawn items outside grid
+
   //pretty it up - colour the areas and label them
   //have grid size dependant on strength
+  //spawn items from PHB
+  //  needs searchable combobox - JQuery has one
+  //Save feature
 
-  //Bugs
+  //FUTURE
+  //Custom Items
+  
+
+  //BUGS
   //Collision is removed when interacting with a different shape.
   //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
+  //  change who/where gets their 'isColliding' set false
 
 
   var width = window.innerWidth;
@@ -65,13 +73,54 @@
 
 
  // layer.add(spawnMaul());
-  layer.add(spawnGenericItem('string', 1))
+  // layer.add(spawnGenericItem('1', 1))
+  // layer.add(spawnGenericItem('2', 2))
+  // layer.add(spawnGenericItem('3', 3))
+  // layer.add(spawnGenericItem('4', 4))
+  // layer.add(spawnGenericItem('5', 5))
 
-  // layer.add (spawnGenericItem('string', .25))
-  // layer.add (spawnGenericItem('2', 2))
-   //layer.add (spawnGenericItem('3', 3))
+
+
+
+
+  //  layer.add (spawnGenericItem('string', .25))
+  //  layer.add (spawnGenericItem('string', .5))
+
+    //  layer.add (spawnGenericItem('1.25', 1.25))
+    //  layer.add (spawnGenericItem('1.5', 1.5))
+    //  layer.add (spawnGenericItem('2.25', 2.25))
+    //  layer.add (spawnGenericItem('2.5', 2.5))
+    // layer.add (spawnGenericItem('3.25', 3.25))
+    // layer.add (spawnGenericItem('3.5', 3.5))
+    // layer.add (spawnGenericItem('4.25', 4.25))
+    // layer.add (spawnGenericItem('4.5', 4.5))
+
+    // layer.add (spawnGenericItem('5.25', 5.25))
+    // layer.add (spawnGenericItem('5.5', 5.5))
+
+
+    // layer.add (spawnGenericItem('6.25', 6.25))
+    // layer.add (spawnGenericItem('6.5', 6.5))
+
+
+    // layer.add (spawnGenericItem('7.25', 7.25))
+    // layer.add (spawnGenericItem('7.5', 7.5))
+
+
+    // layer.add (spawnGenericItem('8.25', 8.25))
+    // layer.add (spawnGenericItem('8.5', 8.5))
+
+
+    // layer.add (spawnGenericItem('9.25', 9.25))
+    // layer.add (spawnGenericItem('9.5', 9.5))
+
+
+    // layer.add (spawnGenericItem('10.25', 10.25))
+    // layer.add (spawnGenericItem('10.5', 10.5))
+
+
   // layer.add (spawnGenericItem('4', 4))
-  // layer.add (spawnGenericItem('5', 5))
+   //layer.add (spawnGenericItem('5', 5))
   // layer.add (spawnGenericItem('6', 6))
   // layer.add (spawnGenericItem('7', 7))
   // layer.add (spawnGenericItem('8', 8))
@@ -79,12 +128,12 @@
   // layer.add (spawnGenericItem('10', 10))
 
   //explorers pack contents
-  layer.add (spawnGenericItem('backpack', 5, 'brown'))//can give hex code or rgb(0,255,0)
-  layer.add (spawnGenericItem('bedroll', 7, 'brown'))
-  layer.add (spawnGenericItem('mess kit', 1, 'silver'))
-  layer.add (spawnGenericItem('tinderbox', 1, 'lightblack'))
+  // layer.add (spawnGenericItem('backpack', 5, 'brown'))//can give hex code or rgb(0,255,0)
+  // layer.add (spawnGenericItem('bedroll', 7, 'brown'))
+  // layer.add (spawnGenericItem('mess kit', 1, 'silver'))
+  // layer.add (spawnGenericItem('tinderbox', 1, 'lightblack'))
 
-  layer.add (spawnGenericItem('torch', 1, 'orange'))
+  //layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
@@ -95,7 +144,7 @@
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
   // layer.add (spawnGenericItem('torch', 1, 'orange'))
 
-  layer.add (spawnGenericItem('rations', 2, 'yellow'))
+  //layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
@@ -106,8 +155,8 @@
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
   // layer.add (spawnGenericItem('rations', 2, 'yellow'))
 
-  layer.add (spawnGenericItem('waterskin', 5))
-  layer.add (spawnGenericItem('hempen rope', 10, 'brown'))
+  // layer.add (spawnGenericItem('waterskin', 5))
+  // layer.add (spawnGenericItem('hempen rope', 10, 'brown'))
 
 
 

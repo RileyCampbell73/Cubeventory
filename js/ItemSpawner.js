@@ -1,5 +1,3 @@
-//Need place to spawn stuff.
-
 
 function spawnGenericItem(name, weight, colour) {
 
@@ -20,22 +18,51 @@ function spawnGenericItem(name, weight, colour) {
         name: 'itemShapes'
     });
 
-    //if weight isnt specified, or 0, spawn a 40/40 object
-    if (weight === undefined || weight === 0) {
-        ItemShapes.add(new Konva.Rect({
-            x: 0,
-            y: 0,
-            width: 39,
-            height: 39,
-            fill: colour, //need to use colour depending on itemtype
-            name: 'fillShape',
-            stroke: "black",
-            strokeWidth: 1,
-            isColliding: false,
-            fillColour: colour
-        }));
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
 
-        ItemShapes.add(new Konva.Text({
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+
+    //if weight isnt specified, or under 1
+    if (weight === undefined || weight < 1) {
+
+        if (weight >= .5) {
+            ItemShapes.add(new Konva.Rect({
+                x: 0,
+                y: 0,
+                width: 39,
+                height: 79,
+                fill: colour,
+                name: 'fillShape',
+                stroke: "black",
+                strokeWidth: 1,
+                isColliding: false,
+                fillColour: colour
+            }));
+        }
+        else {
+            ItemShapes.add(new Konva.Rect({
+                x: 0,
+                y: 0,
+                width: 39,
+                height: 39,
+                fill: colour,
+                name: 'fillShape',
+                stroke: "black",
+                strokeWidth: 1,
+                isColliding: false,
+                fillColour: colour
+            }));
+        }
+        ItemText.add(new Konva.Text({
+            x: 8,
+            y: -6,
+            rotation: 45,
             text: name,
             fontSize: 14,
             fontFamily: 'Calibri',
@@ -44,76 +71,103 @@ function spawnGenericItem(name, weight, colour) {
             padding: 5,
             align: 'center'
         }));
+
+        return Item;
     }
 
+    var totalweight = weight;
     var under1lb = (weight % 1).toFixed(3)
     weight = Math.floor(weight)
 
-    var rowlength = Math.round(Math.sqrt(weight))
+    var ColumnCount = Math.round(Math.sqrt(weight))
     var rowCount = 0;
-    var i = 0;
-    while (true) {
 
-        for (i = 0; i < rowlength; i++) {
+    while (true) { // this loop logic could be improved, but at theis point I'm scared to touch this further.
+
+        for (let i = 0; i < ColumnCount; i++) {
+
             ItemShapes.add(new Konva.Rect({
                 x: i * 80,
                 y: rowCount * 80,
                 width: 79,
                 height: 79,
-                fill: colour, 
+                fill: colour,
                 name: 'fillShape',
                 stroke: "black",
                 strokeWidth: 1,
                 isColliding: false,
                 fillColour: colour
             }));
+
             weight--;
-            if (weight <= 0)
+            if (weight <= 0) {
+                
+                //funky logic to determine where extra goes and what orientation it should be
+                //want any extra weight to appear in the spot a full cube would
+                var newColumnCount = Math.round(Math.sqrt(Math.floor(totalweight) + 1))
+                var halfCubeUpright = true;
+
+                i++
+                if (i >= newColumnCount){
+                    i=0
+                    rowCount++;
+                    halfCubeUpright = false;
+                }
+                else if (newColumnCount > ColumnCount)
+                    rowCount = 0
+
+                if (under1lb >= .5) {
+                    if (halfCubeUpright){
+                        ItemShapes.add(new Konva.Rect({
+                            x: i * 80,
+                            y: rowCount * 80,
+                            width: 39,
+                            height: 79,
+                            fill: colour,
+                            name: 'fillShape',
+                            stroke: "black",
+                            strokeWidth: 1,
+                            isColliding: false,
+                            fillColour: colour
+                        }));
+                    }
+                    else{
+                        ItemShapes.add(new Konva.Rect({
+                            x: i * 80,
+                            y: rowCount * 80,
+                            width: 79,
+                            height: 39,
+                            fill: colour,
+                            name: 'fillShape',
+                            stroke: "black",
+                            strokeWidth: 1,
+                            isColliding: false,
+                            fillColour: colour
+                        }));
+                    }
+                }
+                else if (under1lb < .5 && under1lb != 0) {
+                    ItemShapes.add(new Konva.Rect({
+                        x: i * 80,
+                        y: rowCount * 80,
+                        width: 39,
+                        height: 39,
+                        fill: colour,
+                        name: 'fillShape',
+                        stroke: "black",
+                        strokeWidth: 1,
+                        isColliding: false,
+                        fillColour: colour
+                    }));
+                }
                 break;
+            }
         }
         if (weight <= 0) {
-
-            //attach anything extra
-            if (under1lb >= .5) {
-                i++;
-                ItemShapes.add(new Konva.Rect({
-                    x: i * 80,
-                    y: rowCount * 80,
-                    width: 39,
-                    height: 79,
-                    fill: colour, 
-                    name: 'fillShape',
-                    stroke: "black",
-                    strokeWidth: 1,
-                    isColliding: false,
-                    fillColour: colour
-                }));
-            }
-            else if (under1lb < .5 && under1lb != 0) {
-                ItemShapes.add(new Konva.Rect({
-                    x: i * 80,
-                    y: rowCount * 80,
-                    width: 39,
-                    height: 39,
-                    fill: colour, 
-                    name: 'fillShape',
-                    stroke: "black",
-                    strokeWidth: 1,
-                    isColliding: false,
-                    fillColour: colour
-                }));
-            }
-
             break;
         }
         rowCount++;
     }
-    //group for test
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -129,14 +183,7 @@ function spawnGenericItem(name, weight, colour) {
         name: 'text'
     }));
 
-
-    Item.add(ItemShapes)
-    Item.add(ItemText)
-
     return Item;
-
-
-
 }
 
 //some items may have odd shapes and require their own function
