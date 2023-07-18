@@ -12,9 +12,17 @@ function spawnGenericItem(name, weight, colour) {
         y: 0,
         draggable: true
     });
-    //if weight isnt specified, or 0, spawn a 25 / 25 object
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //if weight isnt specified, or 0, spawn a 40/40 object
     if (weight === undefined || weight === 0) {
-        Item.add(new Konva.Rect({
+        ItemShapes.add(new Konva.Rect({
             x: 0,
             y: 0,
             width: 39,
@@ -27,7 +35,7 @@ function spawnGenericItem(name, weight, colour) {
             fillColour: colour
         }));
 
-        Item.add(new Konva.Text({
+        ItemShapes.add(new Konva.Text({
             text: name,
             fontSize: 14,
             fontFamily: 'Calibri',
@@ -47,7 +55,7 @@ function spawnGenericItem(name, weight, colour) {
     while (true) {
 
         for (i = 0; i < rowlength; i++) {
-            Item.add(new Konva.Rect({
+            ItemShapes.add(new Konva.Rect({
                 x: i * 80,
                 y: rowCount * 80,
                 width: 79,
@@ -68,7 +76,7 @@ function spawnGenericItem(name, weight, colour) {
             //attach anything extra
             if (under1lb >= .5) {
                 i++;
-                Item.add(new Konva.Rect({
+                ItemShapes.add(new Konva.Rect({
                     x: i * 80,
                     y: rowCount * 80,
                     width: 39,
@@ -82,7 +90,7 @@ function spawnGenericItem(name, weight, colour) {
                 }));
             }
             else if (under1lb < .5 && under1lb != 0) {
-                Item.add(new Konva.Rect({
+                ItemShapes.add(new Konva.Rect({
                     x: i * 80,
                     y: rowCount * 80,
                     width: 39,
@@ -100,15 +108,30 @@ function spawnGenericItem(name, weight, colour) {
         }
         rowCount++;
     }
-    Item.add(new Konva.Text({
+    //group for test
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
         text: name,
-        fontSize: 14,
+        fontSize: 20,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 50,
-        padding: 5,
-        align: 'center'
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
     }));
+
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
 
     return Item;
 

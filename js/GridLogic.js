@@ -30,12 +30,36 @@ function InitializeMenu() {
   let currentShape;
   var menuNode = document.getElementById('menu');
   document.getElementById('rotate-button').addEventListener('click', () => {
-    currentShape.parent.rotate(90);
+    
+    var itemGroup = currentShape.parent.parent;
+    itemGroup.rotate(90);
+
+
+    // itemGroup.find('.itemText')[0].rotate(-90);
+    // itemGroup.find('.itemText')[0].setAttr('y', itemGroup.find('.itemText')[0].getAttr('y') + 80)
   });
+
   document.getElementById('flip-button').addEventListener('click', () => {
-    currentShape.parent.to({
-      scaleX: -currentShape.scaleX(),
-    });
+
+    var scaleX = currentShape.parent.scaleX();
+    if (scaleX > 0){
+      currentShape.parent.scaleX(-Math.abs(currentShape.scaleX()))
+
+      //var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
+      
+      //text.setAttr('x', text.getAttr('x') - 80)
+      //text.setAttr('y', text.getAttr('y') + 80)
+    }
+    else{
+      currentShape.parent.scaleX(Math.abs(currentShape.scaleX()))
+
+      //var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0]
+     
+      //text.setAttr('x', text.getAttr('x') + 80)
+      //text.setAttr('y', text.getAttr('y') - 80)
+
+    }
+
   });
   document.getElementById('delete-button').addEventListener('click', () => {
     currentShape.parent.destroy();
@@ -57,6 +81,10 @@ function InitializeMenu() {
 
     if (currentShape.getLayer().getAttr('id') === 'gridLayer')//so they can't manipulate the grid.
       return;
+
+    if (currentShape.parent.getAttr('name') == 'itemText'){
+      currentShape = currentShape.parent.parent.find('.itemShapes')[0].children[0];
+    }
 
     // show menu
     menuNode.style.display = 'initial';
@@ -92,7 +120,7 @@ function InitializeCollisionSnapping() {
   // it can be just center of the object
   // but we will enable all edges and center
   function getObjectSnappingEdges(node) {
-    var box = node.getClientRect();
+    var box = node.find('.itemShapes')[0].getClientRect();
     var absPos = node.absolutePosition();
 
     return {
