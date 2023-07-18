@@ -5,16 +5,131 @@
 // });
 
 
-function createGridLayer() {
-  var gridLayer = new Konva.Layer({ id: 'gridLayer' });
+function createGridLayer(strength) {
+  
+  var strengthCount = strength;
+
+  var gridLayer = new Konva.Layer({
+    id: 'gridLayer' 
+  });
+
+  //Text around the grid
+  gridLayer.add(new Konva.Text({
+    x: 0,
+    y: (GRID_SIZE * (strength / 2)) + 20 + 200, //numbers to get it to fit better
+    rotation: -90,
+    text: 'STRENGTH',
+    fontSize: 40,
+    fontFamily: 'Calibri',
+    fontStyle: 'bold',
+    fill: '#000',
+    width: 200,
+    //padding: 5,
+    align: 'center'
+}));
+
+gridLayer.add(new Konva.Text({
+  x: GRID_SIZE,
+  y: 0, //(GRID_SIZE * (strength / 2)) + 20 + 200, //numbers to get it to fit better
+  //rotation: -90,
+  text: 'NOT ENCUMBERED!',
+  fontSize: 40,
+  fontFamily: 'Calibri',
+  fontStyle: 'bold',
+  fill: '#000',
+  width: GRID_SIZE * 5,
+  //padding: 5,
+  align: 'center'
+}));
+
+gridLayer.add(new Konva.Text({
+  x: GRID_SIZE * 6,
+  y: 0, 
+
+  text: 'ENCUMBERED',
+  fontSize: 40,
+  fontFamily: 'Calibri',
+  fontStyle: 'bold',
+  fill: '#000',
+  width: GRID_SIZE * 5,
+  //padding: 5,
+  align: 'center',
+}));
+
+gridLayer.add(new Konva.Text({
+  x: GRID_SIZE * 6,
+  y: 32, 
+
+  text: '(-10 speed)',
+  fontSize: 15,
+  fontFamily: 'Calibri',
+  //fontStyle: 'bold',
+  fill: '#000',
+  width: GRID_SIZE * 5,
+  //padding: 5,
+  align: 'center',
+}));
+
+gridLayer.add(new Konva.Text({
+  x: GRID_SIZE * 11,
+  y: 0, 
+  text: 'HEAVILY ENCUMBERED',
+  fontSize: 40,
+  fontFamily: 'Calibri',
+  fontStyle: 'bold',
+  fill: '#000',
+  width: GRID_SIZE * 5,
+  //padding: 5,
+  align: 'center',
+}));
+
+gridLayer.add(new Konva.Text({
+  x: GRID_SIZE * 11,
+  y: 32, 
+
+  text: '(-20 speed)\nDisadvantage on:\n Abilioty checks, Attack rolls,\n Str, Dex, & Con saves',
+  fontSize: 12,
+  fontFamily: 'Calibri',
+  //fontStyle: 'bold',
+  fill: '#000',
+  width: GRID_SIZE * 5,
+  //padding: 5,
+  align: 'center',
+}));
+
+//numbers for grid
+  for (let y = 0; y < strength; y++) { 
+      gridLayer.add(new Konva.Text({
+        x: 50,
+        y: (y * GRID_SIZE) + GRID_PADDING + 65,//the 65 is to better center them. so its 40 + length of textbox I guess.
+        rotation: -90,
+        text: strengthCount--,
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 50,
+        //padding: 5,
+        align: 'center'
+    }));
+  }
+
+  //grid
   for (let x = 0; x < 15; x++) {
-    for (let y = 0; y < 10; y++) { // this is dependant on strength
+    for (let y = 0; y < strength; y++) { 
+      var gridColour = ''
+      if (x < 5)
+        gridColour = '#B9FF9F'//green
+      else if (x >= 5 && x < 10)
+        gridColour = '#EBB60A'//yellowy orange
+      else if (x >= 10)
+        gridColour = '#B70000'//red
+
       var rect = new Konva.Rect({
-        x: x * 80,
-        y: y * 80,
+        x: (x * GRID_SIZE) + GRID_PADDING,
+        y: (y * GRID_SIZE) + GRID_PADDING,
         width: 79,
         height: 79,
-        fill: 'white',
+        fill: gridColour,
         stroke: 'black',
         strokeWidth: 1,
       });
@@ -107,8 +222,8 @@ function InitializeCollisionSnapping() {
     var horizontal = [0, stage.height()];
 
     for (let i = 0; i < 30; i++) {//change top be dynamic to stage size.
-      vertical.push(i * 40);
-      horizontal.push(i * 40);
+      vertical.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
+      horizontal.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
     }
     return {
       vertical: vertical.flat(),

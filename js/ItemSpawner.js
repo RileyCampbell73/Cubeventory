@@ -6,8 +6,8 @@ function spawnGenericItem(name, weight, colour) {
 
     //first make a group, everything will be a group.
     var Item = new Konva.Group({
-        x: 0,
-        y: 0,
+        x: (GRID_SIZE * 15) + GRID_PADDING + 100,//100 is just a lil padding
+        y: GRID_PADDING,
         draggable: true
     });
 

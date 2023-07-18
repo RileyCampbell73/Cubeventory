@@ -32,9 +32,7 @@
   //  Make this const somewhere
 
   //Need designated place to spawn items outside grid
-
-  //pretty it up - colour the areas and label them
-  //have grid size dependant on strength
+  //  right now they just spawn right right
   //spawn items from PHB
   //  needs searchable combobox - JQuery has one
   //Save feature
@@ -50,10 +48,12 @@
   //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
   //  change who/where gets their 'isColliding' set false
 
-
-  var width = window.innerWidth;
-  var height = window.innerHeight;
   var GUIDELINE_OFFSET = 10;
+  var GRID_PADDING = 80;
+  var GRID_SIZE = 80;
+
+  var width = (15 * GRID_SIZE)+ GRID_PADDING + 500; //500 is for extra room for spawning itemas and controls
+  var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
 
   // first we need to create a stage
   var stage = new Konva.Stage({
@@ -62,7 +62,7 @@
     height: height,
   });
 
-  stage.add(createGridLayer());
+  stage.add(createGridLayer(10));//10 is strength #
   stage.draw();
 
   // create layer for shapes
