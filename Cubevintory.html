@@ -1,11 +1,28 @@
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
   <script src="https://unpkg.com/konva@9/konva.min.js"></script>
   <script src="js/GridLogic.js"></script>
   <script src="js/ItemSpawner.js"></script>
+  <script src="js/AutofillCombobox.js"></script>
+  <script src="js/Equipment.js"></script>
+
 </head>
 
 <body>
+  <div class="ui-widget">
+    <label>Spawn Item:</label>
+    <select id="EquipmentComboBox">
+
+    </select>
+  </div>
+
   <div id="container"></div>
+
+
+
+
   <div id="menu">
     <div>
       <button id="rotate-button">Rotate</button>
@@ -21,6 +38,7 @@
 <script>
 
   //TODO
+
   //have some other graphic to tell when something is colliding? - May wanna use red colour. 
   //  Yeah use an image or something.
   //    image turned out to be dead end
@@ -30,22 +48,31 @@
   //change cube physical size. too large?
   //  currently set to 80
 
-  //Need designated place to spawn items outside grid
-  //  right now they just spawn right right
   //spawn items from PHB
   //  needs searchable combobox - JQuery has one
+  //  WIP:
+  //    Want combobox to clear once something is made
+  //    Make combobox scrollable (https://jqueryui.com/autocomplete/#maxheight)
+  //    needs a switch statement on how to create item - generic or a specialized one
+  //    What to do about colour
+  //      Keep entire json object in value so I can use other attributes to determine colour?
+  
   //Save feature
 
   //FUTURE
+
   //Custom Items
   //Bag of Holding and other tools to aid in Encumberance
   //  Like a mule or horse.
   
 
   //BUGS
+
   //Collision is removed when interacting with a different shape.
   //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
   //  change who/where gets their 'isColliding' set false
+
+  //SpawnGenericItem will create something larger that 5 across. need to cap that.
 
   var GUIDELINE_OFFSET = 10;
   var GRID_PADDING = 80;
@@ -71,98 +98,24 @@
   // add the layer to the stage
   stage.add(layer);
 
-
- // layer.add(spawnMaul());
-  // layer.add(spawnGenericItem('1', 1))
-  // layer.add(spawnGenericItem('2', 2))
-  // layer.add(spawnGenericItem('3', 3))
-  // layer.add(spawnGenericItem('4', 4))
-  // layer.add(spawnGenericItem('5', 5))
-
-
-
-
-
-    layer.add (spawnGenericItem('string', .25))
-  //  layer.add (spawnGenericItem('string', .5))
-
-    //  layer.add (spawnGenericItem('1.25', 1.25))
-    //  layer.add (spawnGenericItem('1.5', 1.5))
-    //  layer.add (spawnGenericItem('2.25', 2.25))
-    //  layer.add (spawnGenericItem('2.5', 2.5))
-    // layer.add (spawnGenericItem('3.25', 3.25))
-    // layer.add (spawnGenericItem('3.5', 3.5))
-    // layer.add (spawnGenericItem('4.25', 4.25))
-    // layer.add (spawnGenericItem('4.5', 4.5))
-
-    // layer.add (spawnGenericItem('5.25', 5.25))
-    // layer.add (spawnGenericItem('5.5', 5.5))
-
-
-    // layer.add (spawnGenericItem('6.25', 6.25))
-    // layer.add (spawnGenericItem('6.5', 6.5))
-
-
-    // layer.add (spawnGenericItem('7.25', 7.25))
-    // layer.add (spawnGenericItem('7.5', 7.5))
-
-
-    // layer.add (spawnGenericItem('8.25', 8.25))
-    // layer.add (spawnGenericItem('8.5', 8.5))
-
-
-    // layer.add (spawnGenericItem('9.25', 9.25))
-    // layer.add (spawnGenericItem('9.5', 9.5))
-
-
-    // layer.add (spawnGenericItem('10.25', 10.25))
-    // layer.add (spawnGenericItem('10.5', 10.5))
-
-
-  // layer.add (spawnGenericItem('4', 4))
-   //layer.add (spawnGenericItem('5', 5))
-  // layer.add (spawnGenericItem('6', 6))
-  // layer.add (spawnGenericItem('7', 7))
-  // layer.add (spawnGenericItem('8', 8))
-  //  layer.add (spawnGenericItem('9', 9))
-  // layer.add (spawnGenericItem('10', 10))
-
-  //explorers pack contents
-  layer.add (spawnGenericItem('backpack', 5, 'brown'))//can give hex code or rgb(0,255,0)
-  layer.add (spawnGenericItem('bedroll', 7, 'brown'))
-  layer.add (spawnGenericItem('mess kit', 1, 'silver'))
-  layer.add (spawnGenericItem('tinderbox', 1, 'grey'))
-
-  layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-  // layer.add (spawnGenericItem('torch', 1, 'orange'))
-
-  layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-  // layer.add (spawnGenericItem('rations', 2, 'yellow'))
-
-   layer.add (spawnGenericItem('waterskin', 5))
-   layer.add (spawnGenericItem('hempen rope', 10, 'brown'))
-
-
-
   InitializeMenu();
   InitializeCollisionSnapping()
+  
+  var obj = JSON.parse(EquipmentJSON);
 
+  //loop through and create html Options for all
+  for (let i = 0; i < obj.length; i++) {
+    $('#EquipmentComboBox').append($('<option>', {
+      value: obj[i].weight,
+      text: obj[i].name
+    }));
+  }
+
+  initializeItemCombobox()
+
+function spawnItem(name, weight){
+  layer.add(spawnGenericItem(name, weight))
+}
 
 
 
