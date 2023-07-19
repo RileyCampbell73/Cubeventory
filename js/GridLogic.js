@@ -136,6 +136,19 @@ gridLayer.add(new Konva.Text({
       gridLayer.add(rect)
     }
   }
+
+  //spawning area
+  gridLayer.add(new Konva.Rect({
+    x: (GRID_SIZE * 15) + GRID_PADDING + 20,
+    y: GRID_PADDING,
+    width: 480,
+    height: GRID_SIZE * strength,
+    fill: 'white',
+    stroke: 'black',
+        strokeWidth: 1,
+    cornerRadius: 10,
+  }));
+
   return gridLayer;
 }
 

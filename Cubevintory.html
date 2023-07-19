@@ -29,7 +29,6 @@
   
   //change cube physical size. too large?
   //  currently set to 80
-  //  Make this const somewhere
 
   //Need designated place to spawn items outside grid
   //  right now they just spawn right right
@@ -52,6 +51,8 @@
   var GRID_PADDING = 80;
   var GRID_SIZE = 80;
 
+  var strength = 10;
+
   var width = (15 * GRID_SIZE)+ GRID_PADDING + 500; //500 is for extra room for spawning itemas and controls
   var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
 
@@ -62,7 +63,7 @@
     height: height,
   });
 
-  stage.add(createGridLayer(10));//10 is strength #
+  stage.add(createGridLayer(strength));
   stage.draw();
 
   // create layer for shapes

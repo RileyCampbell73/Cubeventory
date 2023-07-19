@@ -4,10 +4,14 @@ function spawnGenericItem(name, weight, colour) {
     if (colour === undefined)
         colour = 'lightblue'
 
+    var randItemSpawn = randomSpawnLocation();
+
     //first make a group, everything will be a group.
     var Item = new Konva.Group({
-        x: (GRID_SIZE * 15) + GRID_PADDING + 100,//100 is just a lil padding
-        y: GRID_PADDING,
+        // x: (GRID_SIZE * 15) + GRID_PADDING + 100,//100 is just a lil padding
+        // y: GRID_PADDING,
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
         draggable: true
     });
 
@@ -184,6 +188,20 @@ function spawnGenericItem(name, weight, colour) {
     }));
 
     return Item;
+}
+
+function randomSpawnLocation(){
+
+    var xMin = (GRID_SIZE * 15) + GRID_PADDING + 30;
+    var xMax = width - ((GRID_SIZE * 3) - 5);
+
+    var yMin = GRID_PADDING + 5;
+    var yMax = (GRID_SIZE * (strength - 2)) - 5;
+
+    return {
+        'x': Math.floor(Math.random() * (xMax - xMin + 1) + xMin),
+        'y': Math.floor(Math.random() * (yMax - yMin + 1) + yMin)
+    }
 }
 
 //some items may have odd shapes and require their own function
