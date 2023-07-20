@@ -1,4 +1,25 @@
 
+function SpawnItemfromJSON(json) {
+    var item = JSON.parse(json);
+
+    //check if its a pack
+    //  Will have to search the json for it. Just call this method again with the fouind json
+
+    var itemCategory = item.gear_category
+    if (itemCategory === undefined)
+        itemCategory = item.equipment_category
+
+    var colour = determineColour(itemCategory.index);
+    switch (item.index) {
+        case 'maul':
+            layer.add(spawnMaul());
+            break;
+        default:
+            layer.add(spawnGenericItem(item.name, item.weight, colour));
+    }
+}
+
+
 function spawnGenericItem(name, weight, colour) {
 
     if (colour === undefined)
@@ -105,15 +126,15 @@ function spawnGenericItem(name, weight, colour) {
 
             weight--;
             if (weight <= 0) {
-                
+
                 //funky logic to determine where extra goes and what orientation it should be
                 //want any extra weight to appear in the spot a full cube would
                 var newColumnCount = Math.round(Math.sqrt(Math.floor(totalweight) + 1))
                 var halfCubeUpright = true;
 
                 i++
-                if (i >= newColumnCount){
-                    i=0
+                if (i >= newColumnCount) {
+                    i = 0
                     rowCount++;
                     halfCubeUpright = false;
                 }
@@ -121,7 +142,7 @@ function spawnGenericItem(name, weight, colour) {
                     rowCount = 0
 
                 if (under1lb >= .5) {
-                    if (halfCubeUpright){
+                    if (halfCubeUpright) {
                         ItemShapes.add(new Konva.Rect({
                             x: i * 80,
                             y: rowCount * 80,
@@ -135,7 +156,7 @@ function spawnGenericItem(name, weight, colour) {
                             fillColour: colour
                         }));
                     }
-                    else{
+                    else {
                         ItemShapes.add(new Konva.Rect({
                             x: i * 80,
                             y: rowCount * 80,
@@ -190,7 +211,7 @@ function spawnGenericItem(name, weight, colour) {
     return Item;
 }
 
-function randomSpawnLocation(){
+function randomSpawnLocation() {
 
     var xMin = (GRID_SIZE * 15) + GRID_PADDING + 30;
     var xMax = width - ((GRID_SIZE * 3) - 5);
@@ -204,13 +225,85 @@ function randomSpawnLocation(){
     }
 }
 
+function determineColour(gearCategory) {
+    switch (gearCategory) {
+        case 'standard-gear':
+            return '#FFFF90'
+        case 'adventuring-gear':
+            return '#FFD268'
+        case 'arcane-foci':
+            return '#ABF5FF'
+        case 'medium-armor':
+        case 'heavy-armor':
+        case 'light-armor':
+        case 'shields':
+        case 'armor':
+            return '#989898'
+        case 'artisans-tools':
+        case 'tools':
+            return '#6D7F81'
+        case 'druidic-foci':
+            return '#00C642'
+        case 'gaming-sets':
+            return '#7D4DFF'
+        case 'holy-symbols':
+            return '#ECF751'
+        case 'kits':
+            return '#EAA2FC'
+        case 'martial-ranged-weapons':
+        case 'martial-weapons':
+        case 'martial-melee-weapons':
+        case 'melee-weapons':
+        case 'ranged-weapons':
+        case 'simple-melee-weapons':
+        case 'simple-ranged-weapons':
+        case 'simple-weapons':
+        case 'weapon':
+            return '#C1C1C1'
+        case 'musical-instruments':
+            return '#A34AD0'
+        case 'potion':
+            return '#FF8383'
+        case 'ring':
+        case 'rod':
+            return '#C6C6C6'
+        case 'scroll':
+            return '#EBD5B3'
+        case 'staff':
+            return '##BA8C63'
+        case 'wand':
+            return '#956E50'
+        case 'wondrous-items':
+            return '#6EA8FF'
+        case 'other-tools':
+        default:
+            return 'lightblue'
+    }
+}
+
+function createCube(x, y, colour) { // need this?
+    return new Konva.Rect({
+        x: x,
+        y: y,
+        width: 79,
+        height: 79,
+        fill: colour,
+        name: 'fillShape',
+        stroke: "black",
+        strokeWidth: 1,
+        isColliding: false,
+        fillColour: colour
+    })
+}
+
 //some items may have odd shapes and require their own function
 function spawnMaul() {
 
+    var randItemSpawn = randomSpawnLocation();
 
     var Maul = new Konva.Group({
-        x: 0,
-        y: 0,
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
         draggable: true
     });
 

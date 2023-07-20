@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class="ui-widget">
+  <div class="ui-widget" style="padding-left: 1300;">
     <label>Spawn Item:</label>
     <select id="EquipmentComboBox">
 
@@ -51,16 +51,21 @@
   //spawn items from PHB
   //  needs searchable combobox - JQuery has one
   //  WIP:
-  //    Want combobox to clear once something is made
-  //    Make combobox scrollable (https://jqueryui.com/autocomplete/#maxheight)
-  //    needs a switch statement on how to create item - generic or a specialized one
-  //    What to do about colour
-  //      Keep entire json object in value so I can use other attributes to determine colour?
+  //    Want combobox to clear once something is made?
+  //    add manual add button for multiples?
+
+  //Create Custom shapes for some items
+  //  weapons
+  //  armor
+  //  tools (crowbar, etc.)
   
   //Save feature
 
   //FUTURE
 
+  //edit items
+  //  name, desc, weight(?)
+  //review item colours
   //Custom Items
   //Bag of Holding and other tools to aid in Encumberance
   //  Like a mule or horse.
@@ -73,6 +78,8 @@
   //  change who/where gets their 'isColliding' set false
 
   //SpawnGenericItem will create something larger that 5 across. need to cap that.
+  
+  //Delete only gets shapes
 
   var GUIDELINE_OFFSET = 10;
   var GRID_PADDING = 80;
@@ -104,9 +111,14 @@
   var obj = JSON.parse(EquipmentJSON);
 
   //loop through and create html Options for all
+  $('#EquipmentComboBox').append($('<option>', {
+      value:'',
+      text: ''
+    }));
+
   for (let i = 0; i < obj.length; i++) {
     $('#EquipmentComboBox').append($('<option>', {
-      value: obj[i].weight,
+      value: JSON.stringify(obj[i]),
       text: obj[i].name
     }));
   }
@@ -148,5 +160,12 @@ function spawnItem(name, weight){
 
   #menu button:hover {
     background-color: lightgray;
+  }
+
+  .ui-autocomplete {
+    max-height: 500px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
   }
 </style>
