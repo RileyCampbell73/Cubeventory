@@ -3,7 +3,7 @@ function SpawnItemfromJSON(json) {
     var item = JSON.parse(json);
 
     //check if its a pack
-    //  Will have to search the json for it. Just call this method again with the fouind json
+    //  Will have to search the json for it. Just call this method again with the found json
 
     var itemCategory = item.gear_category
     if (itemCategory === undefined)

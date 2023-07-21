@@ -47,6 +47,7 @@
   
   //change cube physical size. too large?
   //  currently set to 80
+  //  I think this is too big - bump down to 60
 
   //spawn items from PHB
   //  needs searchable combobox - JQuery has one
@@ -58,19 +59,21 @@
   //  weapons
   //  armor
   //  tools (crowbar, etc.)
+
+  //text overflow issue
   
   //Save feature
+  //  Just saves items and their locations into json. Let them save their own files and upload them on return
+  //  throw save into cookie? 
+  //    Will need to add clear / new button
 
-  //FUTURE
+  //Make this work without with RAW AND with the Variant: Encumbrance rule
+  //  right now this is all the Encumbrance rule, but take away the 'encumbrance sections' and what you're left with is RAW carrying capacity
+  //  Only thing to add is size, which determines carrying capacity
 
-  //edit items
-  //  name, desc, weight(?)
-  //review item colours
-  //Custom Items
-  //Bag of Holding and other tools to aid in Encumberance
-  //  Like a mule or horse.
-  
+  //Host it
 
+ 
   //BUGS
 
   //Collision is removed when interacting with a different shape.
@@ -80,6 +83,20 @@
   //SpawnGenericItem will create something larger that 5 across. need to cap that.
   
   //Delete only gets shapes
+
+ 
+  //FUTURE
+
+  //edit items
+  //  name, desc, weight(?), Note
+  //  maybe clicking an item shows its detail in a side panel / this edit screen
+  //review item colours
+  //Custom Items
+  //Bag of Holding and other tools to aid in Encumberance
+  //  Like a mule or horse.
+  
+
+
 
   var GUIDELINE_OFFSET = 10;
   var GRID_PADDING = 80;
