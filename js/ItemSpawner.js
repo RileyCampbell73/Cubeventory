@@ -30,10 +30,55 @@ function SpawnItemfromJSON(json) {
         case 'shield':
             layer.add(spawnShield(item.name, colour))
             break;
-        
+        case 'greatclub':
+            layer.add(spawnGreatClub(item.name, colour))
+            break;
+        case 'mace':
+        case 'battleaxe':
+            layer.add(spawnMace(item.name, colour))
+            break;
+        case 'quarterstaff':
+            break;
+        case 'spear':
+            break;
+        case 'crossbow-light':
+            break;
+        case 'glaive':
+        case 'halberd':
+            break;
+        case 'greataxe':
+            break;
+        case 'greatsword':
+            break;
+        case 'lance':
+            break;
+        case 'longsword':
+            break;
         case 'maul':
             layer.add(spawnMaul(item.name, colour));
             break;
+        case 'pike':
+            break;
+        case 'crossbow-heavy':
+            break;
+        case 'staff':
+            break;
+        case 'chain':
+            break;
+        case 'climbers-kit':
+            break;
+        case 'crowbar':
+            break;
+        case 'pick-miners':
+            break;
+        case 'pole-10-foot':
+            break;
+        case 'pot-iron':
+            break;
+        case 'rope-hempen-50-feet':
+            break;
+
+
         default:
             layer.add(spawnGenericItem(item.name, item.weight, colour));
     }
@@ -253,7 +298,7 @@ function determineColour(gearCategory) {
     }
 }
 
-function createCube(x, y, colour, width = 79, height = 79) {
+function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1) {
     return new Konva.Rect({
         x: x,
         y: y,
@@ -304,44 +349,44 @@ function spawnPaddedArmor(name, colour) {
     ));
 
     ItemShapes.add(createCube(
-        80,
+        GRID_SIZE,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
+        GRID_SIZE * 2,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        240,
+        GRID_SIZE * 3,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        80,
-        colour
-    ));
-    
-    ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
-        160,
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
         colour
     ));
 
@@ -398,56 +443,56 @@ function spawnLeatherArmor(name, colour) {
     ));
 
     ItemShapes.add(createCube(
-        80,
+        GRID_SIZE,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
+        GRID_SIZE * 2,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        240,
+        GRID_SIZE * 3,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        80,
-        colour
-    ));
-    
-    ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
-        160,
+        GRID_SIZE,
+        GRID_SIZE * 2,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        240,
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
-        240,
+        GRID_SIZE,
+        GRID_SIZE * 3,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 3,
         colour
     ));
 
@@ -498,76 +543,76 @@ function spawnStuddedArmor(name, colour) {
     Padded_Armor.add(ItemText)
 
     ItemShapes.add(createCube(
-        80,
+        GRID_SIZE,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        240,
+        GRID_SIZE * 3,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
         0,
-        80,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        240,
-        80,
+        GRID_SIZE * 3,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        320,
-        80,
+        GRID_SIZE * 4,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        160,
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        160,
+        GRID_SIZE * 3,
+        GRID_SIZE * 2,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        240,
+        GRID_SIZE,
+        GRID_SIZE * 3,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        240,
+        GRID_SIZE * 2,
+        GRID_SIZE * 3,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        240,
+        GRID_SIZE * 3,
+        GRID_SIZE * 3,
         colour
     ));
 
@@ -623,60 +668,60 @@ function spawnHideArmor(name, colour) {
         colour
     ));
     ItemShapes.add(createCube(
-        80,
+        GRID_SIZE,
         0,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
+        GRID_SIZE * 2,
         0,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
+        GRID_SIZE * 3,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
         0,
-        80,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        80,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        80,
+        GRID_PADDING * 3,
+        GRID_PADDING,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        160,
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        80,
-        240,
+        GRID_SIZE,
+        GRID_SIZE * 3,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        240,
+        GRID_SIZE * 2,
+        GRID_SIZE * 3,
         colour
     ));
 
@@ -732,105 +777,105 @@ function spawnChainShirtArmor(name, colour) {
         colour
     ));
     ItemShapes.add(createCube(
-        80,
+        GRID_SIZE,
         0,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
+        GRID_SIZE * 2,
         0,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
+        GRID_SIZE * 3,
         0,
         colour
     ));
     ItemShapes.add(createCube(
-        320,
+        GRID_SIZE * 4,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
         0,
-        80,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        80,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        80,
+        GRID_SIZE * 3,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        320,
-        80,
+        GRID_SIZE * 4,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        160,
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        160,
+        GRID_SIZE * 3,
+        GRID_SIZE * 2,
         colour
     ));
     ItemShapes.add(createCube(
-        320,
-        160,
+        GRID_SIZE * 4,
+        GRID_SIZE * 2,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        240,
+        GRID_SIZE,
+        GRID_SIZE * 3,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        240,
+        GRID_SIZE * 2,
+        GRID_SIZE * 3,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        240,
+        GRID_SIZE * 3,
+        GRID_SIZE * 3,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        320,
+        GRID_SIZE,
+        GRID_SIZE * 4,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        320,
+        GRID_SIZE * 2,
+        GRID_SIZE * 4,
         colour
     ));
     ItemShapes.add(createCube(
-        240,
-        320,
+        GRID_SIZE * 3,
+        GRID_SIZE * 4,
         colour
     ));
-   
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -883,33 +928,156 @@ function spawnShield(name, colour) {
         colour
     ));
     ItemShapes.add(createCube(
-        160,
+        GRID_SIZE * 2,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
         0,
-        80,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        80,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE,
+        GRID_SIZE * 2,
         colour
     ));
-    
-   
+
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnGreatClub(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    for (let x = 0; x < 2; x++) {
+        for (let y = 0; y < 5; y++) {
+            ItemShapes.add(createCube(
+                x * GRID_SIZE,
+                y * GRID_SIZE,
+                colour
+            ));
+        }
+    }
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnMace(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -963,56 +1131,56 @@ function spawnMaul(name, colour) {
     ));
 
     ItemShapes.add(createCube(
-        80,
+        GRID_SIZE,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
-        160,
+        GRID_SIZE * 2,
         0,
         colour
     ));
 
     ItemShapes.add(createCube(
         0,
-        80,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        80,
-        colour
-    ));
-    
-    ItemShapes.add(createCube(
-        160,
-        80,
+        GRID_SIZE,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        160,
+        GRID_SIZE * 2,
+        GRID_SIZE,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        240,
+        GRID_SIZE,
+        GRID_SIZE * 2,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        320,
+        GRID_SIZE,
+        GRID_SIZE * 3,
         colour
     ));
 
     ItemShapes.add(createCube(
-        80,
-        400,
+        GRID_SIZE,
+        GRID_SIZE * 4,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 5,
         colour
     ));
 
