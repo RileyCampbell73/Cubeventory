@@ -12,7 +12,7 @@ function SpawnItemfromJSON(json) {
     var colour = determineColour(itemCategory.index);
     switch (item.index) {
         case 'maul':
-            layer.add(spawnMaul());
+            layer.add(spawnMaul(item.name, colour));
             break;
         default:
             layer.add(spawnGenericItem(item.name, item.weight, colour));
@@ -21,9 +21,6 @@ function SpawnItemfromJSON(json) {
 
 
 function spawnGenericItem(name, weight, colour) {
-
-    if (colour === undefined)
-        colour = 'lightblue'
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -57,32 +54,10 @@ function spawnGenericItem(name, weight, colour) {
     if (weight === undefined || weight < 1) {
 
         if (weight >= .5) {
-            ItemShapes.add(new Konva.Rect({
-                x: 0,
-                y: 0,
-                width: 39,
-                height: 79,
-                fill: colour,
-                name: 'fillShape',
-                stroke: "black",
-                strokeWidth: 1,
-                isColliding: false,
-                fillColour: colour
-            }));
+            ItemShapes.add(createCube(0, 0, colour, 39));
         }
         else {
-            ItemShapes.add(new Konva.Rect({
-                x: 0,
-                y: 0,
-                width: 39,
-                height: 39,
-                fill: colour,
-                name: 'fillShape',
-                stroke: "black",
-                strokeWidth: 1,
-                isColliding: false,
-                fillColour: colour
-            }));
+            ItemShapes.add(createCube(0, 0, colour, 39, 39));
         }
         ItemText.add(new Konva.Text({
             x: 8,
@@ -111,18 +86,11 @@ function spawnGenericItem(name, weight, colour) {
 
         for (let i = 0; i < ColumnCount; i++) {
 
-            ItemShapes.add(new Konva.Rect({
-                x: i * 80,
-                y: rowCount * 80,
-                width: 79,
-                height: 79,
-                fill: colour,
-                name: 'fillShape',
-                stroke: "black",
-                strokeWidth: 1,
-                isColliding: false,
-                fillColour: colour
-            }));
+            ItemShapes.add(createCube(
+                i * 80,
+                rowCount * 80,
+                colour
+            ));
 
             weight--;
             if (weight <= 0) {
@@ -143,47 +111,31 @@ function spawnGenericItem(name, weight, colour) {
 
                 if (under1lb >= .5) {
                     if (halfCubeUpright) {
-                        ItemShapes.add(new Konva.Rect({
-                            x: i * 80,
-                            y: rowCount * 80,
-                            width: 39,
-                            height: 79,
-                            fill: colour,
-                            name: 'fillShape',
-                            stroke: "black",
-                            strokeWidth: 1,
-                            isColliding: false,
-                            fillColour: colour
-                        }));
+                        ItemShapes.add(createCube(
+                            i * 80,
+                            rowCount * 80,
+                            colour,
+                            39
+                        ));
                     }
                     else {
-                        ItemShapes.add(new Konva.Rect({
-                            x: i * 80,
-                            y: rowCount * 80,
-                            width: 79,
-                            height: 39,
-                            fill: colour,
-                            name: 'fillShape',
-                            stroke: "black",
-                            strokeWidth: 1,
-                            isColliding: false,
-                            fillColour: colour
-                        }));
+                        ItemShapes.add(createCube(
+                            i * 80,
+                            rowCount * 80,
+                            colour,
+                            79,
+                            39
+                        ));
                     }
                 }
                 else if (under1lb < .5 && under1lb != 0) {
-                    ItemShapes.add(new Konva.Rect({
-                        x: i * 80,
-                        y: rowCount * 80,
-                        width: 39,
-                        height: 39,
-                        fill: colour,
-                        name: 'fillShape',
-                        stroke: "black",
-                        strokeWidth: 1,
-                        isColliding: false,
-                        fillColour: colour
-                    }));
+                    ItemShapes.add(createCube(
+                        i * 80,
+                        rowCount * 80,
+                        colour,
+                        39,
+                        39
+                    ));
                 }
                 break;
             }
@@ -281,12 +233,12 @@ function determineColour(gearCategory) {
     }
 }
 
-function createCube(x, y, colour) { // need this?
+function createCube(x, y, colour, width = 79, height = 79) {
     return new Konva.Rect({
         x: x,
         y: y,
-        width: 79,
-        height: 79,
+        width: width,
+        height: height,
         fill: colour,
         name: 'fillShape',
         stroke: "black",
@@ -297,121 +249,106 @@ function createCube(x, y, colour) { // need this?
 }
 
 //some items may have odd shapes and require their own function
-function spawnMaul() {
+function spawnMaul(name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
+    //first make a group, everything will be a group.
     var Maul = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true
     });
 
-    Maul.add(new Konva.Rect({
+    //group for shape
+    var ItemShapes = new Konva.Group({
         x: 0,
         y: 0,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 80,
-        y: 0,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 160,
-        y: 0,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 0,
-        y: 80,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 80,
-        y: 80,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 80,
-        y: 160,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 80,
-        y: 240,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
-    Maul.add(new Konva.Rect({
-        x: 80,
-        y: 320,
-        width: 79,
-        height: 79,
-        stroke: 'black',
-        strokeWidth: 1,
-        fill: 'green',
-        name: 'fillShape',
-        isColliding: false,
-        fillColour: 'green'
-    }));
+        name: 'itemShapes'
+    });
 
-    Maul.add(new Konva.Text({
-        text: 'maul',
-        fontSize: 14,
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Maul.add(ItemShapes)
+    Maul.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+    
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        240,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        320,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        400,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 50,
-        padding: 5,
-        align: 'center'
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
     }));
 
     return Maul;
