@@ -11,6 +11,26 @@ function SpawnItemfromJSON(json) {
 
     var colour = determineColour(itemCategory.index);
     switch (item.index) {
+        case 'padded-armor':
+            layer.add(spawnPaddedArmor(item.name, colour))
+            break;
+        case 'leather-armor':
+            layer.add(spawnLeatherArmor(item.name, colour))
+            break;
+        case 'studded-leather-armor':
+            layer.add(spawnStuddedArmor(item.name, colour))
+            break;
+        case 'hide-armor':
+            layer.add(spawnHideArmor(item.name, colour))
+            break;
+        case 'chain-shirt':
+        case 'breastplate':
+            layer.add(spawnChainShirtArmor(item.name, colour))
+            break;
+        case 'shield':
+            layer.add(spawnShield(item.name, colour))
+            break;
+        
         case 'maul':
             layer.add(spawnMaul(item.name, colour));
             break;
@@ -249,6 +269,665 @@ function createCube(x, y, colour, width = 79, height = 79) {
 }
 
 //some items may have odd shapes and require their own function
+function spawnPaddedArmor(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        240,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+    
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        160,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnLeatherArmor(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        240,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+    
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        160,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        240,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        240,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnStuddedArmor(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        80,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        240,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        240,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        320,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        160,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        240,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        240,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        240,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 88,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnHideArmor(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        240,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        240,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnChainShirtArmor(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        320,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        320,
+        80,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        160,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        320,
+        160,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        240,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        240,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        240,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        80,
+        320,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        320,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        240,
+        320,
+        colour
+    ));
+   
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnShield(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        160,
+        80,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        80,
+        160,
+        colour
+    ));
+    
+   
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
 function spawnMaul(name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
