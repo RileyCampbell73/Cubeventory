@@ -38,7 +38,6 @@
   //    image turned out to be dead end
   //    For now, we store the intended colour to be reverted to. Want a different solution.
 
-  
   //change cube physical size. too large?
   //  currently set to 80
   //  I think this is too big - bump down to 60
@@ -47,6 +46,9 @@
   //  WIP:
   //    Want combobox to clear once something is made?
   //    add manual add button for multiples?
+
+  //refactor colours
+  //  use a range of the same colour and get one randomly
 
   //text overflow issue
   
@@ -70,8 +72,6 @@
   //  change who/where gets their 'isColliding' set false
 
   //SpawnGenericItem will create something larger that 5 across. need to cap that.
-  
-  //Delete only gets shapes
 
  
   //FUTURE
@@ -80,13 +80,10 @@
   //edit items
   //  name, desc, weight(?), Note
   //  maybe clicking an item shows its detail in a side panel / this edit screen
-  //review item colours
   //Custom Items
   //Bag of Holding and other tools to aid in Encumberance
   //  Like a mule or horse.
   
-
-
 
   var GUIDELINE_OFFSET = 10;
   var GRID_PADDING = 80;
@@ -115,28 +112,23 @@
   InitializeMenu();
   InitializeCollisionSnapping()
   
-  var obj = JSON.parse(EquipmentJSON);
+  var EquipmentJSON = JSON.parse(EquipmentJSON);
 
-  //loop through and create html Options for all
+
   $('#EquipmentComboBox').append($('<option>', {
       value:'',
       text: ''
     }));
 
-  for (let i = 0; i < obj.length; i++) {
+  //loop through and create html Options for all
+  for (let i = 0; i < EquipmentJSON.length; i++) {
     $('#EquipmentComboBox').append($('<option>', {
-      value: JSON.stringify(obj[i]),
-      text: obj[i].name
+      value: JSON.stringify(EquipmentJSON[i]),
+      text: EquipmentJSON[i].name
     }));
   }
 
   initializeItemCombobox()
-
-function spawnItem(name, weight){
-  layer.add(spawnGenericItem(name, weight))
-}
-
-
 
 </script>
 

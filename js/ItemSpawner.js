@@ -9,6 +9,9 @@ function SpawnItemfromJSON(json) {
     if (itemCategory === undefined)
         itemCategory = item.equipment_category
 
+    if (itemCategory.index == 'equipment-packs')
+        return SpawnPackContents(item);
+
     var colour = determineColour(itemCategory.index);
     switch (item.index) {
         case 'padded-armor':
@@ -88,6 +91,18 @@ function SpawnItemfromJSON(json) {
     }
 }
 
+function SpawnPackContents(packJson){
+
+    var packContents = packJson.contents;
+
+    for (let i = 0; i < packContents.length; i++) {
+        var item = EquipmentJSON.filter((item) => item.index == packContents[i].item.index)[0];
+        for (let x = 0; x < packContents[i].quantity; x++) {
+            SpawnItemfromJSON(JSON.stringify(item));
+        }
+
+    }
+}
 
 function spawnGenericItem(name, weight, colour) {
 
