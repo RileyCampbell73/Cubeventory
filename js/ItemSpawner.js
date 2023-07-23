@@ -38,44 +38,48 @@ function SpawnItemfromJSON(json) {
             layer.add(spawnMace(item.name, colour))
             break;
         case 'quarterstaff':
-            break;
         case 'spear':
+        case 'lance':
+        case 'longsword':
+        case 'staff':
+        case 'pole-10-foot':
+            layer.add(spawnLineItem(item.name, colour, item.weight))
             break;
         case 'crossbow-light':
+            layer.add(spawnLightCrossbow(item.name, colour))
             break;
         case 'glaive':
         case 'halberd':
+            layer.add(spawnGlaive(item.name, colour))
             break;
         case 'greataxe':
+            layer.add(spawnGreataxe(item.name, colour))
             break;
         case 'greatsword':
-            break;
-        case 'lance':
-            break;
-        case 'longsword':
+            layer.add(spawnGreatsword(item.name, colour))
             break;
         case 'maul':
             layer.add(spawnMaul(item.name, colour));
             break;
         case 'pike':
-            break;
-        case 'crossbow-heavy':
-            break;
-        case 'staff':
-            break;
         case 'chain':
-            break;
         case 'climbers-kit':
+            layer.add(spawnMultiLineItem(item.name, colour, 2, item.weight / 2))
+            break;
+        case 'crossbow-heavy':// too bulky?
+            layer.add(spawnHeavyCrossbow(item.name, colour))
             break;
         case 'crowbar':
+            layer.add(spawnCrowbar(item.name, colour))
             break;
         case 'pick-miners':
-            break;
-        case 'pole-10-foot':
+            layer.add(spawnMinersPick(item.name, colour))
             break;
         case 'pot-iron':
+            layer.add(spawnIronPot(item.name, colour))
             break;
         case 'rope-hempen-50-feet':
+            layer.add(spawnHempRope(item.name, colour))
             break;
 
 
@@ -1096,6 +1100,566 @@ function spawnMace(name, colour) {
 
 }
 
+function spawnLineItem(name, colour, weight) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+
+    for (let i = 0; i < weight; i++) {
+        ItemShapes.add(createCube(
+            GRID_SIZE * i,
+            0,
+            colour
+        ));
+    }
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnLightCrossbow(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnGlaive(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnGreataxe(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnGreatsword(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 88,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnMultiLineItem(name, colour, columns, rows) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    for (let x = 0; x < columns; x++) {
+        for (let y = 0; y < rows; y++) {
+            ItemShapes.add(createCube(
+                GRID_SIZE * x,
+                GRID_SIZE * y,
+                colour
+            ));
+        }
+    }
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
+function spawnHeavyCrossbow(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Padded_Armor = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Padded_Armor.add(ItemShapes)
+    Padded_Armor.add(ItemText)
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 4,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 4,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 3,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 3,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        GRID_SIZE * 3,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 4,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 5,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 6,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 7,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 88,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Padded_Armor;
+
+}
+
 function spawnMaul(name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
@@ -1183,6 +1747,384 @@ function spawnMaul(name, colour) {
         GRID_SIZE * 5,
         colour
     ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Maul;
+
+}
+
+function spawnCrowbar(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Maul = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Maul.add(ItemShapes)
+    Maul.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: -6,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Maul;
+
+}
+
+function spawnMinersPick(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Maul = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Maul.add(ItemShapes)
+    Maul.add(ItemText)
+
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 4,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 3,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 4,
+        colour
+    ));
+    
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: 74,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Maul;
+
+}
+
+function spawnIronPot(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Maul = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Maul.add(ItemShapes)
+    Maul.add(ItemText)
+
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 3,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 3,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE * 3,
+        colour
+    ));
+    
+
+    ItemText.add(new Konva.Text({
+        x: 8,
+        y: 74,
+        rotation: 45,
+        text: name,
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: '#000',
+        width: 105,
+        //padding: 5,
+        align: 'center',
+        name: 'text'
+    }));
+
+    return Maul;
+
+}
+
+function spawnHempRope(name, colour) {
+
+    var randItemSpawn = randomSpawnLocation();
+
+    //first make a group, everything will be a group.
+    var Maul = new Konva.Group({
+        x: randItemSpawn.x,
+        y: randItemSpawn.y,
+        draggable: true
+    });
+
+    //group for shape
+    var ItemShapes = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+
+    //group for text
+    var ItemText = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+
+    Maul.add(ItemShapes)
+    Maul.add(ItemText)
+
+    ItemShapes.add(createCube(
+        0,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        0,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 3,
+        0,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE * 2,
+        GRID_SIZE,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+    ItemShapes.add(createCube(
+        GRID_SIZE,
+        GRID_SIZE * 2,
+        colour
+    ));
+
+    ItemShapes.add(createCube(
+        0,
+        GRID_SIZE * 3,
+        colour
+    ));
+       
 
     ItemText.add(new Konva.Text({
         x: 8,
