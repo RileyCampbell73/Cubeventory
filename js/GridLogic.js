@@ -190,7 +190,7 @@ function InitializeMenu() {
 
   });
   document.getElementById('delete-button').addEventListener('click', () => {
-    currentShape.parent.destroy();
+    currentShape.parent.parent.destroy();
   });
 
   window.addEventListener('click', () => {
