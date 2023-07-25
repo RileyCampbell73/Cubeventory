@@ -358,7 +358,7 @@ function InitializeCollisionSnapping() {
           name: 'guid-line',
           dash: [4, 6],
         });
-        layer.add(line);
+        Itemlayer.add(line);
         line.absolutePosition({
           x: 0,
           y: lg.lineGuide,
@@ -371,7 +371,7 @@ function InitializeCollisionSnapping() {
           name: 'guid-line',
           dash: [4, 6],
         });
-        layer.add(line);
+        Itemlayer.add(line);
         line.absolutePosition({
           x: lg.lineGuide,
           y: 0,
@@ -380,9 +380,9 @@ function InitializeCollisionSnapping() {
     });
   }
 
-  layer.on('dragmove', function (e) {
+  Itemlayer.on('dragmove', function (e) {
     // clear all previous lines on the screen
-    layer.find('.guid-line').forEach((l) => l.destroy());
+    Itemlayer.find('.guid-line').forEach((l) => l.destroy());
 
     e.target.moveToTop();
 
@@ -449,16 +449,16 @@ function InitializeCollisionSnapping() {
     e.target.absolutePosition(absPos);
   });
 
-  layer.on('dragend', function (e) {
+  Itemlayer.on('dragend', function (e) {
     // clear all previous lines on the screen
-    layer.find('.guid-line').forEach((l) => l.destroy());
+    Itemlayer.find('.guid-line').forEach((l) => l.destroy());
   });
 
   //collision logic
-  layer.on('dragmove', function (e) {
+  Itemlayer.on('dragmove', function (e) {
     var target = e.target;
 
-    layer.children.forEach(function (shape) {
+    Itemlayer.children.forEach(function (shape) {
       shape.find('Rect').forEach(function (square) {
         square.setAttr('isColliding', false)
       })
@@ -468,7 +468,7 @@ function InitializeCollisionSnapping() {
     target.find('Rect').forEach(function (square) {
       //square.setAttr('isColliding', false)
       //loop through each other shapes
-      layer.children.forEach(function (group) {
+      Itemlayer.children.forEach(function (group) {
         // do not check intersection with itself
         if (group === target) {
           return;

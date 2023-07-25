@@ -19,6 +19,12 @@
     <br />
     <label>Use Encumbrance Rule</label>
     <input type="checkbox" id="EncumbranceRule" name="EncumbranceRule" value="" >
+
+    <br/>
+    <input type="button" onclick="SaveInventory()" value="Save">
+    <br/>
+    <input type="file" id="saveUploadFile" accept=".json">
+    <input type="button" onclick="uploadSaveFile()" value="Load">
   </div>
 
   <div id="container"></div>
@@ -111,7 +117,7 @@
   var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
 
   var stage;
-  var layer;
+  var Itemlayer;
   var EquipmentJSON;
 
   $(document).ready(function () 
@@ -129,9 +135,9 @@
     stage.draw();
 
     // create layer for shapes
-    layer = new Konva.Layer();
+    Itemlayer = new Konva.Layer();
     // add the layer to the stage
-    stage.add(layer);
+    stage.add(Itemlayer);
 
     InitializeMenu();
     InitializeCollisionSnapping()
@@ -164,8 +170,64 @@
       gridLayer.moveToBottom();
     });
 
-
   });
+
+  function SaveInventory()
+  {
+
+    var saveFile = {
+      name: "character",
+      EncumbranceRule: $('#EncumbranceRule')[0].checked,
+      Strength: 10,
+      items: Itemlayer.toJSON()
+    }
+
+    var saveJSON = JSON.stringify(saveFile);
+
+    const file = new File([saveJSON], 'save.json')
+    const link = document.createElement('a')
+    const url = URL.createObjectURL(file)
+
+    link.href = url
+    link.download = file.name
+    document.body.appendChild(link)
+    link.click()
+
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  }
+
+  function uploadSaveFile(){
+    var fileInput = $('#saveUploadFile')[0];
+    if (!fileInput.value.length) return;
+
+    // Create a new FileReader() object
+	  let reader = new FileReader();
+
+    // Setup the callback event to run when the file is read
+	  reader.onload = LoadSaveFile;
+
+    // Read the file
+	  reader.readAsText(fileInput.files[0]);
+
+  }
+
+  function LoadSaveFile(event)
+  {
+    let str = event.target.result;
+	  let json = JSON.parse(str);
+
+    //update fields with save data
+    $('#EncumbranceRule')[0].checked = json.EncumbranceRule
+    $('#EncumbranceRule')[0].dispatchEvent(new Event('change'))
+
+    //create layer from save file
+    Itemlayer.destroy()
+    Itemlayer = Konva.Node.create(json.items);
+    stage.add(Itemlayer);
+    InitializeMenu();
+    InitializeCollisionSnapping()
+  }
 
 
 

@@ -15,30 +15,30 @@ function SpawnItemfromJSON(json) {
     var colour = determineColour(itemCategory.index);
     switch (item.index) {
         case 'padded-armor':
-            layer.add(spawnPaddedArmor(item.name, colour))
+            Itemlayer.add(spawnPaddedArmor(item.name, colour))
             break;
         case 'leather-armor':
-            layer.add(spawnLeatherArmor(item.name, colour))
+            Itemlayer.add(spawnLeatherArmor(item.name, colour))
             break;
         case 'studded-leather-armor':
-            layer.add(spawnStuddedArmor(item.name, colour))
+            Itemlayer.add(spawnStuddedArmor(item.name, colour))
             break;
         case 'hide-armor':
-            layer.add(spawnHideArmor(item.name, colour))
+            Itemlayer.add(spawnHideArmor(item.name, colour))
             break;
         case 'chain-shirt':
         case 'breastplate':
-            layer.add(spawnChainShirtArmor(item.name, colour))
+            Itemlayer.add(spawnChainShirtArmor(item.name, colour))
             break;
         case 'shield':
-            layer.add(spawnShield(item.name, colour))
+            Itemlayer.add(spawnShield(item.name, colour))
             break;
         case 'greatclub':
-            layer.add(spawnGreatClub(item.name, colour))
+            Itemlayer.add(spawnGreatClub(item.name, colour))
             break;
         case 'mace':
         case 'battleaxe':
-            layer.add(spawnMace(item.name, colour))
+            Itemlayer.add(spawnMace(item.name, colour))
             break;
         case 'quarterstaff':
         case 'spear':
@@ -46,48 +46,48 @@ function SpawnItemfromJSON(json) {
         case 'longsword':
         case 'staff':
         case 'pole-10-foot':
-            layer.add(spawnLineItem(item.name, colour, item.weight))
+            Itemlayer.add(spawnLineItem(item.name, colour, item.weight))
             break;
         case 'crossbow-light':
-            layer.add(spawnLightCrossbow(item.name, colour))
+            Itemlayer.add(spawnLightCrossbow(item.name, colour))
             break;
         case 'glaive':
         case 'halberd':
-            layer.add(spawnGlaive(item.name, colour))
+            Itemlayer.add(spawnGlaive(item.name, colour))
             break;
         case 'greataxe':
-            layer.add(spawnGreataxe(item.name, colour))
+            Itemlayer.add(spawnGreataxe(item.name, colour))
             break;
         case 'greatsword':
-            layer.add(spawnGreatsword(item.name, colour))
+            Itemlayer.add(spawnGreatsword(item.name, colour))
             break;
         case 'maul':
-            layer.add(spawnMaul(item.name, colour));
+            Itemlayer.add(spawnMaul(item.name, colour));
             break;
         case 'pike':
         case 'chain':
         case 'climbers-kit':
-            layer.add(spawnMultiLineItem(item.name, colour, 2, item.weight / 2))
+            Itemlayer.add(spawnMultiLineItem(item.name, colour, 2, item.weight / 2))
             break;
         case 'crossbow-heavy':// too bulky?
-            layer.add(spawnHeavyCrossbow(item.name, colour))
+            Itemlayer.add(spawnHeavyCrossbow(item.name, colour))
             break;
         case 'crowbar':
-            layer.add(spawnCrowbar(item.name, colour))
+            Itemlayer.add(spawnCrowbar(item.name, colour))
             break;
         case 'pick-miners':
-            layer.add(spawnMinersPick(item.name, colour))
+            Itemlayer.add(spawnMinersPick(item.name, colour))
             break;
         case 'pot-iron':
-            layer.add(spawnIronPot(item.name, colour))
+            Itemlayer.add(spawnIronPot(item.name, colour))
             break;
         case 'rope-hempen-50-feet':
-            layer.add(spawnHempRope(item.name, colour))
+            Itemlayer.add(spawnHempRope(item.name, colour))
             break;
 
 
         default:
-            layer.add(spawnGenericItem(item.name, item.weight, colour));
+            Itemlayer.add(spawnGenericItem(item.name, item.weight, colour));
     }
 }
 
