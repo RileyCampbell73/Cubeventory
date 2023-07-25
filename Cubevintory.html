@@ -13,10 +13,15 @@
 
 <body>
   <div class="ui-widget" style="padding-left: 1300;">
-    <label>Spawn Item:</label>
-    <select id="EquipmentComboBox"></select>
 
-    <br />
+    <label>Character Name</label>
+    <input type="text" id="CharacterName" name="CharacterName">
+    <br/>
+
+    <label>Strength</label>
+    <input type="number" id="CharacterStrength" name="CharacterStrength" value="10" min="1" max="20">
+    <br/>
+
     <label>Use Encumbrance Rule</label>
     <input type="checkbox" id="EncumbranceRule" name="EncumbranceRule" value="" >
 
@@ -25,6 +30,10 @@
     <br/>
     <input type="file" id="saveUploadFile" accept=".json">
     <input type="button" onclick="uploadSaveFile()" value="Load">
+
+      <br />
+      <label>Spawn Item:</label>
+    <select id="EquipmentComboBox"></select>
   </div>
 
   <div id="container"></div>
@@ -62,9 +71,6 @@
   //refactor colours
   //  use a range of the same colour and get one randomly
   //  change to rgb and random those values
-
-  //textbox for chacter strength
-  // Character name? thats more for save feature.
 
   //text overflow issue
   //  Refactor creating text while we're at it.
@@ -130,6 +136,8 @@
       height: height,
     });
 
+    strength = $('#CharacterStrength')[0].value;
+
     var gridLayer = createGridLayer(strength, false)
     stage.add(gridLayer);
     stage.draw();
@@ -170,15 +178,26 @@
       gridLayer.moveToBottom();
     });
 
+    $('#CharacterStrength').change(function(){
+      strength = $('#CharacterStrength')[0].value;
+      
+      gridLayer.destroy()
+      gridLayer = createGridLayer(strength, this.checked)
+      
+      //redraw
+      stage.add(gridLayer);
+      gridLayer.moveToBottom();
+    });
+
   });
 
   function SaveInventory()
   {
 
     var saveFile = {
-      name: "character",
-      EncumbranceRule: $('#EncumbranceRule')[0].checked,
-      Strength: 10,
+      name: $('#CharacterName')[0].value,
+      strength: strength,
+      encumbranceRule: $('#EncumbranceRule')[0].checked,
       items: Itemlayer.toJSON()
     }
 
@@ -218,7 +237,12 @@
 	  let json = JSON.parse(str);
 
     //update fields with save data
-    $('#EncumbranceRule')[0].checked = json.EncumbranceRule
+    $('#CharacterName')[0].value = json.name
+
+    $('#CharacterStrength')[0].value = json.strength
+    $('#CharacterStrength')[0].dispatchEvent(new Event('change'))
+    
+    $('#EncumbranceRule')[0].checked = json.encumbranceRule
     $('#EncumbranceRule')[0].dispatchEvent(new Event('change'))
 
     //create layer from save file
