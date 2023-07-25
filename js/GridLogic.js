@@ -1,16 +1,10 @@
 
-// $(document).ready(function () {
+function createGridLayer(strength, useEncumbrance) {
 
-
-// });
-
-
-function createGridLayer(strength) {
-  
   var strengthCount = strength;
 
   var gridLayer = new Konva.Layer({
-    id: 'gridLayer' 
+    id: 'gridLayer'
   });
 
   //Text around the grid
@@ -26,103 +20,110 @@ function createGridLayer(strength) {
     width: 200,
     //padding: 5,
     align: 'center'
-}));
+  }));
 
-gridLayer.add(new Konva.Text({
-  x: GRID_SIZE,
-  y: 0, //(GRID_SIZE * (strength / 2)) + 20 + 200, //numbers to get it to fit better
-  //rotation: -90,
-  text: 'NOT ENCUMBERED!',
-  fontSize: 40,
-  fontFamily: 'Calibri',
-  fontStyle: 'bold',
-  fill: '#000',
-  width: GRID_SIZE * 5,
-  //padding: 5,
-  align: 'center'
-}));
+  if (useEncumbrance) {
 
-gridLayer.add(new Konva.Text({
-  x: GRID_SIZE * 6,
-  y: 0, 
+    gridLayer.add(new Konva.Text({
+      x: GRID_SIZE,
+      y: 0, //(GRID_SIZE * (strength / 2)) + 20 + 200, //numbers to get it to fit better
+      //rotation: -90,
+      text: 'NOT ENCUMBERED!',
+      fontSize: 40,
+      fontFamily: 'Calibri',
+      fontStyle: 'bold',
+      fill: '#000',
+      width: GRID_SIZE * 5,
+      //padding: 5,
+      align: 'center'
+    }));
 
-  text: 'ENCUMBERED',
-  fontSize: 40,
-  fontFamily: 'Calibri',
-  fontStyle: 'bold',
-  fill: '#000',
-  width: GRID_SIZE * 5,
-  //padding: 5,
-  align: 'center',
-}));
+    gridLayer.add(new Konva.Text({
+      x: GRID_SIZE * 6,
+      y: 0,
 
-gridLayer.add(new Konva.Text({
-  x: GRID_SIZE * 6,
-  y: 32, 
+      text: 'ENCUMBERED',
+      fontSize: 40,
+      fontFamily: 'Calibri',
+      fontStyle: 'bold',
+      fill: '#000',
+      width: GRID_SIZE * 5,
+      //padding: 5,
+      align: 'center',
+    }));
 
-  text: '(-10 speed)',
-  fontSize: 15,
-  fontFamily: 'Calibri',
-  //fontStyle: 'bold',
-  fill: '#000',
-  width: GRID_SIZE * 5,
-  //padding: 5,
-  align: 'center',
-}));
+    gridLayer.add(new Konva.Text({
+      x: GRID_SIZE * 6,
+      y: 32,
 
-gridLayer.add(new Konva.Text({
-  x: GRID_SIZE * 11,
-  y: 0, 
-  text: 'HEAVILY ENCUMBERED',
-  fontSize: 40,
-  fontFamily: 'Calibri',
-  fontStyle: 'bold',
-  fill: '#000',
-  width: GRID_SIZE * 5,
-  //padding: 5,
-  align: 'center',
-}));
+      text: '(-10 speed)',
+      fontSize: 15,
+      fontFamily: 'Calibri',
+      //fontStyle: 'bold',
+      fill: '#000',
+      width: GRID_SIZE * 5,
+      //padding: 5,
+      align: 'center',
+    }));
 
-gridLayer.add(new Konva.Text({
-  x: GRID_SIZE * 11,
-  y: 32, 
+    gridLayer.add(new Konva.Text({
+      x: GRID_SIZE * 11,
+      y: 0,
+      text: 'HEAVILY ENCUMBERED',
+      fontSize: 40,
+      fontFamily: 'Calibri',
+      fontStyle: 'bold',
+      fill: '#000',
+      width: GRID_SIZE * 5,
+      //padding: 5,
+      align: 'center',
+    }));
 
-  text: '(-20 speed)\nDisadvantage on:\n Abilioty checks, Attack rolls,\n Str, Dex, & Con saves',
-  fontSize: 12,
-  fontFamily: 'Calibri',
-  //fontStyle: 'bold',
-  fill: '#000',
-  width: GRID_SIZE * 5,
-  //padding: 5,
-  align: 'center',
-}));
+    gridLayer.add(new Konva.Text({
+      x: GRID_SIZE * 11,
+      y: 32,
 
-//numbers for grid
-  for (let y = 0; y < strength; y++) { 
-      gridLayer.add(new Konva.Text({
-        x: 50,
-        y: (y * GRID_SIZE) + GRID_PADDING + 65,//the 65 is to better center them. so its 40 + length of textbox I guess.
-        rotation: -90,
-        text: strengthCount--,
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: '#000',
-        width: 50,
-        //padding: 5,
-        align: 'center'
+      text: '(-20 speed)\nDisadvantage on:\n Abilioty checks, Attack rolls,\n Str, Dex, & Con saves',
+      fontSize: 12,
+      fontFamily: 'Calibri',
+      //fontStyle: 'bold',
+      fill: '#000',
+      width: GRID_SIZE * 5,
+      //padding: 5,
+      align: 'center',
+    }));
+  }
+
+  //numbers for grid
+  for (let y = 0; y < strength; y++) {
+    gridLayer.add(new Konva.Text({
+      x: 50,
+      y: (y * GRID_SIZE) + GRID_PADDING + 65,//the 65 is to better center them. so its 40 + length of textbox I guess.
+      rotation: -90,
+      text: strengthCount--,
+      fontSize: 30,
+      fontFamily: 'Calibri',
+      fill: '#000',
+      width: 50,
+      //padding: 5,
+      align: 'center'
     }));
   }
 
   //grid
   for (let x = 0; x < 15; x++) {
-    for (let y = 0; y < strength; y++) { 
+    for (let y = 0; y < strength; y++) {
       var gridColour = ''
-      if (x < 5)
+      if (useEncumbrance) {
+        if (x < 5)
+          gridColour = '#B9FF9F'//green
+        else if (x >= 5 && x < 10)
+          gridColour = '#EBB60A'//yellowy orange
+        else if (x >= 10)
+          gridColour = '#B70000'//red
+      }
+      else
         gridColour = '#B9FF9F'//green
-      else if (x >= 5 && x < 10)
-        gridColour = '#EBB60A'//yellowy orange
-      else if (x >= 10)
-        gridColour = '#B70000'//red
 
       var rect = new Konva.Rect({
         x: (x * GRID_SIZE) + GRID_PADDING,
@@ -145,7 +146,7 @@ gridLayer.add(new Konva.Text({
     height: GRID_SIZE * strength,
     fill: 'white',
     stroke: 'black',
-        strokeWidth: 1,
+    strokeWidth: 1,
     cornerRadius: 10,
   }));
 
@@ -158,7 +159,7 @@ function InitializeMenu() {
   let currentShape;
   var menuNode = document.getElementById('menu');
   document.getElementById('rotate-button').addEventListener('click', () => {
-    
+
     var itemGroup = currentShape.parent.parent;
     itemGroup.rotate(90);
 
@@ -170,7 +171,7 @@ function InitializeMenu() {
   document.getElementById('flip-button').addEventListener('click', () => {
 
     var scaleX = currentShape.parent.parent.scaleX();
-    if (scaleX > 0){
+    if (scaleX > 0) {
       currentShape.parent.parent.scaleX(-Math.abs(currentShape.scaleX()))
 
       var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
@@ -178,7 +179,7 @@ function InitializeMenu() {
       text.setAttr('x', text.getAttr('x') + 80)
       text.setAttr('y', text.getAttr('y') + 80)
     }
-    else{
+    else {
       currentShape.parent.parent.scaleX(Math.abs(currentShape.scaleX()))
 
       var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
@@ -210,7 +211,7 @@ function InitializeMenu() {
     if (currentShape.getLayer().getAttr('id') === 'gridLayer')//so they can't manipulate the grid.
       return;
 
-    if (currentShape.parent.getAttr('name') == 'itemText'){
+    if (currentShape.parent.getAttr('name') == 'itemText') {
       currentShape = currentShape.parent.parent.find('.itemShapes')[0].children[0];
     }
 

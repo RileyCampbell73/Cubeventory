@@ -3,19 +3,22 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
   <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+  <script src="js/Equipment.js"></script>
   <script src="js/GridLogic.js"></script>
   <script src="js/ItemSpawner.js"></script>
   <script src="js/AutofillCombobox.js"></script>
-  <script src="js/Equipment.js"></script>
+  
 
 </head>
 
 <body>
   <div class="ui-widget" style="padding-left: 1300;">
     <label>Spawn Item:</label>
-    <select id="EquipmentComboBox">
+    <select id="EquipmentComboBox"></select>
 
-    </select>
+    <br />
+    <label>Use Encumbrance Rule</label>
+    <input type="checkbox" id="EncumbranceRule" name="EncumbranceRule" value="" >
   </div>
 
   <div id="container"></div>
@@ -60,11 +63,6 @@
   //text overflow issue
   //  Refactor creating text while we're at it.
 
-  //Make this work without with RAW AND with the Variant: Encumbrance rule
-  //  right now this is all the Encumbrance rule, but take away the 'encumbrance sections' and what you're left with is RAW carrying capacity
-  //  Only thing to add is size, which determines carrying capacity
-  //  Would also allow for complex shapes past 5 cubes. 
-  
   //Save feature
   //  Just saves items and their locations into json. Let them save their own files and upload them on return
   //  throw save into cookie? 
@@ -79,21 +77,19 @@
   //    save button
   //    load button
   //    clear button
-  //    Control to change shaoes to all generic
-  
+  //    Control to change shapes to all generic
+
 
   //Host it
 
- 
+
   //BUGS
 
   //Collision is removed when interacting with a different shape.
   //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
   //  change who/where gets their 'isColliding' set false
 
-  //SpawnGenericItem will create something larger that 5 across. need to cap that.
 
- 
   //FUTURE
 
   //Coin weight
@@ -103,7 +99,7 @@
   //Custom Items
   //Bag of Holding and other tools to aid in Encumberance
   //  Like a mule or horse.
-  
+
 
   var GUIDELINE_OFFSET = 10;
   var GRID_PADDING = 80;
@@ -111,44 +107,67 @@
 
   var strength = 10;
 
-  var width = (15 * GRID_SIZE)+ GRID_PADDING + 500; //500 is for extra room for spawning itemas and controls
+  var width = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning itemas and controls
   var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
 
-  // first we need to create a stage
-  var stage = new Konva.Stage({
-    container: 'container',
-    width: width,
-    height: height,
-  });
+  var stage;
+  var layer;
+  var EquipmentJSON;
 
-  stage.add(createGridLayer(strength));
-  stage.draw();
+  $(document).ready(function () 
+  {
 
-  // create layer for shapes
-  var layer = new Konva.Layer();
-  // add the layer to the stage
-  stage.add(layer);
+    // first we need to create a stage
+    stage = new Konva.Stage({
+      container: 'container',
+      width: width,
+      height: height,
+    });
 
-  InitializeMenu();
-  InitializeCollisionSnapping()
-  
-  var EquipmentJSON = JSON.parse(EquipmentJSON);
+    var gridLayer = createGridLayer(strength, false)
+    stage.add(gridLayer);
+    stage.draw();
+
+    // create layer for shapes
+    layer = new Konva.Layer();
+    // add the layer to the stage
+    stage.add(layer);
+
+    InitializeMenu();
+    InitializeCollisionSnapping()
+
+    EquipmentJSON = JSON.parse(EquipmentJSONRAW);
 
 
-  $('#EquipmentComboBox').append($('<option>', {
-      value:'',
+    $('#EquipmentComboBox').append($('<option>', {
+      value: '',
       text: ''
     }));
 
-  //loop through and create html Options for all
-  for (let i = 0; i < EquipmentJSON.length; i++) {
-    $('#EquipmentComboBox').append($('<option>', {
-      value: JSON.stringify(EquipmentJSON[i]),
-      text: EquipmentJSON[i].name
-    }));
-  }
+    //loop through and create html Options for all
+    for (let i = 0; i < EquipmentJSON.length; i++) {
+      $('#EquipmentComboBox').append($('<option>', {
+        value: JSON.stringify(EquipmentJSON[i]),
+        text: EquipmentJSON[i].name
+      }));
+    }
 
-  initializeItemCombobox()
+    initializeItemCombobox()
+
+    $('#EncumbranceRule').change(function () {
+      //remove old grid layer
+      gridLayer.destroy()
+      gridLayer = createGridLayer(strength, this.checked)
+      
+      //redraw
+      stage.add(gridLayer);
+      gridLayer.moveToBottom();
+    });
+
+
+  });
+
+
 
 </script>
 
