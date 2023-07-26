@@ -39,8 +39,8 @@
         <ul class="list-unstyled components">
             <li>
               <div>
-                <input type="checkbox" id="EncumbranceRule" name="EncumbranceRule" value="" >
-                <label>Use Encumbrance Rule</label>
+                <input type="checkbox" id="EncumbranceRule" name="EncumbranceRule" value="" checked>
+                <label for="EncumbranceRule">Use Encumbrance Rule</label>
               </div>
             </li>
             <li>
@@ -135,13 +135,19 @@
   //  Refactor Load to JUST be file control
   //  Save file should include the Character name
 
-
-  //Clear button
+  //Clear button?
   //  with a confirm
 
   //change browser tab to be *Character Name*'s Inventory
+  //  also need favicon
 
+  //need a help button and modal
+  //  explains how to use it
+  //    embed the Zee video?
+  //    gives place to submit feedback and bugs
 
+  //add Konva contribute widget into sidebar
+  //  Ko-fi link?
 
   //BUGS
 
@@ -149,13 +155,11 @@
   //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
   //  change who/where gets their 'isColliding' set false
 
-  //changing strength remakes grid but ignores encumberance rule
-
 
   //FUTURE
 
-  //Coin weight
   //Ability to switch to only generic shapes
+  //Coin weight
   //edit items
   //  name, desc, weight(?), Note
   //  maybe clicking an item shows its detail in a side panel / this edit screen
@@ -170,7 +174,7 @@
 
   var strength = 10;
 
-  var width = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning itemas and controls
+  var width = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
   var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
 
   var stage;
@@ -179,6 +183,8 @@
 
   $(document).ready(function () 
   {
+
+    document.title = 'Cubeventory';
 
     // first we need to create a stage
     stage = new Konva.Stage({
@@ -189,7 +195,7 @@
 
     strength = $('#CharacterStrength')[0].value;
 
-    var gridLayer = createGridLayer(strength, false)
+    var gridLayer = createGridLayer(strength, true)
     stage.add(gridLayer);
     stage.draw();
 
@@ -233,7 +239,7 @@
       strength = $('#CharacterStrength')[0].value;
       
       gridLayer.destroy()
-      gridLayer = createGridLayer(strength, this.checked)
+      gridLayer = createGridLayer(strength, $('#EncumbranceRule')[0].checked)
       
       //redraw
       stage.add(gridLayer);
