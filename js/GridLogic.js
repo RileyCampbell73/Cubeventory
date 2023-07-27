@@ -131,7 +131,7 @@ function createGridLayer(strength, useEncumbrance) {
         width: 79,
         height: 79,
         fill: gridColour,
-        stroke: 'black',
+        stroke: 'grey',
         strokeWidth: 1,
       });
       gridLayer.add(rect)

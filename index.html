@@ -122,24 +122,23 @@
   //    Want combobox to clear once something is made?
   //    add manual add button for multiples?
 
-  //refactor colours
-  //  use a range of the same colour and get one randomly
-  //  change to rgb and random those values
-
   //text overflow issue
   //  Refactor creating text while we're at it.
+
+  //text rotation
 
   //Save feature
   //  throw save into cookie? 
   //    Will need to add clear / new button
   //  Refactor Load to JUST be file control
-  //  Save file should include the Character name
 
   //Clear button?
   //  with a confirm
 
-  //change browser tab to be *Character Name*'s Inventory
-  //  also need favicon
+  //control to add generic item
+  //  Maybe this works better with edit function?
+
+  //Need favicon
 
   //need a help button and modal
   //  explains how to use it
@@ -155,6 +154,8 @@
   //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
   //  change who/where gets their 'isColliding' set false
 
+  //Dashes in items are misaligned
+
 
   //FUTURE
 
@@ -163,6 +164,7 @@
   //edit items
   //  name, desc, weight(?), Note
   //  maybe clicking an item shows its detail in a side panel / this edit screen
+  //  Set Equipped and show that visually
   //Custom Items
   //Bag of Holding and other tools to aid in Encumberance
   //  Like a mule or horse.
@@ -263,10 +265,20 @@
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
 
+    $('#CharacterName').on( "focusout", function () {
+
+      document.title = this.value + "'s Cubeventory";
+
+    });
+
   });
+
+
 
   function SaveInventory()
   {
+
+    var name = $('#CharacterName')[0].value
 
     var saveFile = {
       name: $('#CharacterName')[0].value,
@@ -277,7 +289,7 @@
 
     var saveJSON = JSON.stringify(saveFile);
 
-    const file = new File([saveJSON], 'save.json')
+    const file = new File([saveJSON], name + ' cubeventory.json')
     const link = document.createElement('a')
     const url = URL.createObjectURL(file)
 

@@ -91,7 +91,7 @@ function SpawnItemfromJSON(json) {
     }
 }
 
-function SpawnPackContents(packJson){
+function SpawnPackContents(packJson) {
 
     var packContents = packJson.contents;
 
@@ -143,6 +143,9 @@ function spawnGenericItem(name, weight, colour) {
         else {
             ItemShapes.add(createCube(0, 0, colour, 39, 39));
         }
+
+        ItemShapes.add(generateOutline(ItemShapes))
+
         ItemText.add(new Konva.Text({
             x: 8,
             y: -6,
@@ -169,7 +172,7 @@ function spawnGenericItem(name, weight, colour) {
     if (ColumnCount > 5)
         ColumnCount = 5
 
-    while (true) { // this loop logic could be improved, but at theis point I'm scared to touch this further.
+    while (true) { // this loop logic could be improved, but at this point I'm scared to touch it further.
 
         for (let i = 0; i < ColumnCount; i++) {
 
@@ -233,6 +236,8 @@ function spawnGenericItem(name, weight, colour) {
         rowCount++;
     }
 
+    ItemShapes.add(generateOutline(ItemShapes))
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -268,6 +273,7 @@ function determineColour(gearCategory) {
     switch (gearCategory) {
         case 'standard-gear':
             return '#FFFF90'
+        //return getColourShade('#FFFF90')
         case 'adventuring-gear':
             return '#FFD268'
         case 'arcane-foci':
@@ -320,6 +326,36 @@ function determineColour(gearCategory) {
     }
 }
 
+function getColourShade(hex) {//for getting shades of a hex colour.
+    //Was originally to differentiate between items. But have since added a hard border to items
+
+    var rgb = hexToRgb(hex);
+
+    var r = Math.floor(Math.random() * ((rgb.r + 40) - (rgb.r - 40) + 1) + (rgb.r - 40))
+    if (r > 255)
+        r = 255
+
+    var g = Math.floor(Math.random() * ((rgb.g + 40) - (rgb.g - 40) + 1) + (rgb.g - 40))
+    if (g > 255)
+        g = 255
+
+    var b = Math.floor(Math.random() * ((rgb.b + 40) - (rgb.b - 40) + 1) + (rgb.b - 40))
+    if (b > 255)
+        b = 255
+
+    return "rgb(" + r + ", " + g + ", " + b + ")"
+
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
 function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1) {
     return new Konva.Rect({
         x: x,
@@ -329,10 +365,167 @@ function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1)
         fill: colour,
         name: 'fillShape',
         stroke: "black",
-        strokeWidth: 1,
+        strokeWidth: .5,
+        dash: [10, 10],// apply dashed stroke that is 10px long and 10px apart
         isColliding: false,
         fillColour: colour
     })
+}
+
+function generateOutline(shapelayer) { // this out outta hand fast
+    //this is assuming we are using generic shape spawner
+
+    var maxX = 0;
+
+    // record 0,0
+    var outlinePoints = [];
+    outlinePoints.push(0 + .5)
+    outlinePoints.push(0 + .5)
+
+    if (shapelayer.children.length === 1) {
+        var cube = shapelayer.children[0]
+
+        outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+        outlinePoints.push(cube.y() + .5)
+
+        outlinePoints.push((0 + (cube.getWidth() + 1)) - 1.5)
+        outlinePoints.push((0 + (cube.getHeight() + 1)) - 1.5)
+
+        outlinePoints.push(0 + .5)
+        outlinePoints.push((0 + (cube.getHeight() + 1)) - 1.5)
+
+
+        outlinePoints.push(0 + .5)
+        outlinePoints.push(0 + .5)
+    }
+    else {
+
+        //loop through cubes
+        //buffer of .5 on the left and top side,
+        //buffer of 1.5 on the right and bottom side 
+        //they add up to the stroke width for the line - which is 2
+        shapelayer.children.forEach(function (cube, index) {
+            if (index + 1 !== shapelayer.children.length) {
+
+                //  always be looking at next cube
+                var nextCube = shapelayer.children[index + 1]
+
+                //  if next Y != current y (we are at end of line)
+                if (cube.y() !== nextCube.y()) {
+                    //record x + 80 and y
+                    outlinePoints.push((cube.x() + 80) - 1.5)
+                    outlinePoints.push(cube.y() + .5)
+
+                    if (maxX < cube.x() + 80)
+                        maxX = cube.x() + 80
+                }
+
+            }
+            else {
+                //last cube
+                var prevCube = shapelayer.children[index - 1]
+
+                outlinePoints.push(maxX - 1.5)
+                outlinePoints.push(cube.y() - 1.5)
+
+                if ((cube.x() + 80) > maxX && cube.y() !== prevCube.y()) { // smaller shape on new column
+                    //cut off beginning of array, add in the needed coords, put all that back onto array and finish
+
+                    //pop out the first two coords, thats always 0,0 and top right
+                    var newOutlinePoints = [];
+                    newOutlinePoints.push(outlinePoints.shift())
+                    newOutlinePoints.push(outlinePoints.shift())
+
+                    newOutlinePoints.push(outlinePoints.shift())
+                    newOutlinePoints.push(outlinePoints.shift())
+
+                    newOutlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    newOutlinePoints.push(cube.y() + .5)
+
+                    newOutlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    newOutlinePoints.push((cube.y() + (cube.getHeight() + 1)) + .5)
+
+                    if ((cube.getWidth() + 1) < GRID_SIZE) {
+                        newOutlinePoints.push((cube.x()) - 1.5)
+                        newOutlinePoints.push((cube.y() + (cube.getHeight() + 1)) + .5)
+                    }
+
+                    newOutlinePoints.concat(outlinePoints);
+
+                    outlinePoints = newOutlinePoints;
+
+                    //use prev cube to fill in the rest
+                    outlinePoints.push((prevCube.x() + (prevCube.getWidth() + 1)) - 1.5)
+                    outlinePoints.push((prevCube.y() + (prevCube.getHeight() + 1)) - 1.5)
+
+                    outlinePoints.push(0 + .5)
+                    outlinePoints.push((prevCube.y() + (prevCube.getHeight() + 1)) - 1.5)
+
+                }
+                else if (cube.x() === 0){//first on new row
+                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    outlinePoints.push(cube.y() - 1.5)
+
+                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+
+                    outlinePoints.push(cube.x() + .5)
+                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                }
+                else if (cube.x() !== prevCube.x()) { //incomplete row
+                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    outlinePoints.push(cube.y() - 1.5)
+
+
+                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+
+                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+
+                    //if width < GRIDSIZE
+                    if ((cube.getWidth() + 1) < GRID_SIZE ) {
+                        //need another two points
+                        outlinePoints.push((cube.x()) - 1.5)
+                        outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+
+                        outlinePoints.push((cube.x()) - 1.5)
+                        outlinePoints.push((cube.y() + GRID_SIZE) - 1.5)
+                    }
+                }
+
+                if (cube.x() > 0) {
+                    outlinePoints.push(0 + .5)
+                    outlinePoints.push((cube.y() + (prevCube.getHeight() + 1)) - 1.5)
+                }
+                else {
+                    // outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
+                    // outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+
+                    outlinePoints.push(0 + .5)
+                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                }
+
+                outlinePoints.push(0 + .5)
+                outlinePoints.push(0 + .5)
+            }
+
+        })
+    }
+
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+
+
+    return line;
+
+
+
+
 }
 
 //some items may have odd shapes and require their own function
@@ -1938,7 +2131,7 @@ function spawnMinersPick(name, colour) {
         GRID_SIZE * 4,
         colour
     ));
-    
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: 74,
@@ -2041,7 +2234,7 @@ function spawnIronPot(name, colour) {
         GRID_SIZE * 3,
         colour
     ));
-    
+
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -2142,7 +2335,7 @@ function spawnHempRope(name, colour) {
         GRID_SIZE * 3,
         colour
     ));
-       
+
 
     ItemText.add(new Konva.Text({
         x: 8,
