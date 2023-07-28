@@ -47,13 +47,15 @@
             </li>
             <li>
               <div>
-                <input type="button" onclick="SaveInventory()" value="Save">
+                <a onclick="SaveInventory()">Save</a>
+                <!-- <input type="button" onclick="SaveInventory()" value="Save"> -->
               </div>
             </li>
             <li>
               <div>
-                <input type="file" id="saveUploadFile" accept=".json">
-                <input type="button" onclick="uploadSaveFile()" value="Load">
+                <input type="file" id="saveUploadFile" accept=".json" style="display: none;">
+                <a onclick="document.getElementById('saveUploadFile').click();">Load</a>
+                <!-- <input type="button" onclick="uploadSaveFile()" value="Load"> -->
               </div>
             </li>
             
@@ -112,17 +114,15 @@
   //    image turned out to be dead end
   //    For now, we store the intended colour to be reverted to. Want a different solution.
 
-  //change cube physical size. too large?
-  //  currently set to 80
-  //  I think this is too big - bump down to 60
-  //  Made grid size dependant on screen size?
-  //    use screen size to determine the stage size and go from there?
-  //    Need to figure out text before something like this.
+  //Make grid size dependant on screen size?
+  //  use screen size to determine the stage size and go from there?
+  //  Need to figure out text before something like this.
 
   //spawn items from PHB
   //  how to handle multiples?
   //    Put dropdown next to it, set to 1 everytime an item is picked?
   //    add duplicate button to right click
+  //      how often do you need to add a bulk of something?
 
   //text overflow issue
   //  Refactor creating text while we're at it.
@@ -271,14 +271,14 @@
     });
 
     $('#CharacterName').on( "focusout", function () {
-
       document.title = this.value + "'s Cubeventory";
+    });
 
+    $('#saveUploadFile').on( "change", function () {
+      uploadSaveFile();
     });
 
   });
-
-
 
   function SaveInventory()
   {
