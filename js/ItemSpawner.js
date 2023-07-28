@@ -65,7 +65,7 @@ function SpawnItemfromJSON(json) {
             Itemlayer.add(spawnMaul(item.name, colour));
             break;
         case 'pike':
-        case 'chain':
+        case 'chain-10-feet':
         case 'climbers-kit':
             Itemlayer.add(spawnMultiLineItem(item.name, colour, 2, item.weight / 2))
             break;
@@ -412,12 +412,12 @@ function generateOutline(shapelayer) { // this out outta hand fast
 
                 //  if next Y != current y (we are at end of line)
                 if (cube.y() !== nextCube.y()) {
-                    //record x + 80 and y
-                    outlinePoints.push((cube.x() + 80) - 1.5)
+                    //record x + GRID_SIZE and y
+                    outlinePoints.push((cube.x() + GRID_SIZE) - 1.5)
                     outlinePoints.push(cube.y() + .5)
 
-                    if (maxX < cube.x() + 80)
-                        maxX = cube.x() + 80
+                    if (maxX < cube.x() + GRID_SIZE)
+                        maxX = cube.x() + GRID_SIZE
                 }
 
             }
@@ -428,7 +428,7 @@ function generateOutline(shapelayer) { // this out outta hand fast
                 outlinePoints.push(maxX - 1.5)
                 outlinePoints.push(cube.y() - 1.5)
 
-                if ((cube.x() + 80) > maxX && cube.y() !== prevCube.y()) { // smaller shape on new column
+                if ((cube.x() + GRID_SIZE) > maxX && cube.y() !== prevCube.y()) { // smaller shape on new column
                     //cut off beginning of array, add in the needed coords, put all that back onto array and finish
 
                     //pop out the first two coords, thats always 0,0 and top right
@@ -605,6 +605,25 @@ function spawnPaddedArmor(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, GRID_SIZE - 1.5,
+        0 + .5, GRID_SIZE - 1.5,
+        0 + .5, 0 + .5
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -710,6 +729,25 @@ function spawnLeatherArmor(name, colour) {
         GRID_SIZE * 3,
         colour
     ));
+
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
+        GRID_SIZE + .5, GRID_SIZE - 1.5,
+        0 + .5, GRID_SIZE - 1.5,
+        0 + .5, 0 + .5
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -831,6 +869,33 @@ function spawnStuddedArmor(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        GRID_SIZE + .5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) + .5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) + .5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 5) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 4) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, GRID_SIZE + .5,
+        GRID_SIZE + .5, GRID_SIZE + .5,
+        
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
         x: 88,
         y: -6,
@@ -939,6 +1004,24 @@ function spawnHideArmor(name, colour) {
         GRID_SIZE * 3,
         colour
     ));
+
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 2) -1.5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) -1.5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) -1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 4) -1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 2) -1.5,
+        0 + .5, (GRID_SIZE * 2) -1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1091,6 +1174,24 @@ function spawnChainShirtArmor(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 5) - 1.5, 0 + .5,
+        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 3) - 1.5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 3) - 1.5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 5) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 5) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, (GRID_SIZE * 2) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -1169,6 +1270,28 @@ function spawnShield(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        GRID_SIZE - 1.5, 0 + .5,
+        GRID_SIZE - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 2) + .5, GRID_SIZE + .5,
+        (GRID_SIZE * 2) + .5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, (GRID_SIZE * 2) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1225,6 +1348,20 @@ function spawnGreatClub(name, colour) {
             ));
         }
     }
+
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 5) - 1.5,
+        0 + .5, (GRID_SIZE * 5) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1293,6 +1430,8 @@ function spawnMace(name, colour) {
         colour
     ));
 
+    ItemShapes.add(generateOutline(ItemShapes))
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -1347,6 +1486,20 @@ function spawnLineItem(name, colour, weight) {
             colour
         ));
     }
+
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * weight) - 1.5, 0 + .5,
+        (GRID_SIZE * weight) - 1.5, 80 - 1.5,
+        0 + .5, 80 - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1419,6 +1572,24 @@ function spawnLightCrossbow(name, colour) {
         GRID_SIZE * 2,
         colour
     ));
+
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, GRID_SIZE - 1.5,
+        (GRID_SIZE * 2) - 1.5, GRID_SIZE - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, GRID_SIZE - 1.5,
+        0 + .5, GRID_SIZE - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1496,6 +1667,8 @@ function spawnGlaive(name, colour) {
         GRID_SIZE,
         colour
     ));
+
+    ItemShapes.add(generateOutline(ItemShapes))
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1579,6 +1752,24 @@ function spawnGreataxe(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, GRID_SIZE - 1.5,
+        (GRID_SIZE * 2) - 1.5, GRID_SIZE - 1.5,
+        (GRID_SIZE * 2) - 1.5,  (GRID_SIZE * 2) - 1.5,
+        GRID_SIZE - 1.5,  (GRID_SIZE * 2) - 1.5,
+        GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
+        0 + .5, (GRID_SIZE * 3) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -1656,6 +1847,28 @@ function spawnGreatsword(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        GRID_SIZE + .5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, GRID_SIZE + .5,
+        GRID_SIZE + .5, GRID_SIZE + .5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
         x: 88,
         y: -6,
@@ -1711,6 +1924,20 @@ function spawnMultiLineItem(name, colour, columns, rows) {
             ));
         }
     }
+
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * columns) - 1.5, 0 + .5,
+        (GRID_SIZE * columns) - 1.5, (GRID_SIZE * rows) - 1.5,
+        0 + .5, (GRID_SIZE * rows) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -1853,8 +2080,34 @@ function spawnHeavyCrossbow(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        (GRID_SIZE * 2) + .5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 5) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 3) - 1.5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 3) - 1.5,
+        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 4) - 1.5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) - 1.5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 8) - 1.5,
+        (GRID_SIZE * 2) + .5, (GRID_SIZE * 8) - 1.5,
+        (GRID_SIZE * 2) + .5, (GRID_SIZE * 4) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
+        0 + .5, (GRID_SIZE * 3) - 1.5,
+        0 + .5, GRID_SIZE + .5,
+        (GRID_SIZE * 2) + .5, GRID_SIZE + .5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
-        x: 88,
+        x: 168,
         y: -6,
         rotation: 45,
         text: name,
@@ -1959,6 +2212,24 @@ function spawnMaul(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, 0 + .5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 6) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 6) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
+        0 + .5, (GRID_SIZE * 2) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
+
     ItemText.add(new Konva.Text({
         x: 8,
         y: -6,
@@ -2030,6 +2301,8 @@ function spawnCrowbar(name, colour) {
         GRID_SIZE,
         colour
     ));
+
+    ItemShapes.add(generateOutline(ItemShapes))
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -2131,6 +2404,33 @@ function spawnMinersPick(name, colour) {
         GRID_SIZE * 4,
         colour
     ));
+
+    var outlinePoints = [
+        GRID_SIZE + .5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) + .5,
+        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 2) + .5,
+        (GRID_SIZE * 5) - 1.5, 240 - 1.5,
+        GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
+
+        GRID_SIZE - 1.5, (GRID_SIZE * 4) + .5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 4) + .5,
+        
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 5) - 1.5,
+        GRID_SIZE + .5, (GRID_SIZE * 5) - 1.5,
+
+        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
+        0 + .5, (GRID_SIZE * 4) - 1.5,
+        0 + .5, GRID_SIZE + .5,
+        GRID_SIZE + .5, GRID_SIZE + .5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -2235,6 +2535,23 @@ function spawnIronPot(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        GRID_SIZE + .5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, 0 + .5,
+        (GRID_SIZE * 2) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) - 1.5,
+        0 + .5, (GRID_SIZE * 4) - 1.5,
+        0 + .5, GRID_SIZE + .5,
+        GRID_SIZE + .5, GRID_SIZE + .5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
@@ -2336,6 +2653,31 @@ function spawnHempRope(name, colour) {
         colour
     ));
 
+    var outlinePoints = [
+        0 + .5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, 0 + .5,
+        (GRID_SIZE * 4) - 1.5, GRID_SIZE - 1.5,
+        (GRID_SIZE * 3) - 1.5, GRID_SIZE - 1.5,
+        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) - 1.5,
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
+        
+        (GRID_SIZE * 2) + .5, GRID_SIZE - 1.5,
+        GRID_SIZE - 1.5, GRID_SIZE - 1.5,
+        GRID_SIZE - 1.5, (GRID_SIZE * 2) + .5,
+        (GRID_SIZE * 2) + .5, (GRID_SIZE * 2)  + .5,
+        
+        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE - 1.5, (GRID_SIZE * 4) - 1.5,
+        0 + .5, (GRID_SIZE * 4) - 1.5,
+    ]
+    var line = new Konva.Line({
+        points: outlinePoints,
+        stroke: 'black',
+        strokeWidth: 2,
+        closed: true
+    });
+    ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
         x: 8,
