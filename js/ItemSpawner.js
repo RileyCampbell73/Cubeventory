@@ -4,7 +4,6 @@ function SpawnItemfromJSON(json) {
 
     //check if its a pack
     //  Will have to search the json for it. Just call this method again with the found json
-
     var itemCategory = item.gear_category
     if (itemCategory === undefined)
         itemCategory = item.equipment_category
@@ -138,24 +137,23 @@ function spawnGenericItem(name, weight, colour) {
     if (weight === undefined || weight < 1) {
 
         if (weight >= .5) {
-            ItemShapes.add(createCube(0, 0, colour, 39));
+            ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2 - 1));
         }
         else {
-            ItemShapes.add(createCube(0, 0, colour, 39, 39));
+            ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2 - 1, GRID_SIZE / 2 - 1));
         }
 
         ItemShapes.add(generateOutline(ItemShapes))
 
         ItemText.add(new Konva.Text({
-            x: 8,
-            y: -6,
+            x: 2,
+            y: -4,
             rotation: 45,
             text: name,
-            fontSize: 14,
+            fontSize: 10,
             fontFamily: 'Calibri',
             fill: '#000',
-            width: 50,
-            padding: 5,
+            width: 40,
             align: 'center'
         }));
 
@@ -177,8 +175,8 @@ function spawnGenericItem(name, weight, colour) {
         for (let i = 0; i < ColumnCount; i++) {
 
             ItemShapes.add(createCube(
-                i * 80,
-                rowCount * 80,
+                i * GRID_SIZE,
+                rowCount * GRID_SIZE,
                 colour
             ));
 
@@ -202,29 +200,29 @@ function spawnGenericItem(name, weight, colour) {
                 if (under1lb >= .5) {
                     if (halfCubeUpright) {
                         ItemShapes.add(createCube(
-                            i * 80,
-                            rowCount * 80,
+                            i * GRID_SIZE,
+                            rowCount * GRID_SIZE,
                             colour,
-                            39
+                            GRID_SIZE / 2 - 1
                         ));
                     }
                     else {
                         ItemShapes.add(createCube(
-                            i * 80,
-                            rowCount * 80,
+                            i * GRID_SIZE,
+                            rowCount * GRID_SIZE,
                             colour,
-                            79,
-                            39
+                            GRID_SIZE - 1,
+                            GRID_SIZE / 2 - 1
                         ));
                     }
                 }
                 else if (under1lb < .5 && under1lb != 0) {
                     ItemShapes.add(createCube(
-                        i * 80,
-                        rowCount * 80,
+                        i * GRID_SIZE,
+                        rowCount * GRID_SIZE,
                         colour,
-                        39,
-                        39
+                        GRID_SIZE / 2 - 1,
+                        GRID_SIZE / 2 - 1
                     ));
                 }
                 break;
@@ -240,14 +238,13 @@ function spawnGenericItem(name, weight, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -626,14 +623,13 @@ function spawnPaddedArmor(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -751,14 +747,13 @@ function spawnLeatherArmor(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -897,15 +892,14 @@ function spawnStuddedArmor(name, colour) {
     ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
-        x: 88,
-        y: -6,
+        x: 8,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1025,14 +1019,13 @@ function spawnHideArmor(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1194,14 +1187,13 @@ function spawnChainShirtArmor(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1295,14 +1287,13 @@ function spawnShield(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1365,14 +1356,13 @@ function spawnGreatClub(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1434,14 +1424,13 @@ function spawnMace(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1503,14 +1492,13 @@ function spawnLineItem(name, colour, weight) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1593,14 +1581,13 @@ function spawnLightCrossbow(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1672,14 +1659,13 @@ function spawnGlaive(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1772,14 +1758,13 @@ function spawnGreataxe(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1870,15 +1855,14 @@ function spawnGreatsword(name, colour) {
     ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
-        x: 88,
-        y: -6,
+        x: 8,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -1941,14 +1925,13 @@ function spawnMultiLineItem(name, colour, columns, rows) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -2107,15 +2090,14 @@ function spawnHeavyCrossbow(name, colour) {
     ItemShapes.add(line)
 
     ItemText.add(new Konva.Text({
-        x: 168,
-        y: -6,
+        x: 8,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -2232,14 +2214,13 @@ function spawnMaul(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -2306,14 +2287,13 @@ function spawnCrowbar(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -2434,14 +2414,13 @@ function spawnMinersPick(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: 74,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -2555,14 +2534,13 @@ function spawnIronPot(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: 74,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));
@@ -2681,14 +2659,13 @@ function spawnHempRope(name, colour) {
 
     ItemText.add(new Konva.Text({
         x: 8,
-        y: -6,
+        y: 0,
         rotation: 45,
         text: name,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Calibri',
         fill: '#000',
-        width: 105,
-        //padding: 5,
+        width: 70,
         align: 'center',
         name: 'text'
     }));

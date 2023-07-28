@@ -10,7 +10,7 @@ function createGridLayer(strength, useEncumbrance) {
   //Text around the grid
   gridLayer.add(new Konva.Text({
     x: 0,
-    y: (GRID_SIZE * (strength / 2)) + 20 + 200, //numbers to get it to fit better
+    y: (GRID_SIZE * (strength / 2)) + 10 + 200, //numbers to get it to fit better
     rotation: -90,
     text: 'STRENGTH',
     fontSize: 40,
@@ -18,32 +18,29 @@ function createGridLayer(strength, useEncumbrance) {
     fontStyle: 'bold',
     fill: '#000',
     width: 200,
-    //padding: 5,
     align: 'center'
   }));
 
   if (useEncumbrance) {
 
     gridLayer.add(new Konva.Text({
-      x: GRID_SIZE,
+      x: GRID_PADDING,
       y: 0, //(GRID_SIZE * (strength / 2)) + 20 + 200, //numbers to get it to fit better
       //rotation: -90,
       text: 'NOT ENCUMBERED!',
-      fontSize: 40,
+      fontSize: 30,
       fontFamily: 'Calibri',
       fontStyle: 'bold',
       fill: '#000',
       width: GRID_SIZE * 5,
-      //padding: 5,
       align: 'center'
     }));
 
     gridLayer.add(new Konva.Text({
-      x: GRID_SIZE * 6,
+      x: GRID_SIZE * 5 + GRID_PADDING,
       y: 0,
-
       text: 'ENCUMBERED',
-      fontSize: 40,
+      fontSize: 30,
       fontFamily: 'Calibri',
       fontStyle: 'bold',
       fill: '#000',
@@ -53,9 +50,8 @@ function createGridLayer(strength, useEncumbrance) {
     }));
 
     gridLayer.add(new Konva.Text({
-      x: GRID_SIZE * 6,
+      x: GRID_SIZE * 5 + GRID_PADDING,
       y: 32,
-
       text: '(-10 speed)',
       fontSize: 15,
       fontFamily: 'Calibri',
@@ -67,10 +63,10 @@ function createGridLayer(strength, useEncumbrance) {
     }));
 
     gridLayer.add(new Konva.Text({
-      x: GRID_SIZE * 11,
+      x: GRID_SIZE * 10 + GRID_PADDING,
       y: 0,
       text: 'HEAVILY ENCUMBERED',
-      fontSize: 40,
+      fontSize: 30,
       fontFamily: 'Calibri',
       fontStyle: 'bold',
       fill: '#000',
@@ -82,7 +78,6 @@ function createGridLayer(strength, useEncumbrance) {
     gridLayer.add(new Konva.Text({
       x: GRID_SIZE * 11,
       y: 32,
-
       text: '(-20 speed)\nDisadvantage on:\n Abilioty checks, Attack rolls,\n Str, Dex, & Con saves',
       fontSize: 12,
       fontFamily: 'Calibri',
@@ -98,7 +93,7 @@ function createGridLayer(strength, useEncumbrance) {
   for (let y = 0; y < strength; y++) {
     gridLayer.add(new Konva.Text({
       x: 50,
-      y: (y * GRID_SIZE) + GRID_PADDING + 65,//the 65 is to better center them. so its 40 + length of textbox I guess.
+      y: (y * GRID_SIZE) + GRID_PADDING + 55,//the 55 is to better center them. so its 40 + length of textbox I guess.
       rotation: -90,
       text: strengthCount--,
       fontSize: 30,
@@ -128,8 +123,8 @@ function createGridLayer(strength, useEncumbrance) {
       var rect = new Konva.Rect({
         x: (x * GRID_SIZE) + GRID_PADDING,
         y: (y * GRID_SIZE) + GRID_PADDING,
-        width: 79,
-        height: 79,
+        width: GRID_SIZE - 1,
+        height: GRID_SIZE - 1,
         fill: gridColour,
         stroke: 'grey',
         strokeWidth: 1,
