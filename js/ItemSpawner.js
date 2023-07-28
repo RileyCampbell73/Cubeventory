@@ -1479,8 +1479,8 @@ function spawnLineItem(name, colour, weight) {
     var outlinePoints = [
         0 + .5, 0 + .5,
         (GRID_SIZE * weight) - 1.5, 0 + .5,
-        (GRID_SIZE * weight) - 1.5, 80 - 1.5,
-        0 + .5, 80 - 1.5,
+        (GRID_SIZE * weight) - 1.5, GRID_SIZE - 1.5,
+        0 + .5, GRID_SIZE - 1.5,
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -2390,7 +2390,7 @@ function spawnMinersPick(name, colour) {
         (GRID_SIZE * 2) - 1.5, 0 + .5,
         (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) + .5,
         (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 2) + .5,
-        (GRID_SIZE * 5) - 1.5, 240 - 1.5,
+        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 3) - 1.5,
         GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
 
         GRID_SIZE - 1.5, (GRID_SIZE * 4) + .5,
