@@ -40,7 +40,6 @@ function initializeItemCombobox() {
                         this._trigger("select", event, {
                             item: ui.item.option
                         });
-                        //spawnItem(ui.item.option.text,ui.item.option.value)
                         SpawnItemfromJSON(ui.item.option.value);
                     },
 
@@ -151,6 +150,11 @@ function initializeItemCombobox() {
 
             // Pass empty string as value to search for, displaying all results
             $("#AutoBox").autocomplete("search", "");
+        });
+
+        $( "#AutoBox" ).on( "autocompleteclose", function( event, ui ) {
+
+            this.value = ""
         });
     });
 }
