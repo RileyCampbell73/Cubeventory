@@ -164,24 +164,24 @@ function InitializeMenu() {
   });
 
   document.getElementById('flip-button').addEventListener('click', () => {
+    var scaleX = currentShape.parent.parent.find('.itemShapes')[0].scaleX()
+    var shapes = currentShape.parent.parent.find('.itemShapes')[0];
+    var text = currentShape.parent.parent.find('.itemText')[0];
+    
 
-    var scaleX = currentShape.parent.parent.scaleX();
     if (scaleX > 0) {
-      currentShape.parent.parent.scaleX(-Math.abs(currentShape.scaleX()))
+    var offsetvalue = shapes.getClientRect().width;
+      if (shapes.parent.getRotation() == 90 || shapes.parent.getRotation() == 270)
+        offsetvalue = shapes.getClientRect().height
 
-      var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
-      text.scaleX(-Math.abs(text.scaleX()))
-      text.setAttr('x', text.getAttr('x') + 80)
-      text.setAttr('y', text.getAttr('y') + 80)
+      shapes.offsetX(offsetvalue)
+      shapes.scaleX(-Math.abs(currentShape.scaleX()))
+      text.scaleX(Math.abs(text.scaleX()))
     }
     else {
-      currentShape.parent.parent.scaleX(Math.abs(currentShape.scaleX()))
-
-      var text = currentShape.parent.parent.find('.itemText')[0].find('.text')[0];
+      shapes.offsetX(0) //fix offset
+      shapes.scaleX(Math.abs(currentShape.scaleX()))
       text.scaleX(Math.abs(text.scaleX()))
-      text.setAttr('x', text.getAttr('x') - 80)
-      text.setAttr('y', text.getAttr('y') - 80)
-
     }
 
   });
