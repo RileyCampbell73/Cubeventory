@@ -164,14 +164,6 @@
 
   //need to get magic items into dropdown
 
-  //Grid size slider
-  //  have it work on increments of 10 between 30-80
-  //  add this to save file.
-  //  bugs:
-  //  smaller items text is way too small, needs tooltip
-  //  header text getting smushed
-  //  cap the buttons
-
   //control to add generic item
   //  Maybe this works better with edit function?
 
@@ -201,6 +193,8 @@
 
   //mistyping in autocomplete clears it, should show a "no items found" instead
   //  make trhe 'add generic item' avaliable & take the text from autocomplete
+
+  //Grid resizing displaces items sometimes?
 
   
   //FUTURE
@@ -388,7 +382,9 @@
           //then just do new grid size * that number
           //throw grid padding back on
           //multiply remainder by 1.665
-          shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          if (access < 2)
+            access = 0
+          shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
           shape.x(shapeX)
 
           var shapeY = shape.y();
@@ -396,7 +392,9 @@
           var access = shapeY % prevGridSize
           shapeY -= access
           var Xplacment = shapeY / prevGridSize
-          shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          if (access < 2)
+            access = 0
+          shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
 
           shape.y(shapeY)
 
@@ -415,15 +413,19 @@
           var access = shapeX % prevGridSize
           shapeX -= access
           var Xplacment = shapeX / prevGridSize
-          shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          if (access < 2)
+            access = 0
+          shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
           shape.x(shapeX)
 
           var shapeY = shape.y();
           shapeY -= GRID_PADDING;
-          var access = shapeY % prevGridSize
+          access = shapeY % prevGridSize
           shapeY -= access
-          var Xplacment = shapeY / prevGridSize
-          shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          var Yplacment = shapeY / prevGridSize
+          if (access < 2)
+            access = 0
+          shapeY = (Yplacment * GRID_SIZE) + GRID_PADDING + (access)
           shape.y(shapeY)
 
         }
@@ -443,6 +445,7 @@
       name: $('#CharacterName')[0].value,
       strength: strength,
       encumbranceRule: $('#EncumbranceRule')[0].checked,
+      gridSize: parseInt($('#GridSize')[0].value),
       items: Itemlayer.toJSON()
     }
 
@@ -488,6 +491,11 @@
 
     $('#EncumbranceRule')[0].checked = json.encumbranceRule
     $('#EncumbranceRule')[0].dispatchEvent(new Event('change'))
+
+    $('#GridSize')[0].value = json.gridSize
+    GRID_SIZE = json.gridSize
+    stage.destroy();
+    SetStage();
 
     //create layer from save file
     Itemlayer.destroy()
