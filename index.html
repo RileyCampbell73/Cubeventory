@@ -244,6 +244,7 @@
   var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
 
   var stage;
+  var gridLayer;
   var Itemlayer;
   var EquipmentJSON;
 
@@ -331,7 +332,7 @@
 
     strength = $('#CharacterStrength')[0].value;
 
-    var gridLayer = createGridLayer(strength, true)
+    var gridLayer = createGridLayer(strength, $('#EncumbranceRule')[0].checked)
     stage.add(gridLayer);
     stage.draw();
 

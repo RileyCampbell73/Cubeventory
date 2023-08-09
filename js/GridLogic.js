@@ -3,7 +3,7 @@ function createGridLayer(strength, useEncumbrance) {
 
   var strengthCount = strength;
 
-  var gridLayer = new Konva.Layer({
+  gridLayer = new Konva.Layer({
     id: 'gridLayer'
   });
 
