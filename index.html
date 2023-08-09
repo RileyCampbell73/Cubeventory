@@ -86,6 +86,15 @@
           </button>
 
           <h1>Cubeventory</h1>
+
+          <div>
+            <label>Grid Size</label>
+            
+              <input type="button" value="-"  class="btn btn-info" onclick="decreaseGridSize()">
+              <input type="range" min="40" max="80" value="60" step="10" class="slider" id="GridSize" style="pointer-events: none;">
+              <input type="button" value="+" class="btn btn-info"  onclick="increaseGridSize()">
+            
+          </div>
           <div>
             <label>Character Name</label>
             <input type="text" id="CharacterName" name="CharacterName">
@@ -155,14 +164,16 @@
 
   //need to get magic items into dropdown
 
-  //text issues
-  //  text rotation & flipping
-  //    check item shapes rotation to change the X or Y
-  //      if 0-180 change X, otherwise change Y
-
   //Grid size slider
   //  have it work on increments of 10 between 30-80
   //  add this to save file.
+  //  bugs:
+  //  smaller items text is way too small, needs tooltip
+  //  header text getting smushed
+  //  cap the buttons
+
+  //control to add generic item
+  //  Maybe this works better with edit function?
 
   //Sidebar Links section
   //  add Konva contribute widget into sidebar
@@ -188,6 +199,10 @@
 
   //Dashes in items are misaligned
 
+  //mistyping in autocomplete clears it, should show a "no items found" instead
+  //  make trhe 'add generic item' avaliable & take the text from autocomplete
+
+  
   //FUTURE
 
   //have some other graphic to tell when something is colliding? - May wanna use red colour. 
@@ -203,8 +218,6 @@
   //  throw save into cookie? 
   //    Will need to add clear / new button with a confirm
 
-  //control to add generic item
-  //  Maybe this works better with edit function?
 
   //Ability to switch to only generic shapes
 
@@ -238,29 +251,9 @@
 
     document.title = 'Cubeventory';
 
-    // first we need to create a stage
-    stage = new Konva.Stage({
-      container: 'container',
-      width: width,
-      height: height,
-    });
-
-    strength = $('#CharacterStrength')[0].value;
-
-    var gridLayer = createGridLayer(strength, true)
-    stage.add(gridLayer);
-    stage.draw();
-
-    // create layer for shapes
-    Itemlayer = new Konva.Layer();
-    // add the layer to the stage
-    stage.add(Itemlayer);
-
-    InitializeMenu();
-    InitializeCollisionSnapping()
-
     EquipmentJSON = JSON.parse(EquipmentJSONRAW);
 
+    SetStage();
 
     $('#EquipmentComboBox').append($('<option>', {
       value: '',
@@ -323,7 +316,123 @@
       uploadSaveFile();
     });
 
+
+
   });
+
+  function SetStage(){
+
+    // first we need to create a stage
+    stage = new Konva.Stage({
+      container: 'container',
+      width: width,
+      height: height,
+    });
+
+    strength = $('#CharacterStrength')[0].value;
+
+    var gridLayer = createGridLayer(strength, true)
+    stage.add(gridLayer);
+    stage.draw();
+
+    // create layer for shapes
+    Itemlayer = new Konva.Layer();
+    // add the layer to the stage
+    stage.add(Itemlayer);
+
+    InitializeMenu();
+    InitializeCollisionSnapping()
+
+  }
+
+  function increaseGridSize(){
+    if ($('#GridSize')[0].value != "80"){
+      $('#GridSize')[0].value = parseInt($('#GridSize')[0].value) + 10
+      ResizeGrid();
+    }
+  }
+  function decreaseGridSize(){
+    if ($('#GridSize')[0].value != "40"){
+      $('#GridSize')[0].value = parseInt($('#GridSize')[0].value) - 10
+      ResizeGrid();
+    }
+  }
+
+  function ResizeGrid(){
+      
+      var items = Itemlayer.toJSON();
+      var prevGridSize = GRID_SIZE;
+      
+      stage.destroy();
+      GRID_SIZE = parseInt($('#GridSize')[0].value)
+      SetStage();
+
+      Itemlayer = Konva.Node.create(items);
+
+      
+      if (prevGridSize < GRID_SIZE){
+
+        for( const shape of Itemlayer.children ){
+          shape.scaleX(shape.scaleX() + .1665)
+          shape.scaleY(shape.scaleY() + .1665)
+
+          var shapeX = shape.x();
+          //take off padding 
+          shapeX -= GRID_PADDING;
+          //mod rest off
+          var access = shapeX % prevGridSize
+          shapeX -= access
+          //and divide by prev grid size to get its placment on grid
+          var Xplacment = shapeX / prevGridSize
+          //then just do new grid size * that number
+          //throw grid padding back on
+          //multiply remainder by 1.665
+          shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          shape.x(shapeX)
+
+          var shapeY = shape.y();
+          shapeY -= GRID_PADDING;
+          var access = shapeY % prevGridSize
+          shapeY -= access
+          var Xplacment = shapeY / prevGridSize
+          shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+
+          shape.y(shapeY)
+
+        }
+
+      }
+      else
+      {
+
+        for( const shape of Itemlayer.children ){
+          shape.scaleX(shape.scaleX() - .1665)
+          shape.scaleY(shape.scaleY() - .1665)
+
+          var shapeX = shape.x();
+          shapeX -= GRID_PADDING;
+          var access = shapeX % prevGridSize
+          shapeX -= access
+          var Xplacment = shapeX / prevGridSize
+          shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          shape.x(shapeX)
+
+          var shapeY = shape.y();
+          shapeY -= GRID_PADDING;
+          var access = shapeY % prevGridSize
+          shapeY -= access
+          var Xplacment = shapeY / prevGridSize
+          shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access )
+          shape.y(shapeY)
+
+        }
+
+      }
+      stage.add(Itemlayer);
+
+      InitializeCollisionSnapping()
+      
+    };
 
   function SaveInventory() {
 
