@@ -56,6 +56,11 @@
         </li>
         <li>
           <div>
+            <a onclick="ShowGenericItemModal('')">Add Generic Item</a>
+          </div>
+        </li>
+        <li>
+          <div>
             <a onclick="SaveInventory()">Save</a>
             <!-- <input type="button" onclick="SaveInventory()" value="Save"> -->
           </div>
@@ -142,6 +147,43 @@
     </div>
   </div>
 
+  <!-- Generic Item Modal -->
+  <div class="modal fade" id="genericItemModal" tabindex="-1" role="dialog" aria-labelledby="genericItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create a Generic Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div>
+            <label>Name</label>
+            <input type="text" id="ItemName" name="ItemName">
+          </div>
+
+          <div>
+            <label>Weight</label>
+            <input type="number" id="ItemWeight" name="ItemWeight">
+          </div>
+
+          <div>
+            <label>Colour</label>
+            <input type="color" id="ItemColour" name="ItemColour" value="#ADD8E6">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div id="container" style="padding-top: 120px;"></div>
 
   <div id="menu">
@@ -163,9 +205,6 @@
   //    add duplicate button to right click
 
   //need to get magic items into dropdown
-
-  //control to add generic item
-  //  Maybe this works better with edit function?
 
   //Sidebar Links section
   //  add Konva contribute widget into sidebar
@@ -191,9 +230,6 @@
 
   //Dashes in items are misaligned
 
-  //mistyping in autocomplete clears it, should show a "no items found" instead
-  //  make trhe 'add generic item' avaliable & take the text from autocomplete
-
   //Grid resizing displaces items sometimes?
 
   
@@ -211,7 +247,6 @@
   //Save feature
   //  throw save into cookie? 
   //    Will need to add clear / new button with a confirm
-
 
   //Ability to switch to only generic shapes
 
@@ -505,6 +540,23 @@
     InitializeCollisionSnapping()
   }
 
+  function ShowGenericItemModal(itemName){
+
+    //set name in modal
+    $('#ItemName')[0].value = itemName
+
+    $('#genericItemModal').modal('show'); 
+  }
+
+  function SpawnGenericItem(){
+
+    Itemlayer.add(spawnGenericItem($('#ItemName')[0].value, $('#ItemWeight')[0].value, $('#ItemColour')[0].value))
+
+    //clear modal fields
+    $('#ItemName')[0].value = ''
+    $('#ItemWeight')[0].value = ''
+    $('#ItemColour')[0].value = '#ADD8E6'
+  }
 
 
 </script>
