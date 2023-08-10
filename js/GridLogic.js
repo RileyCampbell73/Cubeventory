@@ -148,6 +148,28 @@ function createGridLayer(strength, useEncumbrance) {
   return gridLayer;
 }
 
+function FlipItem(currentShape){
+  var scaleX = currentShape.find('.itemShapes')[0].scaleX()
+  var shapes = currentShape.find('.itemShapes')[0];
+  var text = currentShape.find('.itemText')[0];
+  
+
+  if (scaleX > 0) {
+  var offsetvalue = shapes.getClientRect().width;
+    if (shapes.children[0].getRotation() == 90 || shapes.children[0].getRotation() == 270)
+      offsetvalue = shapes.getClientRect().height
+
+    shapes.offsetX(offsetvalue)
+    shapes.scaleX(-Math.abs(shapes.scaleX()))
+    text.scaleX(Math.abs(text.scaleX()))
+  }
+  else {
+    shapes.offsetX(0) //fix offset
+    shapes.scaleX(Math.abs(shapes.scaleX()))
+    text.scaleX(Math.abs(text.scaleX()))
+  }
+}
+
 function InitializeMenu() {
 
   // setup menu
@@ -164,26 +186,7 @@ function InitializeMenu() {
   });
 
   document.getElementById('flip-button').addEventListener('click', () => {
-    var scaleX = currentShape.parent.parent.find('.itemShapes')[0].scaleX()
-    var shapes = currentShape.parent.parent.find('.itemShapes')[0];
-    var text = currentShape.parent.parent.find('.itemText')[0];
-    
-
-    if (scaleX > 0) {
-    var offsetvalue = shapes.getClientRect().width;
-      if (shapes.parent.getRotation() == 90 || shapes.parent.getRotation() == 270)
-        offsetvalue = shapes.getClientRect().height
-
-      shapes.offsetX(offsetvalue)
-      shapes.scaleX(-Math.abs(currentShape.scaleX()))
-      text.scaleX(Math.abs(text.scaleX()))
-    }
-    else {
-      shapes.offsetX(0) //fix offset
-      shapes.scaleX(Math.abs(currentShape.scaleX()))
-      text.scaleX(Math.abs(text.scaleX()))
-    }
-
+    FlipItem(currentShape.parent.parent)
   });
   document.getElementById('duplicate-button').addEventListener('click', () => {
     var randItemSpawn = randomSpawnLocation()

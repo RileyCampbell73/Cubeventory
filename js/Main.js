@@ -1,8 +1,6 @@
 
 //TODO
 
-//need to get magic items into dropdown
-
 //Sidebar Links section
 //  add Konva contribute widget into sidebar
 //  Ko-fi link?
@@ -11,8 +9,8 @@
 //      <a href="https://www.flaticon.com/free-icons/cluster" title="cluster icons">Cluster icons created by samlakodad - Flaticon</a>
 //  DnD API
 
-
 // Description on google
+
 
 //BUGS
 
@@ -22,7 +20,13 @@
 
 //Dashes in items are misaligned
 
-//Grid resizing displaces items sometimes?
+//Grid resizing 
+//  displaces items sometimes?
+//  spawning area changes / gets cut off
+//      need to make stage width and height globals
+
+//All right click actions throw error after resizing but still do their function
+//  looks like double trigger - not deleting a layer maybe?
 
 
 //FUTURE
@@ -41,9 +45,10 @@
 //Coin weight
 
 //edit items
-//  name, desc, weight(?), Note
-//  maybe clicking an item shows its detail in a side panel / this edit screen
+//  name, weight, colour
+//      Note? Desc?
 //  Set Equipped and show that visually
+//  this handles magic items as well, can ass base item and then edit its name colour or weight
 
 //Bag of Holding and other tools to aid in Encumberance
 //  Like a mule or horse.
@@ -174,6 +179,82 @@ function decreaseGridSize() {
     }
 }
 
+function ResizeItem(itemShape, prevGridSize, index) {
+
+    //check if complex
+    if (itemShape.getAttr('complexItem') != undefined) {
+        var name = itemShape.children[1].children[0].text()
+        var colour = itemShape.children[0].children[0].fill();
+        var weight = itemShape.children[0].find('.fillShape').length
+
+        //how to determine which one to spawn 
+        var complexItem = determineSpawnMethod(itemShape.getAttr('complexItem'), name, colour, weight)
+        complexItem.x(itemShape.x())
+        complexItem.y(itemShape.y())
+        complexItem.rotation(itemShape.rotation())
+        if (itemShape.children[0].scaleX() < 0)
+            FlipItem(complexItem)
+        
+        //itemShape.destroy()
+        //Itemlayer.add(complexItem)
+        //itemShape = complexItem
+        //Itemlayer.children[index] = complexItem
+
+        return complexItem
+
+    }
+    else {
+
+        var shapeFlipped = false
+        if (itemShape.children[0].scaleX() < 0){
+            FlipItem(itemShape)
+            shapeFlipped = true
+        }
+
+        for (const shape of itemShape.children[0].children) {
+
+            if (shape.name() == 'fillShape') {
+
+                shape.width(GRID_SIZE - 1)
+                shape.height(GRID_SIZE - 1)
+
+                if (shape.x() > 0) {
+                    var shapeX = shape.x();
+                    var Xplacment = shapeX / prevGridSize
+                    shapeX = Xplacment * GRID_SIZE
+                    shape.x(shapeX)
+                }
+
+                if (shape.y() > 0) {
+                    var shapeY = shape.y();
+                    var Yplacment = shapeY / prevGridSize
+                    shapeY = Yplacment * GRID_SIZE
+                    shape.y(shapeY)
+                }
+            }
+            else if (shape.name() == 'shapeOutline') {
+                //delete outline
+                shape.destroy()
+            }
+        }
+
+        //remove text
+        var name = itemShape.children[1].children[0].text()
+        itemShape.children[1].children[0].destroy()
+        //add text
+        itemShape.children[1].add(addItemText(name, itemShape.children[0]))
+
+        //redraw outline
+        itemShape.children[0].add(generateOutline(itemShape.children[0]))
+
+        if (shapeFlipped)
+            FlipItem(itemShape)
+
+        return itemShape
+    }
+
+}
+
 function ResizeGrid() {
 
     var items = Itemlayer.toJSON();
@@ -185,72 +266,53 @@ function ResizeGrid() {
 
     Itemlayer = Konva.Node.create(items);
 
+    //complex items need to be remade. This requires destroying the old one, but we can't do that while looping through its container.
+    var newComplexItems = {}
 
-    if (prevGridSize < GRID_SIZE) {
+    //for (var shape of Itemlayer.children) {
+    for (let i = 0; i < Itemlayer.children.length; i++) {
+        var shape = Itemlayer.children[i]
+        shape = ResizeItem(shape, prevGridSize, i)
 
-        for (const shape of Itemlayer.children) {
-            shape.scaleX(shape.scaleX() + .1665)
-            shape.scaleY(shape.scaleY() + .1665)
-
-            var shapeX = shape.x();
-            //take off padding 
-            shapeX -= GRID_PADDING;
-            //mod rest off
-            var access = shapeX % prevGridSize
-            shapeX -= access
-            //and divide by prev grid size to get its placment on grid
-            var Xplacment = shapeX / prevGridSize
-            //then just do new grid size * that number
-            //throw grid padding back on
-            //multiply remainder by 1.665
-            if (access < 2)
-                access = 0
-            shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
-            shape.x(shapeX)
-
-            var shapeY = shape.y();
-            shapeY -= GRID_PADDING;
-            var access = shapeY % prevGridSize
-            shapeY -= access
-            var Xplacment = shapeY / prevGridSize
-            if (access < 2)
-                access = 0
-            shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
-
-            shape.y(shapeY)
-
+        if (shape.getAttr('complexItem') != undefined) {
+            newComplexItems[i] = shape
         }
 
-    }
-    else {
+        var shapeX = shape.x();
+        //take off padding 
+        shapeX -= GRID_PADDING;
+        //mod rest off
+        var access = shapeX % prevGridSize
+        shapeX -= access
+        //and divide by prev grid size to get its placment on grid
+        var Xplacment = shapeX / prevGridSize
+        //then just do new grid size * that number
+        //throw grid padding back on
+        //multiply remainder by 1.665
+        if (access < 2)
+            access = 0
+        shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
+        shape.x(shapeX)
 
-        for (const shape of Itemlayer.children) {
-            shape.scaleX(shape.scaleX() - .1665)
-            shape.scaleY(shape.scaleY() - .1665)
+        var shapeY = shape.y();
+        shapeY -= GRID_PADDING;
+        var access = shapeY % prevGridSize
+        shapeY -= access
+        var Xplacment = shapeY / prevGridSize
+        if (access < 2)
+            access = 0
+        shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
 
-            var shapeX = shape.x();
-            shapeX -= GRID_PADDING;
-            var access = shapeX % prevGridSize
-            shapeX -= access
-            var Xplacment = shapeX / prevGridSize
-            if (access < 2)
-                access = 0
-            shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
-            shape.x(shapeX)
-
-            var shapeY = shape.y();
-            shapeY -= GRID_PADDING;
-            access = shapeY % prevGridSize
-            shapeY -= access
-            var Yplacment = shapeY / prevGridSize
-            if (access < 2)
-                access = 0
-            shapeY = (Yplacment * GRID_SIZE) + GRID_PADDING + (access)
-            shape.y(shapeY)
-
-        }
+        shape.y(shapeY)
 
     }
+
+    for (const property in newComplexItems) {
+        Itemlayer.children[property].destroy()
+        Itemlayer.add(newComplexItems[property])
+    }
+
+
     stage.add(Itemlayer);
 
     InitializeCollisionSnapping()

@@ -12,32 +12,36 @@ function SpawnItemfromJSON(json) {
         return SpawnPackContents(item);
 
     var colour = determineColour(itemCategory.index);
-    switch (item.index) {
+    Itemlayer.add(determineSpawnMethod(item.index, item.name, colour, item.weight))
+    
+}
+
+function determineSpawnMethod(index, name, colour, weight)
+{
+    
+    switch (index) {
         case 'padded-armor':
-            Itemlayer.add(spawnPaddedArmor(item.name, colour))
+            return spawnPaddedArmor(index, name, colour)
             break;
         case 'leather-armor':
-            Itemlayer.add(spawnLeatherArmor(item.name, colour))
+            return spawnLeatherArmor(index, name, colour)
             break;
         case 'studded-leather-armor':
-            Itemlayer.add(spawnStuddedArmor(item.name, colour))
+            return spawnStuddedArmor(index, name, colour)
             break;
         case 'hide-armor':
-            Itemlayer.add(spawnHideArmor(item.name, colour))
+            return spawnHideArmor(index, name, colour)
             break;
         case 'chain-shirt':
         case 'breastplate':
-            Itemlayer.add(spawnChainShirtArmor(item.name, colour))
+            return spawnChainShirtArmor(index, name, colour)
             break;
         case 'shield':
-            Itemlayer.add(spawnShield(item.name, colour))
+            return spawnShield(index, name, colour)
             break;
-        // case 'greatclub':
-        //     Itemlayer.add(spawnGreatClub(item.name, colour))
-        //     break;
         case 'mace':
         case 'battleaxe':
-            Itemlayer.add(spawnMace(item.name, colour))
+            return spawnMace(index, name, colour)
             break;
         case 'quarterstaff':
         case 'spear':
@@ -45,49 +49,48 @@ function SpawnItemfromJSON(json) {
         case 'longsword':
         case 'staff':
         case 'pole-10-foot':
-            Itemlayer.add(spawnLineItem(item.name, colour, item.weight))
+            return spawnLineItem(index, name, colour, weight)
             break;
         case 'crossbow-light':
-            Itemlayer.add(spawnLightCrossbow(item.name, colour))
+            return spawnLightCrossbow(index, name, colour)
             break;
         case 'glaive':
         case 'halberd':
-            Itemlayer.add(spawnGlaive(item.name, colour))
+            return spawnGlaive(index, name, colour)
             break;
         case 'greataxe':
-            Itemlayer.add(spawnGreataxe(item.name, colour))
+            return spawnGreataxe(index, name, colour)
             break;
         case 'greatsword':
-            Itemlayer.add(spawnGreatsword(item.name, colour))
+            return spawnGreatsword(index, name, colour)
             break;
         case 'maul':
-            Itemlayer.add(spawnMaul(item.name, colour));
+            return spawnMaul(index, name, colour)
             break;
         case 'pike':
         case 'chain-10-feet':
         case 'climbers-kit':
         case 'greatclub':
-            Itemlayer.add(spawnMultiLineItem(item.name, colour, item.weight / 2, 2))
+            return spawnMultiLineItem(index, name, colour, weight / 2, 2)
             break;
         case 'crossbow-heavy':// too bulky?
-            Itemlayer.add(spawnHeavyCrossbow(item.name, colour))
+            return spawnHeavyCrossbow(index, name, colour)
             break;
         case 'crowbar':
-            Itemlayer.add(spawnCrowbar(item.name, colour))
+            return spawnCrowbar(index, name, colour)
             break;
         case 'pick-miners':
-            Itemlayer.add(spawnMinersPick(item.name, colour))
+            return spawnMinersPick(index, name, colour)
             break;
         case 'pot-iron':
-            Itemlayer.add(spawnIronPot(item.name, colour))
+            return spawnIronPot(index, name, colour)
             break;
         case 'rope-hempen-50-feet':
-            Itemlayer.add(spawnHempRope(item.name, colour))
+            return spawnHempRope(index, name, colour)
             break;
 
-
         default:
-            Itemlayer.add(spawnGenericItem(item.name, item.weight, colour));
+            return spawnGenericItem(name, weight, colour);
     }
 }
 
@@ -495,7 +498,8 @@ function generateOutline(shapelayer) { // this out outta hand fast
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 2,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
 
 

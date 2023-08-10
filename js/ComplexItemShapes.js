@@ -1,6 +1,6 @@
 
 //some items may have odd shapes and require their own function
-function spawnPaddedArmor(name, colour) {
+function spawnPaddedArmor(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -8,7 +8,8 @@ function spawnPaddedArmor(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -103,7 +104,7 @@ function spawnPaddedArmor(name, colour) {
 
 }
 
-function spawnLeatherArmor(name, colour) {
+function spawnLeatherArmor(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -111,7 +112,8 @@ function spawnLeatherArmor(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -216,7 +218,7 @@ function spawnLeatherArmor(name, colour) {
 
 }
 
-function spawnStuddedArmor(name, colour) {
+function spawnStuddedArmor(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -224,7 +226,8 @@ function spawnStuddedArmor(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -353,7 +356,7 @@ function spawnStuddedArmor(name, colour) {
 
 }
 
-function spawnHideArmor(name, colour) {
+function spawnHideArmor(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -361,7 +364,8 @@ function spawnHideArmor(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -469,7 +473,7 @@ function spawnHideArmor(name, colour) {
 
 }
 
-function spawnChainShirtArmor(name, colour) {
+function spawnChainShirtArmor(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -477,7 +481,8 @@ function spawnChainShirtArmor(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -627,7 +632,7 @@ function spawnChainShirtArmor(name, colour) {
 
 }
 
-function spawnShield(name, colour) {
+function spawnShield(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -635,7 +640,8 @@ function spawnShield(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -716,7 +722,7 @@ function spawnShield(name, colour) {
 
 }
 
-function spawnMace(name, colour) {
+function spawnMace(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -724,7 +730,8 @@ function spawnMace(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -773,7 +780,7 @@ function spawnMace(name, colour) {
 
 }
 
-function spawnLineItem(name, colour, weight) {
+function spawnLineItem(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -781,7 +788,8 @@ function spawnLineItem(name, colour, weight) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -831,7 +839,7 @@ function spawnLineItem(name, colour, weight) {
 
 }
 
-function spawnLightCrossbow(name, colour) {
+function spawnLightCrossbow(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -839,7 +847,8 @@ function spawnLightCrossbow(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -912,7 +921,7 @@ function spawnLightCrossbow(name, colour) {
 
 }
 
-function spawnGlaive(name, colour) {
+function spawnGlaive(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -920,7 +929,8 @@ function spawnGlaive(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -979,7 +989,7 @@ function spawnGlaive(name, colour) {
 
 }
 
-function spawnGreataxe(name, colour) {
+function spawnGreataxe(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -987,7 +997,8 @@ function spawnGreataxe(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1067,7 +1078,7 @@ function spawnGreataxe(name, colour) {
 
 }
 
-function spawnGreatsword(name, colour) {
+function spawnGreatsword(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1075,7 +1086,8 @@ function spawnGreatsword(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1154,7 +1166,7 @@ function spawnGreatsword(name, colour) {
 
 }
 
-function spawnMultiLineItem(name, colour, columns, rows) {
+function spawnMultiLineItem(index, name, colour, columns, rows) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1162,7 +1174,8 @@ function spawnMultiLineItem(name, colour, columns, rows) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1212,7 +1225,7 @@ function spawnMultiLineItem(name, colour, columns, rows) {
 
 }
 
-function spawnHeavyCrossbow(name, colour) {
+function spawnHeavyCrossbow(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1220,7 +1233,8 @@ function spawnHeavyCrossbow(name, colour) {
     var Padded_Armor = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1367,7 +1381,7 @@ function spawnHeavyCrossbow(name, colour) {
 
 }
 
-function spawnMaul(name, colour) {
+function spawnMaul(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1375,7 +1389,8 @@ function spawnMaul(name, colour) {
     var Maul = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1479,7 +1494,7 @@ function spawnMaul(name, colour) {
 
 }
 
-function spawnCrowbar(name, colour) {
+function spawnCrowbar(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1487,7 +1502,8 @@ function spawnCrowbar(name, colour) {
     var Maul = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1541,7 +1557,7 @@ function spawnCrowbar(name, colour) {
 
 }
 
-function spawnMinersPick(name, colour) {
+function spawnMinersPick(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1549,7 +1565,8 @@ function spawnMinersPick(name, colour) {
     var Maul = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1657,7 +1674,7 @@ function spawnMinersPick(name, colour) {
 
 }
 
-function spawnIronPot(name, colour) {
+function spawnIronPot(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1665,7 +1682,8 @@ function spawnIronPot(name, colour) {
     var Maul = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
@@ -1766,7 +1784,7 @@ function spawnIronPot(name, colour) {
 
 }
 
-function spawnHempRope(name, colour) {
+function spawnHempRope(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
 
@@ -1774,7 +1792,8 @@ function spawnHempRope(name, colour) {
     var Maul = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        complexItem: index
     });
 
     //group for shape
