@@ -185,6 +185,14 @@ function InitializeMenu() {
     }
 
   });
+  document.getElementById('duplicate-button').addEventListener('click', () => {
+    var randItemSpawn = randomSpawnLocation()
+    var clone = currentShape.parent.parent.clone({
+      x: randItemSpawn.x,
+      y: randItemSpawn.y,
+    });
+    Itemlayer.add(clone);
+  });
   document.getElementById('delete-button').addEventListener('click', () => {
     currentShape.parent.parent.destroy();
   });
