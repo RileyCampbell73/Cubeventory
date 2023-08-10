@@ -36,53 +36,28 @@ function initializeItemCombobox() {
 
                 this._on(this.input, {
                     autocompleteselect: function (event, ui) {
-                        ui.item.option.selected = false;
-                        this._trigger("select", event, {
-                            item: ui.item.option
-                        });
-                        SpawnItemfromJSON(ui.item.option.value);
+
+                        if (ui.item.value === -2){
+                            //generic item
+                        }
+                        else if (ui.item.value != -1){//check if clicking 'no result
+
+                            ui.item.option.selected = false;
+                            this._trigger("select", event, {
+                                item: ui.item.option
+                            });
+                            SpawnItemfromJSON(ui.item.option.value);
+                        }
+                        
                     },
 
                     autocompletechange: "_removeIfInvalid"
                 });
             },
 
-            //   _createShowAllButton: function() {
-            //     var input = this.input,
-            //       wasOpen = false;
-
-            //     $( "<a>" )
-            //       .attr( "tabIndex", -1 )
-            //       .attr( "title", "Show All Items" )
-            //       .tooltip()
-            //       .appendTo( this.wrapper )
-            //       .button({
-            //         icons: {
-            //           primary: "ui-icon-triangle-1-s"
-            //         },
-            //         text: false
-            //       })
-            //       .removeClass( "ui-corner-all" )
-            //       .addClass( "custom-combobox-toggle ui-corner-right" )
-            //       .on( "mousedown", function() {
-            //         wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-            //       })
-            //       .on( "click", function() {
-            //         input.trigger( "focus" );
-
-            //         // Close if already visible
-            //         if ( wasOpen ) {
-            //           return;
-            //         }
-
-            //         // Pass empty string as value to search for, displaying all results
-            //         input.autocomplete( "search", "" );
-            //       });
-            //   },
-
             _source: function (request, response) {
                 var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                response(this.element.children("option").map(function () {
+                var items = this.element.children("option").map(function () {
                     var text = $(this).text();
                     if (this.value && (!request.term || matcher.test(text)))
                         return {
@@ -90,7 +65,22 @@ function initializeItemCombobox() {
                             value: text,
                             option: this
                         };
-                }));
+                })
+
+                if (items.length === 0){
+                    items.push( {
+                        label: "No Results Found",
+                        value: -1,
+                        option: null
+                    });
+                    items.push( {
+                        label: "Add Generic Item",
+                        value: -2,
+                        option: null
+                    });
+                }
+
+                response(items);
             },
 
             _removeIfInvalid: function (event, ui) {
@@ -117,15 +107,15 @@ function initializeItemCombobox() {
                 }
 
                 // Remove invalid value
-                this.input
-                    .val("")
-                    .attr("title", value + " didn't match any item")
-                    .tooltip("open");
-                this.element.val("");
-                this._delay(function () {
-                    this.input.tooltip("close").attr("title", "");
-                }, 2500);
-                this.input.autocomplete("instance").term = "";
+                // this.input
+                //     .val("")
+                //     .attr("title", value + " didn't match any item")
+                //     .tooltip("open");
+                // this.element.val("");
+                // this._delay(function () {
+                //     this.input.tooltip("close").attr("title", "");
+                // }, 2500);
+                // this.input.autocomplete("instance").term = "";
             },
 
             _destroy: function () {
@@ -149,12 +139,27 @@ function initializeItemCombobox() {
             }
 
             // Pass empty string as value to search for, displaying all results
-            $("#AutoBox").autocomplete("search", "");
+            if ($("#AutoBox")[0].value.length > 0){
+                $("#AutoBox").autocomplete("search", $("#AutoBox")[0].value);
+            }
+            else{
+                $("#AutoBox").autocomplete("search", "");
+            }
+            
         });
 
         $( "#AutoBox" ).on( "autocompleteclose", function( event, ui ) {
 
-            this.value = ""
+            if (itemSelected){
+                itemSelected = false;
+                this.value = ""
+            }
+
+        });
+
+        var itemSelected = false;
+        $( "#AutoBox" ).on( "autocompleteselect", function( event, ui ) {
+                itemSelected = true;
         });
     });
 }
