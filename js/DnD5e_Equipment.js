@@ -1,4 +1,4 @@
-[
+var EquipmentJSON = [
   {
     "desc": [],
     "special": [],
