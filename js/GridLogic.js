@@ -156,7 +156,7 @@ function FlipItem(currentShape){
 
   if (scaleX > 0) {
   var offsetvalue = shapes.getClientRect().width;
-    if (shapes.children[0].getRotation() == 90 || shapes.children[0].getRotation() == 270)
+    if (shapes.parent.getRotation() == 90 || shapes.parent.getRotation() == 270)
       offsetvalue = shapes.getClientRect().height
 
     shapes.offsetX(offsetvalue)
@@ -171,6 +171,17 @@ function FlipItem(currentShape){
 }
 
 function InitializeMenu() {
+
+  var rotateButton = document.getElementById('rotate-button')
+  var flipButton = document.getElementById('flip-button')
+  var duplicateButton = document.getElementById('duplicate-button')
+  var deleteButton = document.getElementById('delete-button')
+
+  //remove old listeners
+  rotateButton.replaceWith(rotateButton.cloneNode(true));
+  flipButton.replaceWith(flipButton.cloneNode(true));
+  duplicateButton.replaceWith(duplicateButton.cloneNode(true));
+  deleteButton.replaceWith(deleteButton.cloneNode(true));
 
   // setup menu
   let currentShape;
@@ -188,6 +199,7 @@ function InitializeMenu() {
   document.getElementById('flip-button').addEventListener('click', () => {
     FlipItem(currentShape.parent.parent)
   });
+
   document.getElementById('duplicate-button').addEventListener('click', () => {
     var randItemSpawn = randomSpawnLocation()
     var clone = currentShape.parent.parent.clone({
@@ -196,6 +208,7 @@ function InitializeMenu() {
     });
     Itemlayer.add(clone);
   });
+  
   document.getElementById('delete-button').addEventListener('click', () => {
     currentShape.parent.parent.destroy();
   });

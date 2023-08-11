@@ -11,9 +11,6 @@
 //  spawning area changes / gets cut off
 //      need to make stage width and height globals
 
-//All right click actions throw error after resizing but still do their function
-//  looks like double trigger - not deleting a layer maybe?
-
 //Collision is removed when interacting with a different shape.
 //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
 //  change who/where gets their 'isColliding' set false
