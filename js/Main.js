@@ -43,7 +43,7 @@
 //    For now, we store the intended colour to be reverted to. Want a different solution.
 
 
-
+var VERSION_NUM = "1.0.0"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
@@ -312,6 +312,7 @@ function SaveInventory() {
     var name = $('#CharacterName')[0].value
 
     var saveFile = {
+        version: VERSION_NUM,
         name: $('#CharacterName')[0].value,
         strength: strength,
         encumbranceRule: $('#EncumbranceRule')[0].checked,
