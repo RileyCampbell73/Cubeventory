@@ -33,6 +33,11 @@
 
   <link rel="icon" type="image/x-icon" href="./cube-3d.png" />
 
+  <title>Cubeventory</title>
+
+  <meta name="description" content="A DnD5e inventory solution! Turn those abstract containers of infinite garbage into an active representation of what your lugging around on your adventures.">
+  
+  
 </head>
 
 <body>
@@ -57,27 +62,55 @@
           </div>
         </li>
         <li>
-          <div>
+          
             <a onclick="ShowGenericItemModal('')">Add Generic Item</a>
-          </div>
+          
         </li>
         <li>
-          <div>
+          
             <a onclick="SaveInventory()">Save</a>
-          </div>
+          
         </li>
         <li>
-          <div>
+          
             <input type="file" id="saveUploadFile" accept=".json" style="display: none;">
             <a onclick="document.getElementById('saveUploadFile').click();">Load</a>
-          </div>
+          
         </li>
         <li>
-          <div>
+          
             <a data-toggle="modal" data-target="#helpModal">Help</a>
-          </div>
+          
         </li>
+
       </ul>
+      <hr>
+      <div style="font-size: 0.8em;">
+        <div>
+          <span>Created by Riley Campbell</span>
+          <span><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Tip Me', '#29abe0', 'B0B5O3G3H');kofiwidget2.draw();</script> </span>
+        </div>
+        <div>
+          <span><a style="text-decoration: underline;" href="https://github.com/RileyCampbell73/Cubeventory">Github</a></span>
+        </div>
+        <div>
+          <span>Found a bug? Contact <a style="text-decoration: underline;" href="mailto: bugs@cubeventory.com">bugs@cubeventory.com</a> or <a style="text-decoration: underline;" href="https://twitter.com/WaitWhatWho3">@WaitWhatWho3</a></span>
+        </div>
+        <hr>
+        <div>
+          <span>Made with <a style="text-decoration: underline;" href="https://konvajs.org/docs/donate.html">Konva.js</a></span>
+        </div>
+        <div>
+          <span>Cube 3d icon created by samlakodad on <a style="text-decoration: underline;" href="https://www.flaticon.com/free-icon/cube-3d_4783189?term=cluster&page=1&position=15&origin=tag&related_id=4783189" title="cluster icons">Flaticon</a></span>
+        </div>
+        <div>
+          <span>Data provided by </span><a style="text-decoration: underline;" href="https://www.dnd5eapi.co/" title="cluster icons">D&D 5e API</a>
+        </div>
+
+      </div>
+      
+
+      
     </nav>
 
     <!-- Page Content -->
@@ -194,3 +227,4 @@
     </div>
   </div>
 </body>
+

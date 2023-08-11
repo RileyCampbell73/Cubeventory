@@ -1,22 +1,8 @@
 
 //TODO
 
-//Sidebar Links section
-//  add Konva contribute widget into sidebar
-//  Ko-fi link?
-//  Need favicon
-//    DONE - CREDIT:
-//      <a href="https://www.flaticon.com/free-icons/cluster" title="cluster icons">Cluster icons created by samlakodad - Flaticon</a>
-//  DnD API
-
-// Description on google
-
 
 //BUGS
-
-//Collision is removed when interacting with a different shape.
-//  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
-//  change who/where gets their 'isColliding' set false
 
 //Dashes in items are misaligned
 
@@ -28,13 +14,16 @@
 //All right click actions throw error after resizing but still do their function
 //  looks like double trigger - not deleting a layer maybe?
 
+//Collision is removed when interacting with a different shape.
+//  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
+//  change who/where gets their 'isColliding' set false
+
 
 //FUTURE
 
-//have some other graphic to tell when something is colliding? - May wanna use red colour. 
-//  Yeah use an image or something.
-//    image turned out to be dead end
-//    For now, we store the intended colour to be reverted to. Want a different solution.
+//tooltips on items
+//  make it an option? turns on when size gets small enough be fefault
+//  Can show other stuff in tooltip - desc etc
 
 //Save feature
 //  throw save into cookie? 
@@ -55,6 +44,11 @@
 
 //Custom Items
 
+//have some other graphic to tell when something is colliding? - May wanna use red colour. 
+//  Yeah use an image or something.
+//    image turned out to be dead end
+//    For now, we store the intended colour to be reverted to. Want a different solution.
+
 
 
 
@@ -73,8 +67,6 @@ var Itemlayer;
 var EquipmentJSON;
 
 $(document).ready(function () {
-
-    document.title = 'Cubeventory';
 
     SetStage();
 
