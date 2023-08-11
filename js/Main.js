@@ -4,8 +4,6 @@
 
 //BUGS
 
-//Dashes in items are misaligned
-
 //Collision is removed when interacting with a different shape.
 //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
 //  change who/where gets their 'isColliding' set false
