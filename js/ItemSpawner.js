@@ -338,6 +338,9 @@ function hexToRgb(hex) {
 }
 
 function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1) {
+
+    var dashLineMeasurment = Math.sqrt((GRID_SIZE - 1))
+
     return new Konva.Rect({
         x: x,
         y: y,
@@ -347,7 +350,7 @@ function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1)
         name: 'fillShape',
         stroke: "black",
         strokeWidth: .5,
-        dash: [10, 10],// apply dashed stroke that is 10px long and 10px apart
+        dash: [dashLineMeasurment, dashLineMeasurment],// apply dashed stroke that is Xpx long and Xpx apart
         isColliding: false,
         fillColour: colour
     })
