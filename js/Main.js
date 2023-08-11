@@ -203,8 +203,16 @@ function ResizeItem(itemShape, prevGridSize, index) {
 
             if (shape.name() == 'fillShape') {
 
-                shape.width(GRID_SIZE - 1)
-                shape.height(GRID_SIZE - 1)
+
+                if (shape.width() === (prevGridSize / 2) - 1)
+                    shape.width((GRID_SIZE / 2) - 1)
+                else
+                    shape.width(GRID_SIZE - 1)
+                
+                if (shape.height() === (prevGridSize / 2) - 1)
+                    shape.height((GRID_SIZE / 2) - 1)
+                else
+                    shape.height(GRID_SIZE - 1)
 
                 if (shape.x() > 0) {
                     var shapeX = shape.x();
@@ -279,6 +287,9 @@ function ResizeGrid() {
         //multiply remainder by 1.665
         if (access < 2)
             access = 0
+        else if (access - 1 === prevGridSize / 2) // for smaller items
+            access = (GRID_SIZE / 2) + 1
+
         shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
         shape.x(shapeX)
 
@@ -289,6 +300,8 @@ function ResizeGrid() {
         var Xplacment = shapeY / prevGridSize
         if (access < 2)
             access = 0
+        else if (access - 1 === prevGridSize / 2)
+            access = (GRID_SIZE / 2) + 1
         shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
 
         shape.y(shapeY)
