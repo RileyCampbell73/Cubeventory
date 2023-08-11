@@ -6,17 +6,15 @@
 
 //Dashes in items are misaligned
 
-//Grid resizing 
-//  displaces items sometimes?
-//  spawning area changes / gets cut off
-//      need to make stage width and height globals
-
 //Collision is removed when interacting with a different shape.
 //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
 //  change who/where gets their 'isColliding' set false
 
 
 //FUTURE
+
+//Grid resizing 
+//  displaces items sometimes?
 
 //tooltips on items
 //  make it an option? turns on when size gets small enough be fefault
@@ -55,8 +53,8 @@ var GRID_SIZE = 60;
 
 var strength = 10;
 
-var width = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
-var height = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
+var STAGE_WIDTH;
+var STAGE_HEIGHT;
 
 var stage;
 var gridLayer;
@@ -132,11 +130,14 @@ $(document).ready(function () {
 
 function SetStage() {
 
+    STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
+    STAGE_HEIGHT = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
+
     // first we need to create a stage
     stage = new Konva.Stage({
         container: 'container',
-        width: width,
-        height: height,
+        width: STAGE_WIDTH,
+        height: STAGE_HEIGHT,
     });
 
     strength = $('#CharacterStrength')[0].value;
