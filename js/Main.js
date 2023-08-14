@@ -2,9 +2,6 @@
 
 //Change Slider because you can;t interact w it?
 
-//Snap position looks off
-//  I've noticed everything is like 1px off. I SHOULD fix that before 
-
 //"You should include some text around how much things actually weigh. There's nothing to say 1 cube == 1 pound or whatever" - Julia
 //  RIGHT YEAH I SHOULD 100% DO THAT OOPS
 
@@ -209,7 +206,7 @@ function decreaseGridSize() {
     }
 }
 
-function ResizeItem(itemShape, prevGridSize, index) {
+function ResizeItem(itemShape, prevGridSize) {
 
     //check if complex
     if (itemShape.getAttr('complexItem') != undefined) {
@@ -225,10 +222,8 @@ function ResizeItem(itemShape, prevGridSize, index) {
         if (itemShape.children[0].scaleX() < 0)
             FlipItem(complexItem)
         
-        //itemShape.destroy()
-        //Itemlayer.add(complexItem)
-        //itemShape = complexItem
-        //Itemlayer.children[index] = complexItem
+        itemShape.destroy()
+        Itemlayer.add(complexItem)
 
         return complexItem
 
@@ -310,17 +305,10 @@ function ResizeGrid() {
 
     Itemlayer = Konva.Node.create(items);
 
-    //complex items need to be remade. This requires destroying the old one, but we can't do that while looping through its container.
-    var newComplexItems = {}
-
     //for (var shape of Itemlayer.children) {
-    for (let i = 0; i < Itemlayer.children.length; i++) {
+    for (let i = Itemlayer.children.length - 1; i >= 0; i--) {//loop backwards because we may delete shapes in container
         var shape = Itemlayer.children[i]
         shape = ResizeItem(shape, prevGridSize, i)
-
-        if (shape.getAttr('complexItem') != undefined) {
-            newComplexItems[i] = shape
-        }
 
         var shapeX = shape.x();
         //take off padding 
@@ -335,8 +323,8 @@ function ResizeGrid() {
         //multiply remainder by 1.665
         if (access < 2)
             access = 0
-        else if (access - 1 === prevGridSize / 2) // for half items
-            access = (GRID_SIZE / 2) + 1
+        else if (access === prevGridSize / 2) // for half items
+            access = (GRID_SIZE / 2)
 
         shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
         shape.x(shapeX)
@@ -348,19 +336,13 @@ function ResizeGrid() {
         var Xplacment = shapeY / prevGridSize
         if (access < 2)
             access = 0
-        else if (access - 1 === prevGridSize / 2)
-            access = (GRID_SIZE / 2) + 1
+        else if (access === prevGridSize / 2)
+            access = (GRID_SIZE / 2)
         shapeY = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
 
         shape.y(shapeY)
 
     }
-
-    for (const property in newComplexItems) {
-        Itemlayer.children[property].destroy()
-        Itemlayer.add(newComplexItems[property])
-    }
-
 
     stage.add(Itemlayer);
 
