@@ -5,7 +5,7 @@ function spawnPaddedArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -26,8 +26,16 @@ function spawnPaddedArmor(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -79,16 +87,18 @@ function spawnPaddedArmor(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, GRID_SIZE - 1.5,
-        0 + .5, GRID_SIZE - 1.5,
-        0 + .5, 0 + .5
+        0, 0,
+        (GRID_SIZE * 4), 0,
+        (GRID_SIZE * 4), GRID_SIZE,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 3), (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 3),
+        GRID_SIZE, GRID_SIZE,
+        0, GRID_SIZE,
+        0, 0
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -96,11 +106,11 @@ function spawnPaddedArmor(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
     
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -109,7 +119,7 @@ function spawnLeatherArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -130,8 +140,16 @@ function spawnLeatherArmor(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -195,16 +213,18 @@ function spawnLeatherArmor(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
-        GRID_SIZE + .5, GRID_SIZE - 1.5,
-        0 + .5, GRID_SIZE - 1.5,
-        0 + .5, 0 + .5
+        0, 0,
+        (GRID_SIZE * 4), 0,
+        (GRID_SIZE * 4), GRID_SIZE,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 3), (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 4),
+        GRID_SIZE, GRID_SIZE,
+        0, GRID_SIZE,
+        0, 0
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -212,9 +232,9 @@ function spawnLeatherArmor(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -223,7 +243,7 @@ function spawnStuddedArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -244,8 +264,16 @@ function spawnStuddedArmor(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         GRID_SIZE,
@@ -323,23 +351,25 @@ function spawnStuddedArmor(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        GRID_SIZE + .5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) + .5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) + .5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 5) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 4) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, GRID_SIZE + .5,
-        GRID_SIZE + .5, GRID_SIZE + .5,
+        GRID_SIZE, 0,
+        (GRID_SIZE * 2), 0,
+        (GRID_SIZE * 2), GRID_SIZE,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 3), 0,
+        (GRID_SIZE * 4), 0,
+        (GRID_SIZE * 4), GRID_SIZE,
+        (GRID_SIZE * 5), GRID_SIZE,
+        (GRID_SIZE * 5), (GRID_SIZE * 2),
+        (GRID_SIZE * 4), (GRID_SIZE * 2),
+        (GRID_SIZE * 4), (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 2),
+        0, (GRID_SIZE * 2),
+        0, GRID_SIZE,
+        GRID_SIZE, GRID_SIZE,
         
     ]
     var line = new Konva.Line({
@@ -348,11 +378,11 @@ function spawnStuddedArmor(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
 
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -361,7 +391,7 @@ function spawnHideArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -382,8 +412,16 @@ function spawnHideArmor(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -450,15 +488,17 @@ function spawnHideArmor(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 2) -1.5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) -1.5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) -1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 4) -1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 2) -1.5,
-        0 + .5, (GRID_SIZE * 2) -1.5,
+        0, 0,
+        (GRID_SIZE * 4), 0,
+        (GRID_SIZE * 4), (GRID_SIZE * 2),
+        (GRID_SIZE * 3), (GRID_SIZE * 2),
+        (GRID_SIZE * 3), (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 2),
+        0, (GRID_SIZE * 2),
     ]
 
     var line = new Konva.Line({
@@ -467,9 +507,9 @@ function spawnHideArmor(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -478,7 +518,7 @@ function spawnChainShirtArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -499,8 +539,16 @@ function spawnChainShirtArmor(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -609,15 +657,17 @@ function spawnChainShirtArmor(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 5) - 1.5, 0 + .5,
-        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 3) - 1.5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 3) - 1.5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 5) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 5) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, (GRID_SIZE * 2) - 1.5,
+        0, 0,
+        (GRID_SIZE * 5), 0,
+        (GRID_SIZE * 5), (GRID_SIZE * 3),
+        (GRID_SIZE * 4), (GRID_SIZE * 3),
+        (GRID_SIZE * 4), (GRID_SIZE * 5),
+        GRID_SIZE + .5, (GRID_SIZE * 5),
+        GRID_SIZE + .5, (GRID_SIZE * 2),
+        0, (GRID_SIZE * 2),
     ]
 
     var line = new Konva.Line({
@@ -626,9 +676,9 @@ function spawnChainShirtArmor(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -637,7 +687,7 @@ function spawnShield(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -658,8 +708,16 @@ function spawnShield(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -695,19 +753,21 @@ function spawnShield(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        GRID_SIZE - 1.5, 0 + .5,
-        GRID_SIZE - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 2) + .5, GRID_SIZE + .5,
-        (GRID_SIZE * 2) + .5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, (GRID_SIZE * 2) - 1.5,
+        0, 0,
+        GRID_SIZE, 0,
+        GRID_SIZE, GRID_SIZE,
+        (GRID_SIZE * 2), GRID_SIZE,
+        (GRID_SIZE * 2), 0,
+        (GRID_SIZE * 3), 0,
+        (GRID_SIZE * 3), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 2),
+        0, (GRID_SIZE * 2),
     ]
 
     var line = new Konva.Line({
@@ -716,9 +776,9 @@ function spawnShield(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -727,7 +787,7 @@ function spawnMace(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -748,8 +808,16 @@ function spawnMace(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -774,9 +842,11 @@ function spawnMace(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
-    ItemShapes.add(generateOutline(ItemShapes))
+    createInnerDashedLines(ItemShapes, ItemLines)
 
-    return Padded_Armor;
+    ItemLines.add(generateOutline(ItemShapes))
+
+    return Item;
 
 }
 
@@ -785,7 +855,7 @@ function spawnLineItem(index, name, colour, weight) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -806,8 +876,16 @@ function spawnLineItem(index, name, colour, weight) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
 
     for (let i = 0; i < weight; i++) {
@@ -820,11 +898,13 @@ function spawnLineItem(index, name, colour, weight) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * weight) - 1.5, 0 + .5,
-        (GRID_SIZE * weight) - 1.5, GRID_SIZE - 1.5,
-        0 + .5, GRID_SIZE - 1.5,
+        0, 0,
+        (GRID_SIZE * weight), 0,
+        (GRID_SIZE * weight), GRID_SIZE,
+        0, GRID_SIZE,
     ]
 
     var line = new Konva.Line({
@@ -833,9 +913,9 @@ function spawnLineItem(index, name, colour, weight) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -844,7 +924,7 @@ function spawnLightCrossbow(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -865,8 +945,16 @@ function spawnLightCrossbow(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -896,15 +984,17 @@ function spawnLightCrossbow(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, GRID_SIZE - 1.5,
-        (GRID_SIZE * 2) - 1.5, GRID_SIZE - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, GRID_SIZE - 1.5,
-        0 + .5, GRID_SIZE - 1.5,
+        0, 0,
+        (GRID_SIZE * 3), 0,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 2), GRID_SIZE,
+        (GRID_SIZE * 2), (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 3),
+        GRID_SIZE, GRID_SIZE,
+        0, GRID_SIZE,
     ]
 
     var line = new Konva.Line({
@@ -913,11 +1003,11 @@ function spawnLightCrossbow(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
 
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -926,7 +1016,7 @@ function spawnGlaive(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -947,8 +1037,16 @@ function spawnGlaive(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -983,9 +1081,11 @@ function spawnGlaive(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
-    ItemShapes.add(generateOutline(ItemShapes))
+    createInnerDashedLines(ItemShapes, ItemLines)
 
-    return Padded_Armor;
+    ItemLines.add(generateOutline(ItemShapes))
+
+    return Item;
 
 }
 
@@ -994,7 +1094,7 @@ function spawnGreataxe(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1015,8 +1115,16 @@ function spawnGreataxe(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -1056,15 +1164,17 @@ function spawnGreataxe(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, GRID_SIZE - 1.5,
-        (GRID_SIZE * 2) - 1.5, GRID_SIZE - 1.5,
-        (GRID_SIZE * 2) - 1.5,  (GRID_SIZE * 2) - 1.5,
-        GRID_SIZE - 1.5,  (GRID_SIZE * 2) - 1.5,
-        GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
-        0 + .5, (GRID_SIZE * 3) - 1.5,
+        0, 0,
+        (GRID_SIZE * 4), 0,
+        (GRID_SIZE * 4), GRID_SIZE,
+        (GRID_SIZE * 2), GRID_SIZE,
+        (GRID_SIZE * 2),  (GRID_SIZE * 2),
+        GRID_SIZE,  (GRID_SIZE * 2),
+        GRID_SIZE, (GRID_SIZE * 3),
+        0, (GRID_SIZE * 3),
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1072,9 +1182,9 @@ function spawnGreataxe(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -1083,7 +1193,7 @@ function spawnGreatsword(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1104,8 +1214,16 @@ function spawnGreatsword(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         GRID_SIZE,
@@ -1140,19 +1258,21 @@ function spawnGreatsword(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        GRID_SIZE + .5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 4) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, GRID_SIZE + .5,
-        GRID_SIZE + .5, GRID_SIZE + .5,
+        GRID_SIZE, 0,
+        (GRID_SIZE * 2), 0,
+        (GRID_SIZE * 2), GRID_SIZE,
+        (GRID_SIZE * 4), GRID_SIZE,
+        (GRID_SIZE * 4), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 2),
+        0, (GRID_SIZE * 2),
+        0, GRID_SIZE,
+        GRID_SIZE, GRID_SIZE,
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1160,9 +1280,9 @@ function spawnGreatsword(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -1171,7 +1291,7 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1192,8 +1312,16 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     for (let x = 0; x < columns; x++) {
         for (let y = 0; y < rows; y++) {
@@ -1207,11 +1335,13 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * columns) - 1.5, 0 + .5,
-        (GRID_SIZE * columns) - 1.5, (GRID_SIZE * rows) - 1.5,
-        0 + .5, (GRID_SIZE * rows) - 1.5,
+        0, 0,
+        (GRID_SIZE * columns), 0,
+        (GRID_SIZE * columns), (GRID_SIZE * rows),
+        0, (GRID_SIZE * rows),
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1219,9 +1349,9 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -1230,7 +1360,7 @@ function spawnHeavyCrossbow(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Padded_Armor = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1251,8 +1381,16 @@ function spawnHeavyCrossbow(index, name, colour) {
         name: 'itemText'
     });
 
-    Padded_Armor.add(ItemShapes)
-    Padded_Armor.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         GRID_SIZE * 2,
@@ -1351,23 +1489,25 @@ function spawnHeavyCrossbow(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        (GRID_SIZE * 2) + .5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 5) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 3) - 1.5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 3) - 1.5,
-        (GRID_SIZE * 4) - 1.5, (GRID_SIZE * 4) - 1.5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) - 1.5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 8) - 1.5,
-        (GRID_SIZE * 2) + .5, (GRID_SIZE * 8) - 1.5,
-        (GRID_SIZE * 2) + .5, (GRID_SIZE * 4) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 3) - 1.5,
-        0 + .5, (GRID_SIZE * 3) - 1.5,
-        0 + .5, GRID_SIZE + .5,
-        (GRID_SIZE * 2) + .5, GRID_SIZE + .5,
+        (GRID_SIZE * 2), 0,
+        (GRID_SIZE * 3), 0,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 5), GRID_SIZE,
+        (GRID_SIZE * 5), (GRID_SIZE * 3),
+        (GRID_SIZE * 4), (GRID_SIZE * 3),
+        (GRID_SIZE * 4), (GRID_SIZE * 4),
+        (GRID_SIZE * 3), (GRID_SIZE * 4),
+        (GRID_SIZE * 3), (GRID_SIZE * 8),
+        (GRID_SIZE * 2), (GRID_SIZE * 8),
+        (GRID_SIZE * 2), (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 4),
+        GRID_SIZE, (GRID_SIZE * 3),
+        0, (GRID_SIZE * 3),
+        0, GRID_SIZE,
+        (GRID_SIZE * 2), GRID_SIZE,
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1375,9 +1515,9 @@ function spawnHeavyCrossbow(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Padded_Armor;
+    return Item;
 
 }
 
@@ -1386,7 +1526,7 @@ function spawnMaul(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Maul = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1407,8 +1547,16 @@ function spawnMaul(index, name, colour) {
         name: 'itemText'
     });
 
-    Maul.add(ItemShapes)
-    Maul.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -1472,15 +1620,17 @@ function spawnMaul(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, 0 + .5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 6) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 6) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 2) - 1.5,
-        0 + .5, (GRID_SIZE * 2) - 1.5,
+        0, 0,
+        (GRID_SIZE * 3), 0,
+        (GRID_SIZE * 3), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 6),
+        GRID_SIZE, (GRID_SIZE * 6),
+        GRID_SIZE, (GRID_SIZE * 2),
+        0, (GRID_SIZE * 2),
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1488,9 +1638,9 @@ function spawnMaul(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Maul;
+    return Item;
 
 }
 
@@ -1499,7 +1649,7 @@ function spawnCrowbar(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Maul = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1520,8 +1670,16 @@ function spawnCrowbar(index, name, colour) {
         name: 'itemText'
     });
 
-    Maul.add(ItemShapes)
-    Maul.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -1551,9 +1709,11 @@ function spawnCrowbar(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
-    ItemShapes.add(generateOutline(ItemShapes))
+    createInnerDashedLines(ItemShapes, ItemLines)
 
-    return Maul;
+    ItemLines.add(generateOutline(ItemShapes))
+
+    return Item;
 
 }
 
@@ -1562,7 +1722,7 @@ function spawnMinersPick(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Maul = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1583,8 +1743,16 @@ function spawnMinersPick(index, name, colour) {
         name: 'itemText'
     });
 
-    Maul.add(ItemShapes)
-    Maul.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         GRID_SIZE,
@@ -1643,24 +1811,26 @@ function spawnMinersPick(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        GRID_SIZE + .5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) + .5,
-        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 2) + .5,
-        (GRID_SIZE * 5) - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
+        GRID_SIZE, 0,
+        (GRID_SIZE * 2), 0,
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
+        (GRID_SIZE * 5), (GRID_SIZE * 2),
+        (GRID_SIZE * 5), (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 3),
 
-        GRID_SIZE - 1.5, (GRID_SIZE * 4) + .5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 4) + .5,
+        GRID_SIZE, (GRID_SIZE * 4),
+        (GRID_SIZE * 2), (GRID_SIZE * 4),
         
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 5) - 1.5,
-        GRID_SIZE + .5, (GRID_SIZE * 5) - 1.5,
+        (GRID_SIZE * 2), (GRID_SIZE * 5),
+        GRID_SIZE, (GRID_SIZE * 5),
 
-        GRID_SIZE + .5, (GRID_SIZE * 4) - 1.5,
-        0 + .5, (GRID_SIZE * 4) - 1.5,
-        0 + .5, GRID_SIZE + .5,
-        GRID_SIZE + .5, GRID_SIZE + .5,
+        GRID_SIZE, (GRID_SIZE * 4),
+        0, (GRID_SIZE * 4),
+        0, GRID_SIZE,
+        GRID_SIZE, GRID_SIZE,
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1668,9 +1838,9 @@ function spawnMinersPick(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Maul;
+    return Item;
 
 }
 
@@ -1679,7 +1849,7 @@ function spawnIronPot(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Maul = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1700,8 +1870,16 @@ function spawnIronPot(index, name, colour) {
         name: 'itemText'
     });
 
-    Maul.add(ItemShapes)
-    Maul.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         GRID_SIZE,
@@ -1762,15 +1940,17 @@ function spawnIronPot(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        GRID_SIZE + .5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, 0 + .5,
-        (GRID_SIZE * 2) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) - 1.5, GRID_SIZE + .5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 4) - 1.5,
-        0 + .5, (GRID_SIZE * 4) - 1.5,
-        0 + .5, GRID_SIZE + .5,
-        GRID_SIZE + .5, GRID_SIZE + .5,
+        GRID_SIZE, 0,
+        (GRID_SIZE * 2), 0,
+        (GRID_SIZE * 2), GRID_SIZE,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 3), (GRID_SIZE * 4),
+        0, (GRID_SIZE * 4),
+        0, GRID_SIZE,
+        GRID_SIZE, GRID_SIZE,
     ]
     var line = new Konva.Line({
         points: outlinePoints,
@@ -1778,9 +1958,9 @@ function spawnIronPot(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Maul;
+    return Item;
 
 }
 
@@ -1789,7 +1969,7 @@ function spawnHempRope(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Maul = new Konva.Group({
+    var Item = new Konva.Group({
         x: randItemSpawn.x,
         y: randItemSpawn.y,
         draggable: true,
@@ -1810,8 +1990,16 @@ function spawnHempRope(index, name, colour) {
         name: 'itemText'
     });
 
-    Maul.add(ItemShapes)
-    Maul.add(ItemText)
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
+    Item.add(ItemShapes)
+    Item.add(ItemText)
+    Item.add(ItemLines)
 
     ItemShapes.add(createCube(
         0,
@@ -1869,23 +2057,25 @@ function spawnHempRope(index, name, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
+    createInnerDashedLines(ItemShapes, ItemLines)
+
     var outlinePoints = [
-        0 + .5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, 0 + .5,
-        (GRID_SIZE * 4) - 1.5, GRID_SIZE - 1.5,
-        (GRID_SIZE * 3) - 1.5, GRID_SIZE - 1.5,
-        (GRID_SIZE * 3) - 1.5, (GRID_SIZE * 2) - 1.5,
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 2) - 1.5,
+        0, 0,
+        (GRID_SIZE * 4), 0,
+        (GRID_SIZE * 4), GRID_SIZE,
+        (GRID_SIZE * 3), GRID_SIZE,
+        (GRID_SIZE * 3), (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
         
-        (GRID_SIZE * 2) + .5, GRID_SIZE - 1.5,
-        GRID_SIZE - 1.5, GRID_SIZE - 1.5,
-        GRID_SIZE - 1.5, (GRID_SIZE * 2) + .5,
-        (GRID_SIZE * 2) + .5, (GRID_SIZE * 2)  + .5,
+        (GRID_SIZE * 2), GRID_SIZE,
+        GRID_SIZE, GRID_SIZE,
+        GRID_SIZE, (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
         
-        (GRID_SIZE * 2) - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE - 1.5, (GRID_SIZE * 3) - 1.5,
-        GRID_SIZE - 1.5, (GRID_SIZE * 4) - 1.5,
-        0 + .5, (GRID_SIZE * 4) - 1.5,
+        (GRID_SIZE * 2), (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 3),
+        GRID_SIZE, (GRID_SIZE * 4),
+        0, (GRID_SIZE * 4),
     ]
 
     var line = new Konva.Line({
@@ -1894,8 +2084,8 @@ function spawnHempRope(index, name, colour) {
         strokeWidth: 2,
         closed: true
     });
-    ItemShapes.add(line)
+    ItemLines.add(line)
 
-    return Maul;
+    return Item;
 
 }

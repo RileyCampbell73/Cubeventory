@@ -134,22 +134,30 @@ function spawnGenericItem(name, weight, colour) {
         name: 'itemText'
     });
 
+    //group for lines
+    var ItemLines = new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
+
     Item.add(ItemShapes)
     Item.add(ItemText)
+    Item.add(ItemLines)
 
     //if weight isnt specified, or under 1
     if (weight === undefined || weight < 1) {
 
         if (weight >= .5) {
-            ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2 - 1));
+            ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2));
         }
         else {
-            ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2 - 1, GRID_SIZE / 2 - 1));
+            ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2, GRID_SIZE / 2));
         }
 
         ItemText.add(addItemText(name, ItemShapes))
 
-        ItemShapes.add(generateOutline(ItemShapes))
+        ItemLines.add(generateOutline(ItemShapes))
 
         return Item;
     }
@@ -197,7 +205,7 @@ function spawnGenericItem(name, weight, colour) {
                             i * GRID_SIZE,
                             rowCount * GRID_SIZE,
                             colour,
-                            GRID_SIZE / 2 - 1
+                            GRID_SIZE / 2
                         ));
                     }
                     else {
@@ -205,8 +213,8 @@ function spawnGenericItem(name, weight, colour) {
                             i * GRID_SIZE,
                             rowCount * GRID_SIZE,
                             colour,
-                            GRID_SIZE - 1,
-                            GRID_SIZE / 2 - 1
+                            GRID_SIZE,
+                            GRID_SIZE / 2
                         ));
                     }
                 }
@@ -215,8 +223,8 @@ function spawnGenericItem(name, weight, colour) {
                         i * GRID_SIZE,
                         rowCount * GRID_SIZE,
                         colour,
-                        GRID_SIZE / 2 - 1,
-                        GRID_SIZE / 2 - 1
+                        GRID_SIZE / 2,
+                        GRID_SIZE / 2
                     ));
                 }
                 break;
@@ -231,7 +239,11 @@ function spawnGenericItem(name, weight, colour) {
 
     ItemText.add(addItemText(name, ItemShapes))
 
-    ItemShapes.add(generateOutline(ItemShapes))
+    createInnerDashedLines(ItemShapes, ItemLines)
+
+    ItemLines.add(generateOutline(ItemShapes))
+
+    
 
     return Item;
 }
@@ -337,9 +349,9 @@ function hexToRgb(hex) {
     } : null;
 }
 
-function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1) {
+function createCube(x, y, colour, width = GRID_SIZE, height = GRID_SIZE) {
 
-    var dashLineMeasurment = Math.sqrt((GRID_SIZE - 1))
+    
 
     return new Konva.Rect({
         x: x,
@@ -348,12 +360,41 @@ function createCube(x, y, colour, width = GRID_SIZE - 1, height = GRID_SIZE - 1)
         height: height,
         fill: colour,
         name: 'fillShape',
-        stroke: "black",
-        strokeWidth: .5,
-        dash: [dashLineMeasurment, dashLineMeasurment],// apply dashed stroke that is Xpx long and Xpx apart
+        //stroke: "black",
+        //strokeWidth: .5,
+        //dash: [dashLineMeasurment, dashLineMeasurment],// apply dashed stroke that is Xpx long and Xpx apart
         isColliding: false,
         fillColour: colour
     })
+}
+
+function createInnerDashedLines(shapelayer, linesLayer){
+
+    if (shapelayer.children.length === 1) {
+        return
+    }
+
+
+    var dashLineMeasurment = Math.sqrt((GRID_SIZE))
+
+    shapelayer.children.forEach(function (cube) {
+
+        linesLayer.add(new Konva.Rect({
+            x: cube.x(),
+            y: cube.y(),
+            width: cube.width(),
+            height: cube.height(),
+            name: 'DashShape',
+            stroke: "black",
+            strokeWidth: .5,
+            dash: [dashLineMeasurment, dashLineMeasurment],// apply dashed stroke that is Xpx long and Xpx apart
+        }))
+
+    });
+
+
+
+
 }
 
 function generateOutline(shapelayer) { // this out outta hand fast
@@ -363,24 +404,24 @@ function generateOutline(shapelayer) { // this out outta hand fast
 
     // record 0,0
     var outlinePoints = [];
-    outlinePoints.push(0 + .5)
-    outlinePoints.push(0 + .5)
+    outlinePoints.push(0)
+    outlinePoints.push(0)
 
     if (shapelayer.children.length === 1) {
         var cube = shapelayer.children[0]
 
-        outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-        outlinePoints.push(cube.y() + .5)
+        outlinePoints.push((cube.x() + (cube.getWidth())))
+        outlinePoints.push(cube.y())
 
-        outlinePoints.push((0 + (cube.getWidth() + 1)) - 1.5)
-        outlinePoints.push((0 + (cube.getHeight() + 1)) - 1.5)
+        outlinePoints.push((0 + (cube.getWidth())))
+        outlinePoints.push((0 + (cube.getHeight())))
 
-        outlinePoints.push(0 + .5)
-        outlinePoints.push((0 + (cube.getHeight() + 1)) - 1.5)
+        outlinePoints.push(0)
+        outlinePoints.push((0 + (cube.getHeight())))
 
 
-        outlinePoints.push(0 + .5)
-        outlinePoints.push(0 + .5)
+        outlinePoints.push(0)
+        outlinePoints.push(0)
     }
     else {
 
@@ -397,8 +438,8 @@ function generateOutline(shapelayer) { // this out outta hand fast
                 //  if next Y != current y (we are at end of line)
                 if (cube.y() !== nextCube.y()) {
                     //record x + GRID_SIZE and y
-                    outlinePoints.push((cube.x() + GRID_SIZE) - 1.5)
-                    outlinePoints.push(cube.y() + .5)
+                    outlinePoints.push((cube.x() + GRID_SIZE))
+                    outlinePoints.push(cube.y())
 
                     if (maxX < cube.x() + GRID_SIZE)
                         maxX = cube.x() + GRID_SIZE
@@ -409,8 +450,8 @@ function generateOutline(shapelayer) { // this out outta hand fast
                 //last cube
                 var prevCube = shapelayer.children[index - 1]
 
-                outlinePoints.push(maxX - 1.5)
-                outlinePoints.push(cube.y() - 1.5)
+                outlinePoints.push(maxX)
+                outlinePoints.push(cube.y())
 
                 if ((cube.x() + GRID_SIZE) > maxX && cube.y() !== prevCube.y()) { // smaller shape on new column
                     //cut off beginning of array, add in the needed coords, put all that back onto array and finish
@@ -423,15 +464,15 @@ function generateOutline(shapelayer) { // this out outta hand fast
                     newOutlinePoints.push(outlinePoints.shift())
                     newOutlinePoints.push(outlinePoints.shift())
 
-                    newOutlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    newOutlinePoints.push(cube.y() + .5)
+                    newOutlinePoints.push((cube.x() + (cube.getWidth())))
+                    newOutlinePoints.push(cube.y())
 
-                    newOutlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    newOutlinePoints.push((cube.y() + (cube.getHeight() + 1)) + .5)
+                    newOutlinePoints.push((cube.x() + (cube.getWidth())))
+                    newOutlinePoints.push((cube.y() + (cube.getHeight())))
 
-                    if ((cube.getWidth() + 1) < GRID_SIZE) {
-                        newOutlinePoints.push((cube.x()) - 1.5)
-                        newOutlinePoints.push((cube.y() + (cube.getHeight() + 1)) + .5)
+                    if ((cube.getWidth()) < GRID_SIZE) {
+                        newOutlinePoints.push((cube.x()))
+                        newOutlinePoints.push((cube.y() + (cube.getHeight())))
                     }
 
                     newOutlinePoints.concat(outlinePoints);
@@ -439,59 +480,59 @@ function generateOutline(shapelayer) { // this out outta hand fast
                     outlinePoints = newOutlinePoints;
 
                     //use prev cube to fill in the rest
-                    outlinePoints.push((prevCube.x() + (prevCube.getWidth() + 1)) - 1.5)
-                    outlinePoints.push((prevCube.y() + (prevCube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push((prevCube.x() + (prevCube.getWidth())))
+                    outlinePoints.push((prevCube.y() + (prevCube.getHeight())))
 
-                    outlinePoints.push(0 + .5)
-                    outlinePoints.push((prevCube.y() + (prevCube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push(0)
+                    outlinePoints.push((prevCube.y() + (prevCube.getHeight())))
 
                 }
                 else if (cube.x() === 0){//first on new row
-                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    outlinePoints.push(cube.y() - 1.5)
+                    outlinePoints.push((cube.x() + (cube.getWidth())))
+                    outlinePoints.push(cube.y())
 
-                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push((cube.x() + (cube.getWidth())))
+                    outlinePoints.push((cube.y() + (cube.getHeight())))
 
                     outlinePoints.push(cube.x() + .5)
-                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push((cube.y() + (cube.getHeight())))
                 }
                 else if (cube.x() !== prevCube.x()) { //incomplete row
-                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    outlinePoints.push(cube.y() - 1.5)
+                    outlinePoints.push((cube.x() + (cube.getWidth())))
+                    outlinePoints.push(cube.y())
 
 
-                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push((cube.x() + (cube.getWidth())))
+                    outlinePoints.push((cube.y() + (cube.getHeight())))
 
-                    outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
-                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push((cube.x() + (cube.getWidth())))
+                    outlinePoints.push((cube.y() + (cube.getHeight())))
 
                     //if width < GRIDSIZE
-                    if ((cube.getWidth() + 1) < GRID_SIZE ) {
+                    if ((cube.getWidth()) < GRID_SIZE ) {
                         //need another two points
-                        outlinePoints.push((cube.x()) - 1.5)
-                        outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                        outlinePoints.push((cube.x()))
+                        outlinePoints.push((cube.y() + (cube.getHeight())))
 
-                        outlinePoints.push((cube.x()) - 1.5)
-                        outlinePoints.push((cube.y() + GRID_SIZE) - 1.5)
+                        outlinePoints.push((cube.x()))
+                        outlinePoints.push((cube.y() + GRID_SIZE))
                     }
                 }
 
                 if (cube.x() > 0) {
-                    outlinePoints.push(0 + .5)
-                    outlinePoints.push((cube.y() + (prevCube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push(0)
+                    outlinePoints.push((cube.y() + (prevCube.getHeight())))
                 }
                 else {
                     // outlinePoints.push((cube.x() + (cube.getWidth() + 1)) - 1.5)
                     // outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
 
-                    outlinePoints.push(0 + .5)
-                    outlinePoints.push((cube.y() + (cube.getHeight() + 1)) - 1.5)
+                    outlinePoints.push(0)
+                    outlinePoints.push((cube.y() + (cube.getHeight())))
                 }
 
-                outlinePoints.push(0 + .5)
-                outlinePoints.push(0 + .5)
+                outlinePoints.push(0)
+                outlinePoints.push(0)
             }
 
         })
@@ -505,12 +546,7 @@ function generateOutline(shapelayer) { // this out outta hand fast
         name: 'shapeOutline'
     });
 
-
     return line;
-
-
-
-
 }
 
 function addItemText(name, itemShapes){

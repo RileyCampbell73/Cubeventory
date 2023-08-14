@@ -246,15 +246,15 @@ function ResizeItem(itemShape, prevGridSize, index) {
             if (shape.name() == 'fillShape') {
 
 
-                if (shape.width() === (prevGridSize / 2) - 1)
-                    shape.width((GRID_SIZE / 2) - 1)
+                if (shape.width() === (prevGridSize / 2))
+                    shape.width((GRID_SIZE / 2))
                 else
-                    shape.width(GRID_SIZE - 1)
+                    shape.width(GRID_SIZE)
                 
-                if (shape.height() === (prevGridSize / 2) - 1)
-                    shape.height((GRID_SIZE / 2) - 1)
+                if (shape.height() === (prevGridSize / 2))
+                    shape.height((GRID_SIZE / 2))
                 else
-                    shape.height(GRID_SIZE - 1)
+                    shape.height(GRID_SIZE)
 
                 if (shape.x() > 0) {
                     var shapeX = shape.x();
@@ -282,8 +282,14 @@ function ResizeItem(itemShape, prevGridSize, index) {
         //add text
         itemShape.children[1].add(addItemText(name, itemShape.children[0]))
 
+        //remove all lines
+        itemShape.children[2].children = []
+
+        //redraw dashed lines
+        createInnerDashedLines(itemShape.children[0], itemShape.children[2])
+
         //redraw outline
-        itemShape.children[0].add(generateOutline(itemShape.children[0]))
+        itemShape.children[2].add(generateOutline(itemShape.children[0]))
 
         if (shapeFlipped)
             FlipItem(itemShape)
@@ -329,7 +335,6 @@ function ResizeGrid() {
         //multiply remainder by 1.665
         if (access < 2)
             access = 0
-        else if (access - 1 === prevGridSize / 2) // for smaller items
         else if (access - 1 === prevGridSize / 2) // for half items
             access = (GRID_SIZE / 2) + 1
 

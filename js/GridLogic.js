@@ -78,7 +78,6 @@ function createGridLayer(strength, useEncumbrance) {
     gridLayer.add(new Konva.Text({
       x: GRID_SIZE * 11,
       y: 32,
-      text: '(-20 speed)\nDisadvantage on:\n Abilioty checks, Attack rolls,\n Str, Dex, & Con saves',
       text: '(-20 speed)\nDisadvantage on:\n Ability checks, Attack rolls,\n Str, Dex, & Con saves',
       fontSize: GRID_SIZE / 5,
       fontFamily: 'Calibri',
@@ -124,11 +123,11 @@ function createGridLayer(strength, useEncumbrance) {
       var rect = new Konva.Rect({
         x: (x * GRID_SIZE) + GRID_PADDING,
         y: (y * GRID_SIZE) + GRID_PADDING,
-        width: GRID_SIZE - 1,
-        height: GRID_SIZE - 1,
+        width: GRID_SIZE,
+        height: GRID_SIZE,
         fill: gridColour,
         stroke: 'grey',
-        strokeWidth: 1,
+        strokeWidth: 2,
       });
       gridLayer.add(rect)
     }
@@ -252,8 +251,11 @@ function InitializeCollisionSnapping() {
   // were can we snap our objects?
   function getLineGuideStops(skipShape) {
     // we can snap to stage borders and the center of the stage
-    var vertical = [0, stage.width()];
-    var horizontal = [0, stage.height()];
+    //var vertical = [0, stage.width()];
+    //var horizontal = [0, stage.height()];
+
+    var vertical = [];
+    var horizontal = [];
 
     for (let i = 0; i < 30; i++) {//change top be dynamic to stage size.
       vertical.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
@@ -284,11 +286,11 @@ function InitializeCollisionSnapping() {
         //   offset: Math.round(absPos.x - box.x - box.width / 2),
         //   snap: 'center',
         // },
-        {
-          guide: Math.round(box.x + box.width),
-          offset: Math.round(absPos.x - box.x - box.width),
-          snap: 'end',
-        },
+        // {
+        //   guide: Math.round(box.x + box.width),
+        //   offset: Math.round(absPos.x - box.x - box.width),
+        //   snap: 'end',
+        // },
       ],
       horizontal: [
         {
@@ -301,11 +303,11 @@ function InitializeCollisionSnapping() {
         //   offset: Math.round(absPos.y - box.y - box.height / 2),
         //   snap: 'center',
         // },
-        {
-          guide: Math.round(box.y + box.height),
-          offset: Math.round(absPos.y - box.y - box.height),
-          snap: 'end',
-        },
+        // {
+        //   guide: Math.round(box.y + box.height),
+        //   offset: Math.round(absPos.y - box.y - box.height),
+        //   snap: 'end',
+        // },
       ],
     };
   }
@@ -451,19 +453,19 @@ function InitializeCollisionSnapping() {
         //   }
         //   break;
         // }
-        case 'end': {
-          switch (lg.orientation) {
-            case 'V': {
-              absPos.x = lg.lineGuide + lg.offset;
-              break;
-            }
-            case 'H': {
-              absPos.y = lg.lineGuide + lg.offset;
-              break;
-            }
-          }
-          break;
-        }
+        // case 'end': {
+        //   switch (lg.orientation) {
+        //     case 'V': {
+        //       absPos.x = lg.lineGuide + lg.offset;
+        //       break;
+        //     }
+        //     case 'H': {
+        //       absPos.y = lg.lineGuide + lg.offset;
+        //       break;
+        //     }
+        //   }
+        //   break;
+        // }
       }
     });
     e.target.absolutePosition(absPos);
