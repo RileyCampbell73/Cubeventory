@@ -1,5 +1,46 @@
+//FEEDBACK
+
+//Change Slider because you can;t interact w it?
+
+//Snap position looks off
+//  I've noticed everything is like 1px off. I SHOULD fix that before 
+
+//"You should include some text around how much things actually weigh. There's nothing to say 1 cube == 1 pound or whatever" - Julia
+//  RIGHT YEAH I SHOULD 100% DO THAT OOPS
+
+//When you create a new item, it'd be nice if the menu collapsed
+
+//"Also, Spawn Item. I don't like spawn, but that's probably the official term" - Julia
+//  I can change the verbiage, maybe 'create' or 'add' makes more sense
+
+//Strength above 20
+//  just take off cap?
+//  Double check stage height calculation
+//  hard capp at 30, make onchange event hardcap it.
+
+//collision maintaining on objects
+//  low priority - already recognized
+
+//Mobile
+//  Ughhhhhhhhhhhhhhhhhh sounds like a nightmare. This feels antithetical to touch controls
+//  If user enters on mobile device (screensize detector), popup saying its not made for that
+
+
+//"I'd change Add Generic Item to Add Custom Item." - Julia
+    //need Generic synonym
+
+
+//"vertical Half-snap doesn't appear to be working on rows 1-5 when strength is set at 20. Horizontal working normally." - Jason
+
+//"The further I scroll down the page, the further up the right click menu becomes, when grid size is enlargened." - Jason
+//  I've noticed a lot of strange behavior from rightclick menu when resizing screens andscrolling. Will need to investigate
+
+//"items that weigh more than 100 are longer than could fit anywhere in the inventory.  I'm guessing this is due to items being capped at a width of 5." - Jason
+//  Could determine breaking past width of 5 IF the height is going past max strength
 
 //TODO
+
+//  Minify JS files
 
 
 //BUGS
@@ -16,6 +57,7 @@
 
 //tooltips on items
 //  make it an option? turns on when size gets small enough be fefault
+//  make it an option? turns on when size gets small enough be default
 //  Can show other stuff in tooltip - desc etc
 
 //Save feature
@@ -288,6 +330,7 @@ function ResizeGrid() {
         if (access < 2)
             access = 0
         else if (access - 1 === prevGridSize / 2) // for smaller items
+        else if (access - 1 === prevGridSize / 2) // for half items
             access = (GRID_SIZE / 2) + 1
 
         shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
