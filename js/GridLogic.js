@@ -79,6 +79,7 @@ function createGridLayer(strength, useEncumbrance) {
       x: GRID_SIZE * 11,
       y: 32,
       text: '(-20 speed)\nDisadvantage on:\n Abilioty checks, Attack rolls,\n Str, Dex, & Con saves',
+      text: '(-20 speed)\nDisadvantage on:\n Ability checks, Attack rolls,\n Str, Dex, & Con saves',
       fontSize: GRID_SIZE / 5,
       fontFamily: 'Calibri',
       //fontStyle: 'bold',
