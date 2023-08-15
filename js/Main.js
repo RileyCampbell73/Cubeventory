@@ -7,14 +7,6 @@
 
 //When you create a new item, it'd be nice if the menu collapsed
 
-//"Also, Spawn Item. I don't like spawn, but that's probably the official term" - Julia
-//  I can change the verbiage, maybe 'create' or 'add' makes more sense
-
-//Strength above 20
-//  just take off cap?
-//  Double check stage height calculation
-//  hard capp at 30, make onchange event hardcap it.
-
 //collision maintaining on objects
 //  low priority - already recognized
 
@@ -128,7 +120,13 @@ $(document).ready(function () {
     });
 
     $('#CharacterStrength').change(function () {
+        
         strength = $('#CharacterStrength')[0].value;
+
+        if (strength > 30){
+            $('#CharacterStrength')[0].value = 30
+            strength = 30
+        }
 
         gridLayer.destroy()
         gridLayer = createGridLayer(strength, $('#EncumbranceRule')[0].checked)
