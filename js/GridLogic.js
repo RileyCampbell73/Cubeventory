@@ -1,4 +1,3 @@
-
 function createGridLayer(strength, useEncumbrance) {
 
   var strengthCount = strength;
@@ -151,21 +150,28 @@ function createGridLayer(strength, useEncumbrance) {
 function FlipItem(currentShape){
   var scaleX = currentShape.find('.itemShapes')[0].scaleX()
   var shapes = currentShape.find('.itemShapes')[0];
+  var lines = currentShape.find('.itemLines')[0];
   var text = currentShape.find('.itemText')[0];
   
 
   if (scaleX > 0) {
-  var offsetvalue = shapes.getClientRect().width;
+    var offsetvalue = shapes.getClientRect().width;
     if (shapes.parent.getRotation() == 90 || shapes.parent.getRotation() == 270)
       offsetvalue = shapes.getClientRect().height
 
     shapes.offsetX(offsetvalue)
+    lines.offsetX(offsetvalue)
+
     shapes.scaleX(-Math.abs(shapes.scaleX()))
+    lines.scaleX(-Math.abs(lines.scaleX()))
     text.scaleX(Math.abs(text.scaleX()))
   }
   else {
     shapes.offsetX(0) //fix offset
+    lines.offsetX(0) 
+    
     shapes.scaleX(Math.abs(shapes.scaleX()))
+    lines.scaleX(Math.abs(lines.scaleX()))
     text.scaleX(Math.abs(text.scaleX()))
   }
 }
