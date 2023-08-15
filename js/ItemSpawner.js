@@ -541,7 +541,7 @@ function generateOutline(shapelayer) { // this out outta hand fast
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true,
         name: 'shapeOutline'
     });

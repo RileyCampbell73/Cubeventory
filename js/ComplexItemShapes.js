@@ -103,7 +103,7 @@ function spawnPaddedArmor(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -229,7 +229,7 @@ function spawnLeatherArmor(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -375,7 +375,7 @@ function spawnStuddedArmor(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -504,7 +504,7 @@ function spawnHideArmor(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -673,7 +673,7 @@ function spawnChainShirtArmor(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -773,7 +773,7 @@ function spawnShield(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -910,7 +910,7 @@ function spawnLineItem(index, name, colour, weight) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1000,7 +1000,7 @@ function spawnLightCrossbow(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1179,7 +1179,7 @@ function spawnGreataxe(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1277,7 +1277,7 @@ function spawnGreatsword(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1346,7 +1346,7 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1512,7 +1512,7 @@ function spawnHeavyCrossbow(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1635,7 +1635,7 @@ function spawnMaul(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1835,7 +1835,7 @@ function spawnMinersPick(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -1955,7 +1955,7 @@ function spawnIronPot(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
@@ -2081,7 +2081,7 @@ function spawnHempRope(index, name, colour) {
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 3,
         closed: true
     });
     ItemLines.add(line)
