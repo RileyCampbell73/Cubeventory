@@ -169,8 +169,13 @@ function spawnGenericItem(name, weight, colour) {
     var ColumnCount = Math.round(Math.sqrt(weight))
     var rowCount = 0;
 
-    if (ColumnCount > 5)
+    if (ColumnCount > 5){
         ColumnCount = 5
+
+        if (weight / ColumnCount > strength)
+            ColumnCount = weight / strength
+    }
+
 
     while (true) { // this loop logic could be improved, but at this point I'm scared to touch it further.
 

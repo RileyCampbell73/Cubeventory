@@ -75,7 +75,7 @@ function initializeItemCombobox() {
                         option: null
                     });
                     items.push( {
-                        label: "Add Generic Item",
+                        label: "Create Item",
                         value: -2,
                         option: null
                     });

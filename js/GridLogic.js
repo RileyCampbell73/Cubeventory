@@ -243,10 +243,9 @@ function InitializeMenu() {
     // show menu
     menuNode.style.display = 'initial';
     var containerRect = stage.container().getBoundingClientRect();
-    menuNode.style.top =
-      containerRect.top + stage.getPointerPosition().y + 4 + 'px';
-    menuNode.style.left =
-      containerRect.left + stage.getPointerPosition().x + 4 + 'px';
+
+    menuNode.style.top = stage.getPointerPosition().y + 4 + 'px';
+    menuNode.style.left = stage.getPointerPosition().x + 4 + 'px';
   });
 
 }
@@ -263,7 +262,7 @@ function InitializeCollisionSnapping() {
     var vertical = [];
     var horizontal = [];
 
-    for (let i = 0; i < 30; i++) {//change top be dynamic to stage size.
+    for (let i = 0; i < strength * 2; i++) {//change top be dynamic to stage size.
       vertical.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
       horizontal.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
     }

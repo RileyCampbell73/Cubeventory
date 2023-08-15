@@ -1,31 +1,14 @@
 //FEEDBACK
 
-//Change Slider because you can;t interact w it?
+//Change Slider because you can't interact w it?
 
 //"You should include some text around how much things actually weigh. There's nothing to say 1 cube == 1 pound or whatever" - Julia
 //  RIGHT YEAH I SHOULD 100% DO THAT OOPS
-
-//When you create a new item, it'd be nice if the menu collapsed
-
-//collision maintaining on objects
-//  low priority - already recognized
 
 //Mobile
 //  Ughhhhhhhhhhhhhhhhhh sounds like a nightmare. This feels antithetical to touch controls
 //  If user enters on mobile device (screensize detector), popup saying its not made for that
 
-
-//"I'd change Add Generic Item to Add Custom Item." - Julia
-    //need Generic synonym
-
-
-//"vertical Half-snap doesn't appear to be working on rows 1-5 when strength is set at 20. Horizontal working normally." - Jason
-
-//"The further I scroll down the page, the further up the right click menu becomes, when grid size is enlargened." - Jason
-//  I've noticed a lot of strange behavior from rightclick menu when resizing screens andscrolling. Will need to investigate
-
-//"items that weigh more than 100 are longer than could fit anywhere in the inventory.  I'm guessing this is due to items being capped at a width of 5." - Jason
-//  Could determine breaking past width of 5 IF the height is going past max strength
 
 //TODO
 
@@ -41,11 +24,7 @@
 
 //FUTURE
 
-//Grid resizing 
-//  displaces items sometimes?
-
 //tooltips on items
-//  make it an option? turns on when size gets small enough be fefault
 //  make it an option? turns on when size gets small enough be default
 //  Can show other stuff in tooltip - desc etc
 
@@ -128,6 +107,9 @@ $(document).ready(function () {
             strength = 30
         }
 
+        STAGE_HEIGHT = calcStageHeight()
+        stage.height(STAGE_HEIGHT);
+
         gridLayer.destroy()
         gridLayer = createGridLayer(strength, $('#EncumbranceRule')[0].checked)
 
@@ -163,10 +145,14 @@ $(document).ready(function () {
 
 });
 
+function calcStageHeight(){
+    return (strength * GRID_SIZE) + GRID_PADDING + GRID_SIZE;
+}
+
 function SetStage() {
 
     STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
-    STAGE_HEIGHT = (20 * GRID_SIZE) + GRID_PADDING; // 20 is max strength
+    STAGE_HEIGHT = calcStageHeight()
 
     // first we need to create a stage
     stage = new Konva.Stage({
@@ -433,5 +419,10 @@ function SpawnGenericItem() {
     $('#ItemName')[0].value = ''
     $('#ItemWeight')[0].value = ''
     $('#ItemColour')[0].value = '#ADD8E6'
+
+    // hide sidebar
+    $('#sidebar').removeClass('active');
+    // hide overlay
+    $('.overlay').removeClass('active');
 }
 
