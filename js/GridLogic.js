@@ -169,7 +169,7 @@ function FlipItem(currentShape){
   else {
     shapes.offsetX(0) //fix offset
     lines.offsetX(0) 
-    
+
     shapes.scaleX(Math.abs(shapes.scaleX()))
     lines.scaleX(Math.abs(lines.scaleX()))
     text.scaleX(Math.abs(text.scaleX()))
@@ -493,7 +493,7 @@ function InitializeCollisionSnapping() {
     })
 
     //loop through target (shape being dragged) boxes
-    target.find('Rect').forEach(function (square) {
+    target.children[0].find('Rect').forEach(function (square) {
       //square.setAttr('isColliding', false)
       //loop through each other shapes
       Itemlayer.children.forEach(function (group) {
@@ -503,7 +503,7 @@ function InitializeCollisionSnapping() {
         }
 
         //loop through each of that shapes boxes
-        group.find('Rect').forEach(function (rect) {
+        group.children[0].find('Rect').forEach(function (rect) {
           //rect.setAttr('isColliding', false)
           if (haveIntersection(rect.getClientRect(), square.getClientRect())) {
             rect.fill('red')
