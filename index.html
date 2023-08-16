@@ -1,6 +1,6 @@
 <head>
 
-<!-- Version Num: 1.0.0 -->
+<!-- Version Num: 1.0.1 -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
@@ -126,7 +126,9 @@
             <i class="fas fa-align-left"></i>
           </button>
 
-          <h1>Cubeventory</h1>
+          <div>
+            <h1>Cubeventory</h1>
+          </div>
 
           <div>
             <label>Grid Size</label>
@@ -169,7 +171,7 @@
             <p>Cubeventory is a helpful Dungeons and Dragons 5th Edition tool to help track players inventory and encumberance without all the math that comes with it. The idea comes from <a style="color: #007bff; background-color: transparent;"  target="_blank" href="https://www.youtube.com/@zeebashew">Zee Bashew</a> and his video on the topic (embeded below).</p>
 
             <h4>How to use</h4>
-            <p>Add items with the searchable combobox in the top right. Items will appear in the area on the right. They can be dragged with the mouse. Right-clicking an item gives options to rotate, flip, clone, or delete. you can save your inventory with the button in the sidebar. These save files can be loaded back in on returning.</p>
+            <p>Each square is equal to 1 lb. Add items with the searchable combobox in the top right. Items will appear in the area on the right. They can be dragged with the mouse. Right-clicking an item gives options to rotate, flip, clone, or delete. you can save your inventory with the button in the sidebar. These save files can be loaded back in on returning.</p>
             <p>If you try to spawn an item not found in the list, you can create an item (from the result in the searchable combobox or the button in the sidebar.)</p>
             <h4>Zee's video</h4>
             <iframe src="https://www.youtube.com/embed/koKL1wSRLpk" title="Animated Keg: Encumbrance in 5E Dnd(an episode from 5 years finally released today)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -213,6 +215,30 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Mobile User Warning Modal -->
+  <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Mobile User Warning</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+         <p>Warning: This site isn't optimised for use on mobile (yet). It's recommended you use desktop or tablet.</p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button> -->
         </div>
       </div>
     </div>

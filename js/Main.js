@@ -1,15 +1,3 @@
-//FEEDBACK
-
-//Change Slider because you can't interact w it?
-
-//"You should include some text around how much things actually weigh. There's nothing to say 1 cube == 1 pound or whatever" - Julia
-//  RIGHT YEAH I SHOULD 100% DO THAT OOPS
-
-//Mobile
-//  Ughhhhhhhhhhhhhhhhhh sounds like a nightmare. This feels antithetical to touch controls
-//  If user enters on mobile device (screensize detector), popup saying its not made for that
-
-
 //TODO
 
 //  Minify JS files
@@ -23,6 +11,8 @@
 
 
 //FUTURE
+
+//Change Slider because you can't interact w it?
 
 //tooltips on items
 //  make it an option? turns on when size gets small enough be default
@@ -53,7 +43,7 @@
 //    For now, we store the intended colour to be reverted to. Want a different solution.
 
 
-var VERSION_NUM = "1.0.0"
+var VERSION_NUM = "1.0.1"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
@@ -87,6 +77,8 @@ $(document).ready(function () {
     }
 
     initializeItemCombobox()
+
+    showMobileWarning()
 
     $('#EncumbranceRule').change(function () {
         //remove old grid layer
@@ -426,3 +418,8 @@ function SpawnGenericItem() {
     $('.overlay').removeClass('active');
 }
 
+function showMobileWarning(){
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        $('#mobileUserModal').modal('show'); 
+    }
+}
