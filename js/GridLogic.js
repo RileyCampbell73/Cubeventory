@@ -289,9 +289,22 @@ function InitializeCollisionSnapping() {
     var vertical = [];
     var horizontal = [];
 
-    for (let i = 0; i < strength * 2; i++) {//change top be dynamic to stage size.
-      vertical.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
-      horizontal.push((i * (GRID_SIZE / 2)) + GRID_PADDING);
+    //find top left corner of underlying grid
+    //  subtract grid padding / remove it from addition
+
+    //this is close? I need to debugg on mobile or figure out how to do two touch on desktop
+    //var offsetX = stage.children[0].children[16].x() - GRID_PADDING
+    //var offsetY = stage.children[0].children[16].y() - GRID_PADDING
+
+    var offsetX = stage.x() * stage.scaleX()
+    var offsetY = stage.y()* stage.scaleY()
+
+    //scale is fuckin me up
+
+
+    for (let i = 0; i < strength * 2; i++) {
+      vertical.push((i * (GRID_SIZE / 2)) + GRID_PADDING + offsetX); 
+      horizontal.push((i * (GRID_SIZE / 2)) + GRID_PADDING + offsetY);
     }
     return {
       vertical: vertical.flat(),
