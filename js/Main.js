@@ -99,9 +99,9 @@ $(document).ready(function () {
         
         strength = $('#CharacterStrength')[0].value;
 
-        if (strength > 30){
-            $('#CharacterStrength')[0].value = 30
-            strength = 30
+        if (strength > 50){
+            $('#CharacterStrength')[0].value = 50
+            strength = 50
         }
 
         STAGE_HEIGHT = calcStageHeight()
