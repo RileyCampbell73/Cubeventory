@@ -3,16 +3,22 @@
 //MOBILE
 //  problems to fix 
 //      Header getting squished
-//      Moving screen on canvas 
-//          implement Pinch move - https://konvajs.org/docs/sandbox/Multi-touch_Scale_Stage.html
 //      right clicking to rotate flip, etc. 
-//          static menu items
+//          static menu items?
+//          long press?
+//      stage causes page to load odd on mobile. It shows whole stage past header length.
 
 //BUGS
 
 //Collision is removed when interacting with a different shape.
 //  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
 //  change who/where gets their 'isColliding' set false
+
+//Snapping falls off the further right you go. 
+
+//Need more support for smaller screens - See tablet view.
+//  Sidebar scrolling
+//  Header resizing
 
 
 //FUTURE
@@ -63,6 +69,10 @@ var stage;
 var gridLayer;
 var Itemlayer;
 var EquipmentJSON;
+
+var lastCenter = null;
+var lastDist = 0;
+var dragStopped = false;
 
 $(document).ready(function () {
 
@@ -140,11 +150,52 @@ $(document).ready(function () {
         uploadSaveFile();
     });
 
-    var lastCenter = null;
-    var lastDist = 0;
-    var dragStopped = false;
+});
 
-    stage.on('touchmove', function (e) { // fucks up snapping - Use moved object in layer to anchor the snapping lines?
+function getCenter(p1, p2) {
+    return {
+      x: (p1.x + p2.x) / 2,
+      y: (p1.y + p2.y) / 2,
+    };
+  }
+
+function getDistance(p1, p2) {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+}
+
+function calcStageHeight(){
+    return (strength * GRID_SIZE) + GRID_PADDING + GRID_SIZE;
+}
+
+function SetStage() {
+
+    STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
+    STAGE_HEIGHT = calcStageHeight()
+
+    // first we need to create a stage
+    stage = new Konva.Stage({
+        container: 'container',
+        width: STAGE_WIDTH,
+        height: STAGE_HEIGHT,
+        x: 0,
+        y: 0
+    });
+
+    strength = $('#CharacterStrength')[0].value;
+
+    var gridLayer = createGridLayer(strength, $('#EncumbranceRule')[0].checked)
+    stage.add(gridLayer);
+    stage.draw();
+
+    // create layer for shapes
+    Itemlayer = new Konva.Layer();
+    // add the layer to the stage
+    stage.add(Itemlayer);
+
+    InitializeMenu();
+    InitializeCollisionSnapping()
+
+    stage.on('touchmove', function (e) { 
         e.evt.preventDefault();
         var touch1 = e.evt.touches[0];
         var touch2 = e.evt.touches[1];
@@ -192,9 +243,6 @@ $(document).ready(function () {
 
           var scale = stage.scaleX() * (dist / lastDist);
 
-          stage.scaleX(scale);
-          stage.scaleY(scale);
-
           // calculate new position of the stage
           var dx = newCenter.x - lastCenter.x;
           var dy = newCenter.y - lastCenter.y;
@@ -211,55 +259,10 @@ $(document).ready(function () {
         }
       });
 
-      stage.on('touchend', function (e) {
-        lastDist = 0;
-        lastCenter = null;
-      });
-
-});
-
-function getCenter(p1, p2) {
-    return {
-      x: (p1.x + p2.x) / 2,
-      y: (p1.y + p2.y) / 2,
-    };
-  }
-
-function getDistance(p1, p2) {
-    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
-}
-
-function calcStageHeight(){
-    return (strength * GRID_SIZE) + GRID_PADDING + GRID_SIZE;
-}
-
-function SetStage() {
-
-    STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
-    STAGE_HEIGHT = calcStageHeight()
-
-    // first we need to create a stage
-    stage = new Konva.Stage({
-        container: 'container',
-        width: STAGE_WIDTH,
-        height: STAGE_HEIGHT,
-        x: 0,
-        y: 0
+    stage.on('touchend', function (e) {
+    lastDist = 0;
+    lastCenter = null;
     });
-
-    strength = $('#CharacterStrength')[0].value;
-
-    var gridLayer = createGridLayer(strength, $('#EncumbranceRule')[0].checked)
-    stage.add(gridLayer);
-    stage.draw();
-
-    // create layer for shapes
-    Itemlayer = new Konva.Layer();
-    // add the layer to the stage
-    stage.add(Itemlayer);
-
-    InitializeMenu();
-    InitializeCollisionSnapping()
 
 }
 
