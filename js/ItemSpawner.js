@@ -255,11 +255,11 @@ function spawnGenericItem(name, weight, colour) {
 
 function randomSpawnLocation() {
 
-    var xMin = (GRID_SIZE * 15) + GRID_PADDING + 30;
-    var xMax = STAGE_WIDTH - ((GRID_SIZE * 3) - 5);
+    var xMin = GRID_PADDING + 5;
+    var xMax = (GRID_SIZE * 15) - 5;
 
-    var yMin = GRID_PADDING + 5;
-    var yMax = (GRID_SIZE * (strength - 2)) - 5;
+    var yMin = (GRID_SIZE * strength) + GRID_PADDING + 30;
+    var yMax = yMin + 120
 
     return {
         'x': Math.floor(Math.random() * (xMax - xMin + 1) + xMin),

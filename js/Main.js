@@ -164,12 +164,12 @@ function getDistance(p1, p2) {
 }
 
 function calcStageHeight(){
-    return (strength * GRID_SIZE) + GRID_PADDING + GRID_SIZE;
+    return (strength * GRID_SIZE) + GRID_PADDING + GRID_SIZE + 200; //200 for spawning area and a little extra bottom clearance
 }
 
 function SetStage() {
 
-    STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING + 500; //500 is for extra room for spawning items and controls
+    STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING;
     STAGE_HEIGHT = calcStageHeight()
 
     // first we need to create a stage

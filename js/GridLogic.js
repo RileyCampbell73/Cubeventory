@@ -134,41 +134,15 @@ function createGridLayer(strength, useEncumbrance) {
 
   //spawning area
   gridLayer.add(new Konva.Rect({
-    x: (GRID_SIZE * 15) + GRID_PADDING + 20,
-    y: GRID_PADDING,
-    width: 480,
-    height: GRID_SIZE * strength,
+    x: GRID_PADDING,
+    y: (GRID_SIZE * strength) + GRID_PADDING + 20,
+    width:  GRID_SIZE * 15,
+    height: 120,
     fill: 'white',
     stroke: 'black',
     strokeWidth: 1,
     cornerRadius: 10,
   }));
-
-  // //example square
-  // gridLayer.add(new Konva.Rect({
-  //   x: (STAGE_WIDTH - GRID_SIZE * 2) - 5, //(GRID_SIZE * 15) + GRID_PADDING + 20,
-  //   y: GRID_PADDING / 2 - GRID_SIZE / 2,
-  //   width: GRID_SIZE,
-  //   height: GRID_SIZE,
-  //   //fill: 'white',
-  //   stroke: 'black',
-  //   strokeWidth: 2,
-  //   //cornerRadius: 10,
-  // }));
-
-  // gridLayer.add(new Konva.Text({
-  //   x: STAGE_WIDTH - GRID_SIZE,//(GRID_SIZE * 15) + GRID_PADDING + 20 + GRID_SIZE + 5,
-  //   y: GRID_PADDING / 2 - GRID_SIZE / 6,
-  //   text: "= 1 lb.",
-  //   fontSize: GRID_SIZE / 3,
-  //   fontFamily: 'Calibri',
-  //   fill: '#000',
-  //   //width: 100,
-  //   height: GRID_SIZE / 3,
-  //   align: 'left',
-  //   verticalAlign: 'left',
-
-  // }));
   
 
   return gridLayer;
