@@ -138,11 +138,7 @@ $(document).ready(function () {
         LoadSaveFile(lastSave);
     }
 
-    window.addEventListener("beforeunload", () => {
-        const saveJson = makeSave();
-
-        window.localStorage.setItem("local-save", saveJson);
-    });
+    window.addEventListener("beforeunload", AutoSave);
 });
 
 function calcStageHeight(){
@@ -433,5 +429,19 @@ function SpawnGenericItem() {
 function showMobileWarning(){
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         $('#mobileUserModal').modal('show'); 
+    }
+}
+
+function AutoSave() {
+    const saveJson = makeSave();
+
+    window.localStorage.setItem("local-save", saveJson);
+}
+
+function ResetEverything() {
+    if (confirm("UNSAVED CHANGES WILL BE LOST FOREVER! SAVE YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
+        window.removeEventListener("beforeunload", AutoSave);
+        window.localStorage.removeItem("local-save");
+        window.location.reload();
     }
 }
