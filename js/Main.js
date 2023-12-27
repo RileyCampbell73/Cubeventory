@@ -18,10 +18,6 @@
 //  make it an option? turns on when size gets small enough be default
 //  Can show other stuff in tooltip - desc etc
 
-//Save feature
-//  throw save into cookie? 
-//    Will need to add clear / new button with a confirm
-
 //Ability to switch to only generic shapes
 
 //Coin weight
@@ -135,6 +131,18 @@ $(document).ready(function () {
         uploadSaveFile();
     });
 
+    // load save from local storage
+    const lastSave = window.localStorage.getItem("local-save");
+
+    if (lastSave !== null) {
+        LoadSaveFile(lastSave);
+    }
+
+    window.addEventListener("beforeunload", () => {
+        const saveJson = makeSave();
+
+        window.localStorage.setItem("local-save", saveJson);
+    });
 });
 
 function calcStageHeight(){
@@ -326,10 +334,7 @@ function ResizeGrid() {
 
 };
 
-function SaveInventory() {
-
-    var name = $('#CharacterName')[0].value
-
+function makeSave() {
     var saveFile = {
         version: VERSION_NUM,
         name: $('#CharacterName')[0].value,
@@ -339,7 +344,13 @@ function SaveInventory() {
         items: Itemlayer.toJSON()
     }
 
-    var saveJSON = JSON.stringify(saveFile);
+    return JSON.stringify(saveFile);
+}
+
+function SaveInventory() {
+    var name = $('#CharacterName')[0].value
+
+    var saveJSON = makeSave();
 
     const file = new File([saveJSON], name + ' cubeventory.json')
     const link = document.createElement('a')
@@ -362,15 +373,16 @@ function uploadSaveFile() {
     let reader = new FileReader();
 
     // Setup the callback event to run when the file is read
-    reader.onload = LoadSaveFile;
+    reader.onload = function(event) {
+        LoadSaveFile(event.target.result);
+    };
 
     // Read the file
     reader.readAsText(fileInput.files[0]);
 
 }
 
-function LoadSaveFile(event) {
-    let str = event.target.result;
+function LoadSaveFile(str) {
     let json = JSON.parse(str);
 
     //update fields with save data
