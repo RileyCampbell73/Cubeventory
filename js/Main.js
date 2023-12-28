@@ -445,9 +445,17 @@ function showMobileWarning(){
 }
 
 function ResetEverything() {
-    if (confirm("UNSAVED CHANGES WILL BE LOST FOREVER! SAVE YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
-        window.removeEventListener("beforeunload", SaveLocal);
+    if (confirm("SAVED CHANGES WILL BE LOST FOREVER! DOWNLOAD YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
         window.localStorage.removeItem("local-save");
-        window.location.reload();
+
+        //clear everything
+        $('#EncumbranceRule').prop("checked", true);
+        $('#GridSize')[0].value = 60
+        $('#CharacterStrength')[0].value = 10
+        $('#CharacterName')[0].value = ''
+
+        Itemlayer.children = []
+
+        ResizeGrid();
     }
 }
