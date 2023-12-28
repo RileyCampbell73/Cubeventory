@@ -12,6 +12,9 @@
 
 //FUTURE
 
+//Add some indicator that your inventory is saved vs changed 
+//  Will need to implement an 'isDirty' bool - set to false whenever something is changed.
+
 //Change Slider because you can't interact w it?
 
 //tooltips on items
@@ -138,7 +141,7 @@ $(document).ready(function () {
         LoadSaveFile(lastSave);
     }
 
-    window.addEventListener("beforeunload", AutoSave);
+    window.addEventListener("beforeunload", SaveLocal);
 });
 
 function calcStageHeight(){
@@ -343,7 +346,7 @@ function makeSave() {
     return JSON.stringify(saveFile);
 }
 
-function SaveInventory() {
+function SaveDownload() {
     var name = $('#CharacterName')[0].value
 
     var saveJSON = makeSave();
@@ -360,6 +363,15 @@ function SaveInventory() {
     document.body.removeChild(link)
     window.URL.revokeObjectURL(url)
 }
+
+function SaveLocal() {
+    const saveJson = makeSave();
+
+    window.localStorage.setItem("local-save", saveJson);
+
+    alert("Saved!")
+}
+
 
 function uploadSaveFile() {
     var fileInput = $('#saveUploadFile')[0];
@@ -432,15 +444,9 @@ function showMobileWarning(){
     }
 }
 
-function AutoSave() {
-    const saveJson = makeSave();
-
-    window.localStorage.setItem("local-save", saveJson);
-}
-
 function ResetEverything() {
     if (confirm("UNSAVED CHANGES WILL BE LOST FOREVER! SAVE YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
-        window.removeEventListener("beforeunload", AutoSave);
+        window.removeEventListener("beforeunload", SaveLocal);
         window.localStorage.removeItem("local-save");
         window.location.reload();
     }
