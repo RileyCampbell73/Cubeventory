@@ -12,15 +12,14 @@
 
 //FUTURE
 
+//Add some indicator that your inventory is saved vs changed 
+//  Will need to implement an 'isDirty' bool - set to false whenever something is changed.
+
 //Change Slider because you can't interact w it?
 
 //tooltips on items
 //  make it an option? turns on when size gets small enough be default
 //  Can show other stuff in tooltip - desc etc
-
-//Save feature
-//  throw save into cookie? 
-//    Will need to add clear / new button with a confirm
 
 //Ability to switch to only generic shapes
 
@@ -135,6 +134,14 @@ $(document).ready(function () {
         uploadSaveFile();
     });
 
+    // load save from local storage
+    const lastSave = window.localStorage.getItem("local-save");
+
+    if (lastSave !== null) {
+        LoadSaveFile(lastSave);
+    }
+
+    window.addEventListener("beforeunload", SaveLocal);
 });
 
 function calcStageHeight(){
@@ -326,10 +333,7 @@ function ResizeGrid() {
 
 };
 
-function SaveInventory() {
-
-    var name = $('#CharacterName')[0].value
-
+function makeSave() {
     var saveFile = {
         version: VERSION_NUM,
         name: $('#CharacterName')[0].value,
@@ -339,7 +343,13 @@ function SaveInventory() {
         items: Itemlayer.toJSON()
     }
 
-    var saveJSON = JSON.stringify(saveFile);
+    return JSON.stringify(saveFile);
+}
+
+function SaveDownload() {
+    var name = $('#CharacterName')[0].value
+
+    var saveJSON = makeSave();
 
     const file = new File([saveJSON], name + ' cubeventory.json')
     const link = document.createElement('a')
@@ -354,6 +364,15 @@ function SaveInventory() {
     window.URL.revokeObjectURL(url)
 }
 
+function SaveLocal() {
+    const saveJson = makeSave();
+
+    window.localStorage.setItem("local-save", saveJson);
+
+    alert("Saved!")
+}
+
+
 function uploadSaveFile() {
     var fileInput = $('#saveUploadFile')[0];
     if (!fileInput.value.length) return;
@@ -362,15 +381,16 @@ function uploadSaveFile() {
     let reader = new FileReader();
 
     // Setup the callback event to run when the file is read
-    reader.onload = LoadSaveFile;
+    reader.onload = function(event) {
+        LoadSaveFile(event.target.result);
+    };
 
     // Read the file
     reader.readAsText(fileInput.files[0]);
 
 }
 
-function LoadSaveFile(event) {
-    let str = event.target.result;
+function LoadSaveFile(str) {
     let json = JSON.parse(str);
 
     //update fields with save data
@@ -421,5 +441,21 @@ function SpawnGenericItem() {
 function showMobileWarning(){
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         $('#mobileUserModal').modal('show'); 
+    }
+}
+
+function ResetEverything() {
+    if (confirm("SAVED CHANGES WILL BE LOST FOREVER! DOWNLOAD YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
+        window.localStorage.removeItem("local-save");
+
+        //clear everything
+        $('#EncumbranceRule').prop("checked", true);
+        $('#GridSize')[0].value = 60
+        $('#CharacterStrength')[0].value = 10
+        $('#CharacterName')[0].value = ''
+
+        Itemlayer.children = []
+
+        ResizeGrid();
     }
 }
