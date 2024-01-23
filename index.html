@@ -1,6 +1,6 @@
 <head>
 
-<!-- Version Num: 1.0.1 -->
+  <!-- Version Num: 1.0.1 -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
@@ -38,9 +38,10 @@
 
   <title>Cubeventory</title>
 
-  <meta name="description" content="A DnD5e inventory solution! Turn those abstract containers of infinite garbage into an active representation of what your lugging around on your adventures.">
-  
-  
+  <meta name="description"
+    content="A DnD5e inventory solution! Turn those abstract containers of infinite garbage into an active representation of what your lugging around on your adventures.">
+
+
 </head>
 
 <body>
@@ -65,35 +66,35 @@
           </div>
         </li>
         <li>
-          
-            <a onclick="ShowGenericItemModal('')">Create Item</a>
-          
+
+          <a onclick="ShowGenericItemModal('')">Create Item</a>
+
         </li>
         <li>
-          
-            <a onclick="SaveLocal()">Save</a>
-          
+
+          <a onclick="SaveLocal()">Save</a>
+
         </li>
         <li>
-          
+
           <a onclick="SaveDownload()">Save As</a>
-        
-      </li>
-        <li>
-          
-            <input type="file" id="saveUploadFile" accept=".json" style="display: none;">
-            <a onclick="document.getElementById('saveUploadFile').click();">Load</a>
-          
+
         </li>
         <li>
-          
-            <a onclick="ResetEverything()">Reset Everything</a>
-          
+
+          <input type="file" id="saveUploadFile" accept=".json" style="display: none;">
+          <a onclick="document.getElementById('saveUploadFile').click();">Load</a>
+
         </li>
         <li>
-          
-            <a data-toggle="modal" data-target="#helpModal">Help</a>
-          
+
+          <a onclick="ResetEverything()">Reset Everything</a>
+
+        </li>
+        <li>
+
+          <a data-toggle="modal" data-target="#helpModal">Help</a>
+
         </li>
 
       </ul>
@@ -101,66 +102,82 @@
       <div style="font-size: 0.8em;">
         <div>
           <span>Created by Riley Campbell</span>
-          <span><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Tip Me', '#29abe0', 'B0B5O3G3H');kofiwidget2.draw();</script> </span>
+          <span>
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script
+              type='text/javascript'>kofiwidget2.init('Tip Me', '#29abe0', 'B0B5O3G3H'); kofiwidget2.draw();</script>
+          </span>
         </div>
         <div>
-          <span>Project on <a style="text-decoration: underline;" target="_blank" href="https://github.com/RileyCampbell73/Cubeventory">Github</a></span>
+          <span>Project on <a style="text-decoration: underline;" target="_blank"
+              href="https://github.com/RileyCampbell73/Cubeventory">Github</a></span>
         </div>
         <div>
-          <span>Found a bug? Contact <a style="text-decoration: underline;" href="mailto: bugs@cubeventory.com">bugs@cubeventory.com</a> or <a style="text-decoration: underline;" target="_blank" href="https://twitter.com/WaitWhatWho3">@WaitWhatWho3</a></span>
+          <span>Found a bug? Contact <a style="text-decoration: underline;"
+              href="mailto: bugs@cubeventory.com">bugs@cubeventory.com</a> or <a style="text-decoration: underline;"
+              target="_blank" href="https://twitter.com/WaitWhatWho3">@WaitWhatWho3</a></span>
         </div>
         <hr>
         <div>
-          <span>Made with <a style="text-decoration: underline;" target="_blank" href="https://konvajs.org/docs/donate.html">Konva.js</a></span>
+          <span>Made with <a style="text-decoration: underline;" target="_blank"
+              href="https://konvajs.org/docs/donate.html">Konva.js</a></span>
         </div>
         <div>
-          <span>Cube 3d icon created by samlakodad on <a style="text-decoration: underline;" target="_blank" href="https://www.flaticon.com/free-icon/cube-3d_4783189?term=cluster&page=1&position=15&origin=tag&related_id=4783189" title="cluster icons">Flaticon</a></span>
+          <span>Cube 3d icon created by samlakodad on <a style="text-decoration: underline;" target="_blank"
+              href="https://www.flaticon.com/free-icon/cube-3d_4783189?term=cluster&page=1&position=15&origin=tag&related_id=4783189"
+              title="cluster icons">Flaticon</a></span>
         </div>
         <div>
-          <span>Data provided by </span><a style="text-decoration: underline;" target="_blank" href="https://www.dnd5eapi.co" title="cluster icons">D&D 5e API</a>
+          <span>Data provided by </span><a style="text-decoration: underline;" target="_blank"
+            href="https://www.dnd5eapi.co" title="cluster icons">D&D 5e API</a>
         </div>
 
       </div>
-      
 
-      
+
+
     </nav>
 
     <!-- Page Content -->
     <div id="content">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
 
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-          </button>
+        <div class="row" style="width:100%">
+          <div class="col-12 col-xl-1">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+              <i class="fas fa-align-left"></i>
+            </button>
+          </div>
 
-          <div>
+          <!-- <div >
             <h1>Cubeventory</h1>
-          </div>
+          </div> -->
 
-          <div>
-            <label>Grid Size</label>
-            
-              <input type="button" value="-"  class="btn btn-info" onclick="decreaseGridSize()">
-              <input type="range" min="40" max="80" value="60" step="10" class="slider" id="GridSize" style="pointer-events: none;">
-              <input type="button" value="+" class="btn btn-info"  onclick="increaseGridSize()">
-            
+          <div class="col-5 col-xl-3">
+            <label>Grid Size</label><br>
+
+            <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
+            <input type="range" min="40" max="80" value="60" step="10" class="slider" id="GridSize"
+              style="pointer-events: none;">
+            <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
+
           </div>
-          <div>
-            <label>Character Name</label>
+          <div class="col-6 col-xl-3">
+            <label>Character Name</label><br>
             <input type="text" id="CharacterName" name="CharacterName">
           </div>
-          <div>
-            <label>Strength</label>
+          
+          <div class="col-5 col-xl-2">
+            <label for="CharacterStrength">Strength</label><br>
             <input type="number" id="CharacterStrength" name="CharacterStrength" value="10" min="1" max="50">
           </div>
-          <div>
-            <label>Add Item:</label>
+          <div class="col-6 col-xl-3">
+            <label>Add Item:</label><br>
             <select id="EquipmentComboBox"></select>
           </div>
         </div>
+
       </nav>
 
       <div id="container"></div>
@@ -169,7 +186,8 @@
     <div class="overlay"></div>
 
     <!-- Help Modal -->
-    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -180,13 +198,24 @@
           </div>
           <div class="modal-body">
             <h4>What is Cubeventory?</h4>
-            <p>Cubeventory is a helpful Dungeons and Dragons 5th Edition tool to help track players inventory and encumberance without all the math that comes with it. The idea comes from <a style="color: #007bff; background-color: transparent;"  target="_blank" href="https://www.youtube.com/@zeebashew">Zee Bashew</a> and his video on the topic (embeded below).</p>
+            <p>Cubeventory is a helpful Dungeons and Dragons 5th Edition tool to help track players inventory and
+              encumberance without all the math that comes with it. The idea comes from <a
+                style="color: #007bff; background-color: transparent;" target="_blank"
+                href="https://www.youtube.com/@zeebashew">Zee Bashew</a> and his video on the topic (embeded below).</p>
 
             <h4>How to use</h4>
-            <p>Each square is equal to 1 lb. Add items with the searchable combobox in the top right. Items will appear in the area on the right. They can be dragged with the mouse. Right-clicking an item gives options to rotate, flip, clone, or delete. you can save your inventory with the button in the sidebar. These save files can be loaded back in on returning.</p>
-            <p>If you try to spawn an item not found in the list, you can create an item (from the result in the searchable combobox or the button in the sidebar.)</p>
+            <p>Each square is equal to 1 lb. Add items with the searchable combobox in the top right. Items will appear
+              in the area on the right. They can be dragged with the mouse. Right-clicking an item gives options to
+              rotate, flip, clone, or delete. you can save your inventory with the button in the sidebar. These save
+              files can be loaded back in on returning.</p>
+            <p>If you try to spawn an item not found in the list, you can create an item (from the result in the
+              searchable combobox or the button in the sidebar.)</p>
             <h4>Zee's video</h4>
-            <iframe src="https://www.youtube.com/embed/koKL1wSRLpk" title="Animated Keg: Encumbrance in 5E Dnd(an episode from 5 years finally released today)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/koKL1wSRLpk"
+              title="Animated Keg: Encumbrance in 5E Dnd(an episode from 5 years finally released today)"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -197,7 +226,8 @@
   </div>
 
   <!-- Generic Item Modal -->
-  <div class="modal fade" id="genericItemModal" tabindex="-1" role="dialog" aria-labelledby="genericItemModalLabel" aria-hidden="true">
+  <div class="modal fade" id="genericItemModal" tabindex="-1" role="dialog" aria-labelledby="genericItemModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -226,15 +256,17 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"
+            onclick="SpawnGenericItem()">Create</button>
         </div>
       </div>
     </div>
   </div>
-</div>
+  </div>
 
   <!-- Mobile User Warning Modal -->
-  <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel" aria-hidden="true">
+  <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -245,7 +277,7 @@
         </div>
         <div class="modal-body">
 
-         <p>Warning: This site isn't optimised for use on mobile (yet). It's recommended you use desktop or tablet.</p>
+          <p>Warning: This site isn't optimised for use on mobile (yet). It's recommended you use desktop or tablet.</p>
 
         </div>
         <div class="modal-footer">
@@ -255,7 +287,7 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
 
 
 
@@ -268,4 +300,3 @@
     </div>
   </div>
 </body>
-
