@@ -176,7 +176,8 @@ function calcStageHeight(){
 
 function SetStage() {
 
-    STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING;
+    //STAGE_WIDTH = (15 * GRID_SIZE) + GRID_PADDING;
+    STAGE_WIDTH = document.documentElement.clientWidth;
     STAGE_HEIGHT = calcStageHeight()
 
     // first we need to create a stage
