@@ -2,23 +2,30 @@
 
 //MOBILE
 //  problems to fix 
-//      Header getting squished
-//      right clicking to rotate flip, etc. 
-//          static menu items?
-//          long press?
-//      stage causes page to load odd on mobile. It shows whole stage past header length.
+//      Header crowded
+//          Move name & strength into sidebar - they don't change often
+//          Set up Col-MD for tablet users
+//      Refactor items using Id for determining if selected
+//          Might wanna use ID for something later. 
+//      Make stage responsive?
+//          Right now it requires a refresh.
+//      Move Strength Label on ther vertical to save space? 
+
+//Spawning Area
+//  add faint text to the area 
+//  Move to the very top?
 
 //BUGS
-
-//Collision is removed when interacting with a different shape.
-//  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
-//  change who/where gets their 'isColliding' set false
 
 //Snapping falls off the further right you go. 
 
 //Need more support for smaller screens - See tablet view.
 //  Sidebar scrolling
 //  Header resizing
+
+//Collision is removed when interacting with a different shape.
+//  eg, two objects collide and turn red, move third not touching either and the og two are now fine.
+//  change who/where gets their 'isColliding' set false
 
 
 //FUTURE
