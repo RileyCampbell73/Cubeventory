@@ -12,7 +12,9 @@ function SpawnItemfromJSON(json) {
         return SpawnPackContents(item);
 
     var colour = determineColour(itemCategory.index);
-    Itemlayer.add(determineSpawnMethod(item.index, item.name, colour, item.weight))
+    var item = determineSpawnMethod(item.index, item.name, colour, item.weight)
+
+    Itemlayer.add(item)
     
 }
 
@@ -117,7 +119,9 @@ function spawnGenericItem(name, weight, colour) {
         // y: GRID_PADDING,
         x: randItemSpawn.x,
         y: randItemSpawn.y,
-        draggable: true
+        draggable: true,
+        itemName: name,
+        id: ""
     });
 
     //group for shape

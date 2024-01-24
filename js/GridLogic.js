@@ -148,11 +148,15 @@ function createGridLayer(strength, useEncumbrance) {
   return gridLayer;
 }
 
-function FlipItem(currentShape){
-  var scaleX = currentShape.find('.itemShapes')[0].scaleX()
-  var shapes = currentShape.find('.itemShapes')[0];
-  var lines = currentShape.find('.itemLines')[0];
-  var text = currentShape.find('.itemText')[0];
+function RotateItem(item){
+  item.rotate(90);
+}
+
+function FlipItem(item){
+  var scaleX = item.find('.itemShapes')[0].scaleX()
+  var shapes = item.find('.itemShapes')[0];
+  var lines = item.find('.itemLines')[0];
+  var text = item.find('.itemText')[0];
   
 
   if (scaleX > 0) {
@@ -177,6 +181,19 @@ function FlipItem(currentShape){
   }
 }
 
+function CloneItem(item){
+  var randItemSpawn = randomSpawnLocation()
+    var clone = item.clone({
+      x: randItemSpawn.x,
+      y: randItemSpawn.y,
+    });
+    Itemlayer.add(clone);
+}
+
+function DeleteItem(item){
+  item.destroy();
+}
+
 function InitializeMenu() {
 
   var rotateButton = document.getElementById('rotate-button')
@@ -194,30 +211,19 @@ function InitializeMenu() {
   let currentShape;
   var menuNode = document.getElementById('menu');
   document.getElementById('rotate-button').addEventListener('click', () => {
-
-    var itemGroup = currentShape.parent.parent;
-    itemGroup.rotate(90);
-
-
-    // itemGroup.find('.itemText')[0].rotate(-90);
-    // itemGroup.find('.itemText')[0].setAttr('y', itemGroup.find('.itemText')[0].getAttr('y') + 80)
+    RotateItem(currentShape.parent.parent);
   });
 
   document.getElementById('flip-button').addEventListener('click', () => {
-    FlipItem(currentShape.parent.parent)
+    FlipItem(currentShape.parent.parent);
   });
 
   document.getElementById('duplicate-button').addEventListener('click', () => {
-    var randItemSpawn = randomSpawnLocation()
-    var clone = currentShape.parent.parent.clone({
-      x: randItemSpawn.x,
-      y: randItemSpawn.y,
-    });
-    Itemlayer.add(clone);
+    CloneItem(currentShape.parent.parent);
   });
   
   document.getElementById('delete-button').addEventListener('click', () => {
-    currentShape.parent.parent.destroy();
+    DeleteItem(currentShape.parent.parent);
   });
 
   window.addEventListener('click', () => {
@@ -536,4 +542,5 @@ function InitializeCollisionSnapping() {
   }
 
 }
+
 

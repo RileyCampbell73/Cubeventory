@@ -73,6 +73,8 @@ var lastCenter = null;
 var lastDist = 0;
 var dragStopped = false;
 
+var SelectedItem = undefined;
+
 $(document).ready(function () {
 
     SetStage();
@@ -105,10 +107,10 @@ $(document).ready(function () {
     });
 
     $('#CharacterStrength').change(function () {
-        
+
         strength = $('#CharacterStrength')[0].value;
 
-        if (strength > 50){
+        if (strength > 50) {
             $('#CharacterStrength')[0].value = 50
             strength = 50
         }
@@ -161,16 +163,16 @@ $(document).ready(function () {
 
 function getCenter(p1, p2) {
     return {
-      x: (p1.x + p2.x) / 2,
-      y: (p1.y + p2.y) / 2,
+        x: (p1.x + p2.x) / 2,
+        y: (p1.y + p2.y) / 2,
     };
-  }
+}
 
 function getDistance(p1, p2) {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 }
 
-function calcStageHeight(){
+function calcStageHeight() {
     return (strength * GRID_SIZE) + GRID_PADDING + GRID_SIZE + 200; //200 for spawning area and a little extra bottom clearance
 }
 
@@ -198,78 +200,93 @@ function SetStage() {
     // create layer for shapes
     Itemlayer = new Konva.Layer();
     // add the layer to the stage
+
+    stage.on('mousedown, touchstart', function () {
+
+        const mousePos = stage.getPointerPosition();
+        var item = stage.getIntersection(mousePos)
+
+        if (item.getLayer().getAttr('id') === 'gridLayer')//so they can't manipulate the grid.
+            item = null;
+        else
+            item = item.parent.parent
+
+
+
+        onShapeClick(item);
+    });
     stage.add(Itemlayer);
 
     InitializeMenu();
     InitializeCollisionSnapping()
 
-    stage.on('touchmove', function (e) { 
+    stage.on('touchmove', function (e) {
         e.evt.preventDefault();
         var touch1 = e.evt.touches[0];
         var touch2 = e.evt.touches[1];
 
         // we need to restore dragging, if it was cancelled by multi-touch
         if (touch1 && !touch2 && !stage.isDragging() && dragStopped) {
-          stage.startDrag();
-          dragStopped = false;
+            stage.startDrag();
+            dragStopped = false;
         }
 
         if (touch1 && touch2) {
-          // if the stage was under Konva's drag&drop
-          // we need to stop it, and implement our own pan logic with two pointers
-          if (stage.isDragging()) {
-            dragStopped = true;
-            stage.stopDrag();
-          }
+            // if the stage was under Konva's drag&drop
+            // we need to stop it, and implement our own pan logic with two pointers
+            if (stage.isDragging()) {
+                dragStopped = true;
+                stage.stopDrag();
+            }
 
-          var p1 = {
-            x: touch1.clientX,
-            y: touch1.clientY,
-          };
-          var p2 = {
-            x: touch2.clientX,
-            y: touch2.clientY,
-          };
+            var p1 = {
+                x: touch1.clientX,
+                y: touch1.clientY,
+            };
+            var p2 = {
+                x: touch2.clientX,
+                y: touch2.clientY,
+            };
 
-          if (!lastCenter) {
-            lastCenter = getCenter(p1, p2);
-            return;
-          }
-          var newCenter = getCenter(p1, p2);
+            if (!lastCenter) {
+                lastCenter = getCenter(p1, p2);
+                return;
+            }
+            var newCenter = getCenter(p1, p2);
 
-          var dist = getDistance(p1, p2);
+            var dist = getDistance(p1, p2);
 
-          if (!lastDist) {
+            if (!lastDist) {
+                lastDist = dist;
+            }
+
+            // local coordinates of center point
+            var pointTo = {
+                x: (newCenter.x - stage.x()) / stage.scaleX(),
+                y: (newCenter.y - stage.y()) / stage.scaleX(),
+            };
+
+            var scale = stage.scaleX() * (dist / lastDist);
+
+            // calculate new position of the stage
+            var dx = newCenter.x - lastCenter.x;
+            var dy = newCenter.y - lastCenter.y;
+
+            var newPos = {
+                x: newCenter.x - pointTo.x * scale + dx,
+                y: newCenter.y - pointTo.y * scale + dy,
+            };
+
+            stage.position(newPos);
+
             lastDist = dist;
-          }
-
-          // local coordinates of center point
-          var pointTo = {
-            x: (newCenter.x - stage.x()) / stage.scaleX(),
-            y: (newCenter.y - stage.y()) / stage.scaleX(),
-          };
-
-          var scale = stage.scaleX() * (dist / lastDist);
-
-          // calculate new position of the stage
-          var dx = newCenter.x - lastCenter.x;
-          var dy = newCenter.y - lastCenter.y;
-
-          var newPos = {
-            x: newCenter.x - pointTo.x * scale + dx,
-            y: newCenter.y - pointTo.y * scale + dy,
-          };
-
-          stage.position(newPos);
-
-          lastDist = dist;
-          lastCenter = newCenter;
+            lastCenter = newCenter;
         }
-      });
+    });
 
     stage.on('touchend', function (e) {
-    lastDist = 0;
-    lastCenter = null;
+        lastDist = 0;
+        lastCenter = null;
     });
 
 }
@@ -302,7 +319,7 @@ function ResizeItem(itemShape, prevGridSize) {
         complexItem.rotation(itemShape.rotation())
         if (itemShape.children[0].scaleX() < 0)
             FlipItem(complexItem)
-        
+
         itemShape.destroy()
         Itemlayer.add(complexItem)
 
@@ -312,7 +329,7 @@ function ResizeItem(itemShape, prevGridSize) {
     else {
 
         var shapeFlipped = false
-        if (itemShape.children[0].scaleX() < 0){
+        if (itemShape.children[0].scaleX() < 0) {
             FlipItem(itemShape)
             shapeFlipped = true
         }
@@ -326,7 +343,7 @@ function ResizeItem(itemShape, prevGridSize) {
                     shape.width((GRID_SIZE / 2))
                 else
                     shape.width(GRID_SIZE)
-                
+
                 if (shape.height() === (prevGridSize / 2))
                     shape.height((GRID_SIZE / 2))
                 else
@@ -479,7 +496,7 @@ function uploadSaveFile() {
     let reader = new FileReader();
 
     // Setup the callback event to run when the file is read
-    reader.onload = function(event) {
+    reader.onload = function (event) {
         LoadSaveFile(event.target.result);
     };
 
@@ -536,9 +553,9 @@ function SpawnGenericItem() {
     $('.overlay').removeClass('active');
 }
 
-function showMobileWarning(){
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-        $('#mobileUserModal').modal('show'); 
+function showMobileWarning() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        $('#mobileUserModal').modal('show');
     }
 }
 
@@ -556,4 +573,33 @@ function ResetEverything() {
 
         ResizeGrid();
     }
+}
+
+function onShapeClick(item) { // need another method of getting this on an item - doesn't persist past load
+
+    //clear all selected 
+    var selected = Itemlayer.find('#selected')
+    for (let i = 0; i < selected.length; i++) {
+        selected[i].find('.shapeOutline')[0].stroke('black')
+        selected[i].id("selected")
+    }
+
+    if (item === null) {
+        $("#SelectedItem").html("____")
+        //disable buttons
+        $('.ItemManipulateButtons').prop('disabled', true);
+        SelectedItem = null;
+        console.log("SelectedItem changed to: Null")
+    }
+    else {
+        $("#SelectedItem").html(item.getAttr('itemName'))
+        //change border
+        item.find('.shapeOutline')[0].stroke('blue')
+        item.id("selected")
+        //enable buttons
+        $('.ItemManipulateButtons').removeAttr('disabled');
+        SelectedItem = item;
+        console.log("SelectedItem changed to: " + item)
+    }
+
 }
