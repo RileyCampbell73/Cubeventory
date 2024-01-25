@@ -178,21 +178,21 @@
             </div>
           </div>
 
-          <div class="row col-xl-12" style="width:100%">
-            <div>
+          <div class="row col-7 col-xl-12" style="width:100%">
+            <!-- <div>
               <span>Selected Item:</span><label id="SelectedItem">____</label>
+            </div> -->
+            <div class="col-2">
+              <button class="ItemManipulateButtons btn btn-info" disabled onclick="RotateItem(SelectedItem)">Rotate</button>
             </div>
-            <div>
-              <button class="ItemManipulateButtons" disabled onclick="RotateItem(SelectedItem)">Rotate</button>
+            <div class="col-2">
+              <button class="ItemManipulateButtons btn btn-info" disabled onclick="FlipItem(SelectedItem)">Flip</button>
             </div>
-            <div>
-              <button class="ItemManipulateButtons" disabled onclick="FlipItem(SelectedItem)">Flip</button>
+            <div class="col-2">
+              <button class="ItemManipulateButtons btn btn-info" disabled onclick="CloneItem(SelectedItem)">Clone</button>
             </div>
-            <div>
-              <button class="ItemManipulateButtons" disabled onclick="CloneItem(SelectedItem)">Clone</button>
-            </div>
-            <div>
-              <button class="ItemManipulateButtons" disabled onclick="DeleteItem(SelectedItem)">Delete</button>
+            <div class="col-2">
+              <button class="ItemManipulateButtons btn btn-info" disabled onclick="DeleteItem(SelectedItem)">Delete</button>
             </div>
           </div>
         </div>

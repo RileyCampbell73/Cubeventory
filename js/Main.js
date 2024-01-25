@@ -7,6 +7,8 @@
 //          Set up Col-MD for tablet users
 //      Refactor items using Id for determining if selected
 //          Might wanna use ID for something later. 
+//      add name to complex shapes
+//          move its base layer creation into single function??
 //      Make stage responsive?
 //          Right now it requires a refresh.
 //      Move Strength Label on ther vertical to save space? 
@@ -208,19 +210,23 @@ function SetStage() {
     Itemlayer = new Konva.Layer();
     // add the layer to the stage
 
+    ['mousedown', 'touchstart'].forEach(function(e) {
+        stage.on(e, function(){
+            const mousePos = stage.getPointerPosition();
+            var item = stage.getIntersection(mousePos)
+    
+            if (item === null || item.getLayer().getAttr('id') === 'gridLayer')//so they can't manipulate the grid.
+                item = null;
+            else
+                item = item.parent.parent
+    
+            onShapeClick(item);
+        });
+    });
+
     stage.on('mousedown, touchstart', function () {
 
-        const mousePos = stage.getPointerPosition();
-        var item = stage.getIntersection(mousePos)
-
-        if (item.getLayer().getAttr('id') === 'gridLayer')//so they can't manipulate the grid.
-            item = null;
-        else
-            item = item.parent.parent
-
-
-
-        onShapeClick(item);
+     
     });
     stage.add(Itemlayer);
 
@@ -596,7 +602,7 @@ function onShapeClick(item) { // need another method of getting this on an item 
         //disable buttons
         $('.ItemManipulateButtons').prop('disabled', true);
         SelectedItem = null;
-        console.log("SelectedItem changed to: Null")
+        //console.log("SelectedItem changed to: Null")
     }
     else {
         $("#SelectedItem").html(item.getAttr('itemName'))
@@ -606,7 +612,7 @@ function onShapeClick(item) { // need another method of getting this on an item 
         //enable buttons
         $('.ItemManipulateButtons').removeAttr('disabled');
         SelectedItem = item;
-        console.log("SelectedItem changed to: " + item)
+        //console.log("SelectedItem changed to: " + item)
     }
 
 }
