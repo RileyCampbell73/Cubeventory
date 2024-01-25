@@ -7,11 +7,12 @@
 //          Set up Col-MD for tablet users
 //      Refactor items using Id for determining if selected
 //          Might wanna use ID for something later. 
-//      add name to complex shapes
-//          move its base layer creation into single function??
 //      Make stage responsive?
 //          Right now it requires a refresh.
-//      Move Strength Label on ther vertical to save space? 
+//      Move Strength Label on the vertical to save space? 
+//      Update 'Load' to update players saves to account for changes 
+//          added "itemName: name & id: """ to Item Base Group
+//          added "name: 'shapeOutline'" to the shapes outline line.
 
 //Spawning Area
 //  add faint text to the area 

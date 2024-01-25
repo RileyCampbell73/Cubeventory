@@ -5,33 +5,16 @@ function spawnPaddedArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -104,11 +87,12 @@ function spawnPaddedArmor(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
-    
+
 
     return Item;
 
@@ -119,33 +103,16 @@ function spawnLeatherArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -230,7 +197,8 @@ function spawnLeatherArmor(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -243,33 +211,16 @@ function spawnStuddedArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -370,13 +321,14 @@ function spawnStuddedArmor(index, name, colour) {
         0, (GRID_SIZE * 2),
         0, GRID_SIZE,
         GRID_SIZE, GRID_SIZE,
-        
+
     ]
     var line = new Konva.Line({
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -391,33 +343,16 @@ function spawnHideArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -505,7 +440,8 @@ function spawnHideArmor(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -518,33 +454,16 @@ function spawnChainShirtArmor(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -674,7 +593,8 @@ function spawnChainShirtArmor(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -687,34 +607,16 @@ function spawnShield(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
-
+    var ItemLines = createItemLinesGroup();
     Item.add(ItemShapes)
     Item.add(ItemText)
     Item.add(ItemLines)
@@ -774,7 +676,8 @@ function spawnShield(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -787,33 +690,16 @@ function spawnMace(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -855,33 +741,16 @@ function spawnLineItem(index, name, colour, weight) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -911,7 +780,8 @@ function spawnLineItem(index, name, colour, weight) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -924,33 +794,16 @@ function spawnLightCrossbow(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1001,7 +854,8 @@ function spawnLightCrossbow(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1016,33 +870,16 @@ function spawnGlaive(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1094,33 +931,16 @@ function spawnGreataxe(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1171,8 +991,8 @@ function spawnGreataxe(index, name, colour) {
         (GRID_SIZE * 4), 0,
         (GRID_SIZE * 4), GRID_SIZE,
         (GRID_SIZE * 2), GRID_SIZE,
-        (GRID_SIZE * 2),  (GRID_SIZE * 2),
-        GRID_SIZE,  (GRID_SIZE * 2),
+        (GRID_SIZE * 2), (GRID_SIZE * 2),
+        GRID_SIZE, (GRID_SIZE * 2),
         GRID_SIZE, (GRID_SIZE * 3),
         0, (GRID_SIZE * 3),
     ]
@@ -1180,7 +1000,8 @@ function spawnGreataxe(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1193,33 +1014,16 @@ function spawnGreatsword(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1278,7 +1082,8 @@ function spawnGreatsword(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1291,33 +1096,16 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1347,7 +1135,8 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1358,35 +1147,17 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
 function spawnHeavyCrossbow(index, name, colour) {
 
     var randItemSpawn = randomSpawnLocation();
-
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1513,7 +1284,8 @@ function spawnHeavyCrossbow(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1526,33 +1298,16 @@ function spawnMaul(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1636,7 +1391,8 @@ function spawnMaul(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1649,33 +1405,16 @@ function spawnCrowbar(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1722,33 +1461,16 @@ function spawnMinersPick(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1823,7 +1545,7 @@ function spawnMinersPick(index, name, colour) {
 
         GRID_SIZE, (GRID_SIZE * 4),
         (GRID_SIZE * 2), (GRID_SIZE * 4),
-        
+
         (GRID_SIZE * 2), (GRID_SIZE * 5),
         GRID_SIZE, (GRID_SIZE * 5),
 
@@ -1836,7 +1558,8 @@ function spawnMinersPick(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1849,33 +1572,16 @@ function spawnIronPot(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -1956,7 +1662,8 @@ function spawnIronPot(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 
@@ -1969,33 +1676,16 @@ function spawnHempRope(index, name, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        complexItem: index
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -2066,12 +1756,12 @@ function spawnHempRope(index, name, colour) {
         (GRID_SIZE * 3), GRID_SIZE,
         (GRID_SIZE * 3), (GRID_SIZE * 2),
         (GRID_SIZE * 2), (GRID_SIZE * 2),
-        
+
         (GRID_SIZE * 2), GRID_SIZE,
         GRID_SIZE, GRID_SIZE,
         GRID_SIZE, (GRID_SIZE * 2),
         (GRID_SIZE * 2), (GRID_SIZE * 2),
-        
+
         (GRID_SIZE * 2), (GRID_SIZE * 3),
         GRID_SIZE, (GRID_SIZE * 3),
         GRID_SIZE, (GRID_SIZE * 4),
@@ -2082,7 +1772,8 @@ function spawnHempRope(index, name, colour) {
         points: outlinePoints,
         stroke: 'black',
         strokeWidth: 3,
-        closed: true
+        closed: true,
+        name: 'shapeOutline'
     });
     ItemLines.add(line)
 

@@ -1,4 +1,3 @@
-
 function SpawnItemfromJSON(json) {
     var item = JSON.parse(json);
 
@@ -114,36 +113,16 @@ function spawnGenericItem(name, weight, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = new Konva.Group({
-        // x: (GRID_SIZE * 15) + GRID_PADDING + 100,//100 is just a lil padding
-        // y: GRID_PADDING,
-        x: randItemSpawn.x,
-        y: randItemSpawn.y,
-        draggable: true,
-        itemName: name,
-        id: ""
-    });
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name)
 
     //group for shape
-    var ItemShapes = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemShapes'
-    });
+    var ItemShapes = createItemShapesGroup();
 
     //group for text
-    var ItemText = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemText'
-    });
+    var ItemText = createItemTextGroup();
 
     //group for lines
-    var ItemLines = new Konva.Group({
-        x: 0,
-        y: 0,
-        name: 'itemLines'
-    });
+    var ItemLines = createItemLinesGroup();
 
     Item.add(ItemShapes)
     Item.add(ItemText)
@@ -658,4 +637,41 @@ function addItemText(name, itemShapes){
         name: 'text'
     });
 
+}
+
+function createBaseItemGroup(x,y, name, index = undefined){
+
+    return new Konva.Group({
+        x: x,
+        y: y,
+        draggable: true,
+        itemName: name,
+        id: "",
+        complexItem: index
+    });
+
+}
+
+function createItemShapesGroup(){
+    return new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemShapes'
+    });
+}
+
+function createItemTextGroup(){
+    return new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemText'
+    });
+}
+
+function createItemLinesGroup(){
+    return new Konva.Group({
+        x: 0,
+        y: 0,
+        name: 'itemLines'
+    });
 }
