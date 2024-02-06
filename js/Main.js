@@ -3,16 +3,17 @@
 //MOBILE
 //  problems to fix 
 //      Header crowded
-//          Move name & strength into sidebar - they don't change often
-//          Set up Col-MD for tablet users
+//          Set up Col-MD for tablet users?
 //      Refactor items using Id for determining if selected
 //          Might wanna use ID for something later. 
 //      Make stage responsive?
 //          Right now it requires a refresh.
-//      Move Strength Label on the vertical to save space? 
+//      Move Strength Label on grid (the vertical) to save space? 
 //      Update 'Load' to update players saves to account for changes 
 //          added "itemName: name & id: """ to Item Base Group
 //          added "name: 'shapeOutline'" to the shapes outline line.
+//      Still seeing scrolls bars on both axis
+//      remove mobile warning
 
 //Spawning Area
 //  add faint text to the area 
