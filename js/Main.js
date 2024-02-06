@@ -2,18 +2,21 @@
 
 //MOBILE
 //  problems to fix 
-//      Header crowded
+//      Header
 //          Set up Col-MD for tablet users?
-//      Refactor items using Id for determining if selected
-//          Might wanna use ID for something later. 
+//          pretty it up somehow.
 //      Make stage responsive?
 //          Right now it requires a refresh.
 //      Move Strength Label on grid (the vertical) to save space? 
 //      Update 'Load' to update players saves to account for changes 
-//          added "itemName: name & id: """ to Item Base Group
+//          added "itemName: name" & "isSelected: false" to Item Base Group
 //          added "name: 'shapeOutline'" to the shapes outline line.
 //      Still seeing scrolls bars on both axis
 //      remove mobile warning
+//      Doubletouch scroling iffy if one touch is on item - will make crowded inventories hard to navigate
+//      reset selected status when: 
+//          Grid resize, Before save, beforeunload, on delete
+
 
 //Spawning Area
 //  add faint text to the area 
@@ -593,28 +596,34 @@ function ResetEverything() {
 function onShapeClick(item) { // need another method of getting this on an item - doesn't persist past load
 
     //clear all selected 
-    var selected = Itemlayer.find('#selected')
+    var selected = Itemlayer.find(item => {
+        return item.getAttr('isSelected') === true
+    })
     for (let i = 0; i < selected.length; i++) {
         selected[i].find('.shapeOutline')[0].stroke('black')
-        selected[i].id("selected")
+        selected[i].setAttr('isSelected', false);
     }
 
     if (item === null) {
-        $("#SelectedItem").html("____")
+        //$("#SelectedItem").html("____") //for debugging
+
         //disable buttons
         $('.ItemManipulateButtons').prop('disabled', true);
         SelectedItem = null;
-        //console.log("SelectedItem changed to: Null")
     }
     else {
-        $("#SelectedItem").html(item.getAttr('itemName'))
+        //$("#SelectedItem").html(item.getAttr('itemName'))//for debugging
+        
         //change border
         item.find('.shapeOutline')[0].stroke('blue')
-        item.id("selected")
+
+        //set internal selected
+        item.setAttr('isSelected', true);
+        
         //enable buttons
         $('.ItemManipulateButtons').removeAttr('disabled');
+        
         SelectedItem = item;
-        //console.log("SelectedItem changed to: " + item)
     }
 
 }

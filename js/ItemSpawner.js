@@ -646,7 +646,7 @@ function createBaseItemGroup(x,y, name, index = undefined){
         y: y,
         draggable: true,
         itemName: name,
-        id: "",
+        isSelected: false,
         complexItem: index
     });
 
