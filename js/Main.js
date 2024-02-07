@@ -343,6 +343,8 @@ function ResizeItem(itemShape, prevGridSize) {
 
 function ResizeGrid() {
 
+    unselectAll()
+
     var items = Itemlayer.toJSON();
     var prevGridSize = GRID_SIZE;
 
@@ -398,6 +400,9 @@ function ResizeGrid() {
 };
 
 function makeSave() {
+    
+    unselectAll()
+    
     var saveFile = {
         version: VERSION_NUM,
         name: $('#CharacterName')[0].value,
@@ -524,9 +529,8 @@ function ResetEverything() {
     }
 }
 
-function onShapeClick(item) { // need another method of getting this on an item - doesn't persist past load
-
-    //clear all selected 
+function unselectAll(){
+     //clear all selected 
     var selected = Itemlayer.find(item => {
         return item.getAttr('isSelected') === true
     })
@@ -534,6 +538,11 @@ function onShapeClick(item) { // need another method of getting this on an item 
         selected[i].find('.shapeOutline')[0].stroke('black')
         selected[i].setAttr('isSelected', false);
     }
+}
+
+function onShapeClick(item) {
+
+    unselectAll()
 
     if (item === null) {
         //$("#SelectedItem").html("____") //for debugging
