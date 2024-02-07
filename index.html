@@ -41,6 +41,8 @@
   <meta name="description"
     content="A DnD5e inventory solution! Turn those abstract containers of infinite garbage into an active representation of what your lugging around on your adventures.">
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 </head>
 
@@ -72,7 +74,7 @@
             <input type="number" id="CharacterStrength" name="CharacterStrength" value="10" min="1" max="50">
           </div>
         </li>
-        
+
         <li>
           <div>
             <input type="checkbox" id="EncumbranceRule" name="EncumbranceRule" value="" checked>
@@ -155,48 +157,50 @@
     <!-- Page Content -->
     <div id="content">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="row" style="width:100%">
-          <div class="row col-xl-12" style="width:100%">
-            <div class="col-1 col-xl-1">
+      <nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="display: block;">
+          <div class="row">
+            <div class="col-2 col-md-1">
               <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <i class="fas fa-align-left"></i>
               </button>
             </div>
-            <div class="col-11 col-xl-2">
+            <div class="d-none d-lg-block col-lg-3">
               <h1>Cubeventory</h1>
             </div>
-            <div class="col-5 col-xl-3">
+            <div class="col-10 col-md-4">
               <label>Grid Size</label><br>
-
-              <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
-              <input type="range" min="40" max="80" value="60" step="10" class="slider" id="GridSize"
-                style="pointer-events: none;">
-              <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
-
+              <div>
+                <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
+                <input type="range" min="40" max="80" value="60" step="10" class="slider" id="GridSize"
+                  style="pointer-events: none;">
+                <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
+              </div>
             </div>
-            <div class="col-6 col-xl-2">
+            <div class="col-10 col-md-4">
               <label>Add Item:</label><br>
               <select id="EquipmentComboBox"></select>
             </div>
           </div>
-
-          <div class="row col-7 col-xl-12" style="width:100%">
+          <div class="row">
             <!-- for debugging -->
             <!-- <div>
               <span>Selected Item:</span><label id="SelectedItem">____</label> 
             </div> -->
-            <div class="col-2">
-              <button class="ItemManipulateButtons btn btn-info" disabled onclick="RotateItem(SelectedItem)">Rotate</button>
+            <div class="col-3">
+              <button class="ItemManipulateButtons btn btn-info" disabled
+                onclick="RotateItem(SelectedItem)">Rotate</button>
             </div>
-            <div class="col-2">
+            <div class="col-3">
               <button class="ItemManipulateButtons btn btn-info" disabled onclick="FlipItem(SelectedItem)">Flip</button>
             </div>
-            <div class="col-2">
-              <button class="ItemManipulateButtons btn btn-info" disabled onclick="CloneItem(SelectedItem)">Clone</button>
+            <div class="col-3">
+              <button class="ItemManipulateButtons btn btn-info" disabled
+                onclick="CloneItem(SelectedItem)">Clone</button>
             </div>
-            <div class="col-2">
-              <button class="ItemManipulateButtons btn btn-info" disabled onclick="DeleteItem(SelectedItem)">Delete</button>
+            <div class="col-3">
+              <button class="ItemManipulateButtons btn btn-info" disabled
+                onclick="DeleteItem(SelectedItem)">Delete</button>
             </div>
           </div>
         </div>
