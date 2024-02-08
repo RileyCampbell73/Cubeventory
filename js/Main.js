@@ -541,20 +541,16 @@ function unselectAll(){
         selected[i].find('.shapeOutline')[0].stroke('black')
         selected[i].setAttr('isSelected', false);
     }
+
+    $('.ItemManipulateButtons').prop('disabled', true);
+    SelectedItem = null;
 }
 
 function onShapeClick(item) {
 
     unselectAll()
 
-    if (item === null) {
-        //$("#SelectedItem").html("____") //for debugging
-
-        //disable buttons
-        $('.ItemManipulateButtons').prop('disabled', true);
-        SelectedItem = null;
-    }
-    else {
+    if (item != null){
         //$("#SelectedItem").html(item.getAttr('itemName'))//for debugging
         
         //change border

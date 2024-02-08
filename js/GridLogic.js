@@ -206,6 +206,7 @@ function CloneItem(item){
 
 function DeleteItem(item){
   item.destroy();
+  unselectAll()
 }
 
 function InitializeMenu() {
