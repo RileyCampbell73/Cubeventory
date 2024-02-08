@@ -39,8 +39,6 @@ $(document).ready(function () {
 
     initializeItemCombobox()
 
-    showMobileWarning()
-
     $('#EncumbranceRule').change(function () {
         //remove old grid layer
         gridLayer.destroy()
@@ -507,11 +505,6 @@ function SpawnGenericItem() {
     $('.overlay').removeClass('active');
 }
 
-function showMobileWarning() {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $('#mobileUserModal').modal('show');
-    }
-}
 
 function ResetEverything() {
     if (confirm("SAVED CHANGES WILL BE LOST FOREVER! DOWNLOAD YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
