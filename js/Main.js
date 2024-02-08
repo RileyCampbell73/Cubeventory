@@ -1,4 +1,4 @@
-var VERSION_NUM = "1.0.1"
+var VERSION_NUM = "1.1.0"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
@@ -460,6 +460,8 @@ function uploadSaveFile() {
 function LoadSaveFile(str) {
     let json = JSON.parse(str);
 
+   
+
     //update fields with save data
     $('#CharacterName')[0].value = json.name
 
@@ -480,6 +482,14 @@ function LoadSaveFile(str) {
     stage.add(Itemlayer);
     InitializeMenu();
     InitializeCollisionSnapping()
+
+     //check version number
+     if (json.version == "1.0.1"){
+        //add 'name': "shapeOutline" to the complex items
+        //changing grid size fixes this...
+        ResizeGrid()
+    }
+
 }
 
 function ShowGenericItemModal(itemName) {
