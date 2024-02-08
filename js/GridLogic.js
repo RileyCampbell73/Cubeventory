@@ -143,6 +143,20 @@ function createGridLayer(strength, useEncumbrance) {
     strokeWidth: 1,
     cornerRadius: 10,
   }));
+
+  //spawning area text
+  gridLayer.add(new Konva.Text({
+    x: GRID_PADDING,
+    y: ((GRID_SIZE * strength) + GRID_PADDING + 20) + 30,
+    text: "Items Spawn Here",
+    fontSize: 60,
+    fontFamily: 'Calibri',
+    fill: '#000',
+    width: GRID_SIZE * 15,
+    //padding: 5,
+    align: 'center',
+    opacity: 0.10
+  }));
   
 
   return gridLayer;
