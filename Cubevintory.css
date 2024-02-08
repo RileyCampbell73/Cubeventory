@@ -357,3 +357,17 @@
   ::-webkit-scrollbar-thumb:hover {
       background: #555;
   }
+
+  /* ---------------------------------------------------
+        No Scrolling on Mobile STYLE
+    ----------------------------------------------------- */
+
+  @media screen and (max-width: 600px) {
+    html, body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+      }
+      body {
+        position: relative;
+      }
+  }
