@@ -288,8 +288,11 @@ function InitializeCollisionSnapping() {
     var offsetX = stage.x()// * stage.scaleX()
     var offsetY = stage.y() //* stage.scaleY()
 
+    var str = strength
+    if (str < 15)
+      str = 15
 
-    for (let i = 0; i < strength * 2; i++) {
+    for (let i = 0; i < str * 2; i++) {
       vertical.push(((i * (GRID_SIZE / 2)) + GRID_PADDING + offsetX)); 
       horizontal.push(((i * (GRID_SIZE / 2)) + GRID_PADDING + offsetY));
     }
