@@ -245,7 +245,7 @@ function increaseGridSize() {
     }
 }
 function decreaseGridSize() {
-    if ($('#GridSize')[0].value != "40") {
+    if ($('#GridSize')[0].value != "20") {
         $('#GridSize')[0].value = parseInt($('#GridSize')[0].value) - 10
         ResizeGrid();
     }

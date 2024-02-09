@@ -16,7 +16,7 @@ function createGridLayer(strength, useEncumbrance) {
     fontFamily: 'Calibri',
     fontStyle: 'bold',
     fill: '#000',
-    width: 200,
+    width: 250,
     align: 'center'
   }));
 
@@ -92,7 +92,7 @@ function createGridLayer(strength, useEncumbrance) {
   for (let y = 0; y < strength; y++) {
     gridLayer.add(new Konva.Text({
       x: 50,
-      y: (y * GRID_SIZE) + GRID_PADDING + 55,//the 55 is to better center them. so its 40 + length of textbox I guess.
+      y: (y * GRID_SIZE) + GRID_PADDING + 45,//the 45 is to better center them
       rotation: -90,
       text: strengthCount--,
       fontSize: 30,
@@ -149,7 +149,7 @@ function createGridLayer(strength, useEncumbrance) {
     x: GRID_PADDING,
     y: ((GRID_SIZE * strength) + GRID_PADDING + 20) + 30,
     text: "Items Spawn Here",
-    fontSize: 60,
+    fontSize: 40,
     fontFamily: 'Calibri',
     fill: '#000',
     width: GRID_SIZE * 15,
