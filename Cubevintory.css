@@ -5,6 +5,31 @@
       background-color: #f0f0f0;
     } */
 
+  .container {
+      max-width: none
+  }
+
+  #navBar .container {
+      justify-content: flex-start;
+  }
+
+  #button-bar {
+      flex-direction: column;
+      gap: 3px;
+  }
+  #button-bar button:disabled {
+    background-color: grey;
+    border-color: grey;
+  }
+
+  #left-side {
+      margin-right: 20px
+  }
+
+  #title-box {
+      display: flex
+  }
+
   #menu {
       display: none;
       position: absolute;
@@ -363,11 +388,14 @@
     ----------------------------------------------------- */
 
   @media screen and (max-width: 600px) {
-    html, body {
-        overflow-x: hidden;
-        overflow-y: hidden;
-      }
+
+      html,
       body {
-        position: relative;
+          overflow-x: hidden;
+          overflow-y: hidden;
+      }
+
+      body {
+          position: relative;
       }
   }

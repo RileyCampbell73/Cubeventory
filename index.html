@@ -39,7 +39,7 @@
   <title>Cubeventory</title>
 
   <meta name="description"
-    content="A DnD5e inventory solution! Turn those abstract containers of infinite garbage into an active representation of what your lugging around on your adventures.">
+    content="A DnD5e inventory solution! Turn those abstract containers of infinite garbage into an active representation of what you're lugging around on your adventures.">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -158,51 +158,49 @@
     <div id="content">
 
       <nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container" style="display: block;">
-          <div class="row">
-            <div class="col-2 col-md-1">
+        <div class="container">
+          <div id="left-side">
+            <div id="title-box">
               <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <i class="fas fa-align-left"></i>
               </button>
-            </div>
-            <div class="d-none d-lg-block col-lg-3">
-              <h1>Cubeventory</h1>
-            </div>
-            <div class="col-10 col-md-4">
-              <label>Grid Size</label><br>
-              <div>
-                <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
-                <input type="range" min="20" max="80" value="60" step="10" class="slider" id="GridSize"
-                  style="pointer-events: none;">
-                <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
+              <div class="d-none d-lg-block col-lg-3">
+                <h1>Cubeventory</h1>
               </div>
-            </div>
-            <div class="col-10 col-md-4">
-              <label>Add Item:</label><br>
-              <select id="EquipmentComboBox"></select>
-            </div>
+            </div> <!--end of title box-->
+            <div id="input-stuff">
+              <div>
+                <label>Grid Size</label><br>
+                <div>
+                  <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
+                  <input type="range" min="20" max="80" value="60" step="10" class="slider" id="GridSize"
+                    style="pointer-events: none;">
+                  <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
+                </div>
+              </div>
+              <div>
+                <label>Add Item:</label><br>
+                <select id="EquipmentComboBox"></select>
+              </div>
+            </div> <!--end of input stuff-->
           </div>
-          <div class="row">
+          <div class="row" id="button-bar">
             <!-- for debugging -->
             <!-- <div>
               <span>Selected Item:</span><label id="SelectedItem">____</label> 
             </div> -->
-            <div class="col-3">
-              <button class="ItemManipulateButtons btn btn-info" disabled
-                onclick="RotateItem(SelectedItem)">Rotate</button>
-            </div>
-            <div class="col-3">
-              <button class="ItemManipulateButtons btn btn-info" disabled onclick="FlipItem(SelectedItem)">Flip</button>
-            </div>
-            <div class="col-3">
-              <button class="ItemManipulateButtons btn btn-info" disabled
-                onclick="CloneItem(SelectedItem)">Clone</button>
-            </div>
-            <div class="col-3">
-              <button class="ItemManipulateButtons btn btn-info" disabled
-                onclick="DeleteItem(SelectedItem)">Delete</button>
-            </div>
-          </div>
+
+            <button class="ItemManipulateButtons btn btn-info" disabled
+              onclick="RotateItem(SelectedItem)">Rotate</button>
+
+            <button class="ItemManipulateButtons btn btn-info" disabled onclick="FlipItem(SelectedItem)">Flip</button>
+
+            <button class="ItemManipulateButtons btn btn-info" disabled onclick="CloneItem(SelectedItem)">Clone</button>
+
+            <button class="ItemManipulateButtons btn btn-info" disabled
+              onclick="DeleteItem(SelectedItem)">Delete</button>
+
+          </div> <!--end of button bar-->
         </div>
       </nav>
 
@@ -230,9 +228,11 @@
                 href="https://www.youtube.com/@zeebashew">Zee Bashew</a> and his video on the topic (embeded below).</p>
 
             <h4>How to use</h4>
-            <p>Each square is equal to 1 lb. Add items with the searchable combobox in the top right. Items will appear
+            <p>Each square is equal to 1 lb. Add items with the searchable combobox. Items will appear
               in the area on the bottom. They can be dragged with the mouse. Right-clicking an item gives options to
-              rotate, flip, clone, or delete and these controls are avalible in the header. Your inventory will be saved when leaving the page, but can also be saved manually with the button in the sidebar. You can also save your inventory to a file to be used on a different device.</p>
+              rotate, flip, clone, or delete and these controls are avalible in the header. Your inventory will be saved
+              when leaving the page, but can also be saved manually with the button in the sidebar. You can also save
+              your inventory to a file to be used on a different device.</p>
             <p>If you try to spawn an item not found in the list, you can create an item (from the result in the
               searchable combobox or the button in the sidebar.)</p>
             <h4>Zee's video</h4>
@@ -288,30 +288,31 @@
     </div>
   </div>
 
-   <!-- Mobile User Help Modal -->
-   <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel">Mobile User Help</h5>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-         </button>
-       </div>
-       <div class="modal-body">
+  <!-- Mobile User Help Modal -->
+  <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Mobile User Help</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
 
-         <p>Welcome to Cubeventory on mobile! Drag items around with one finger and move the grid around with two fingers.</p>
+          <p>Welcome to Cubeventory on mobile! Drag items around with one finger and move the grid around with two
+            fingers.</p>
 
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button> -->
-       </div>
-     </div>
-   </div>
- </div>
- </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
   <div id="menu">
     <div>
