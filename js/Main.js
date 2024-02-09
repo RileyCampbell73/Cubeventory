@@ -102,6 +102,16 @@ $(document).ready(function () {
     }
 
     window.addEventListener("beforeunload", SaveLocal);
+
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        //check local storage 
+        if (window.localStorage.getItem("shownMobileHelpModal") == null){
+            //show modal explaining mobile controls 
+            $('#mobileUserModal').modal('show');
+            window.localStorage.setItem("shownMobileHelpModal", true);
+        }
+    }
 });
 
 function getCenter(p1, p2) {

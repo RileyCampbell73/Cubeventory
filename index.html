@@ -231,9 +231,8 @@
 
             <h4>How to use</h4>
             <p>Each square is equal to 1 lb. Add items with the searchable combobox in the top right. Items will appear
-              in the area on the right. They can be dragged with the mouse. Right-clicking an item gives options to
-              rotate, flip, clone, or delete. you can save your inventory with the button in the sidebar. These save
-              files can be loaded back in on returning.</p>
+              in the area on the bottom. They can be dragged with the mouse. Right-clicking an item gives options to
+              rotate, flip, clone, or delete and these controls are avalible in the header. Your inventory will be saved when leaving the page, but can also be saved manually with the button in the sidebar. You can also save your inventory to a file to be used on a different device.</p>
             <p>If you try to spawn an item not found in the list, you can create an item (from the result in the
               searchable combobox or the button in the sidebar.)</p>
             <h4>Zee's video</h4>
@@ -288,6 +287,31 @@
       </div>
     </div>
   </div>
+
+   <!-- Mobile User Help Modal -->
+   <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Mobile User Help</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+
+         <p>Welcome to Cubeventory on mobile! Drag items around with one finger and move the grid around with two fingers.</p>
+
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button> -->
+       </div>
+     </div>
+   </div>
+ </div>
+ </div>
 
   <div id="menu">
     <div>
