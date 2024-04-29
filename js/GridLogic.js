@@ -164,6 +164,10 @@ function createGridLayer(strength, useEncumbrance) {
 
 function RotateItem(item){
   item.rotate(90);
+
+  if (item.getRotation() >= 360){
+    item.setRotation(0)
+  }
 }
 
 function FlipItem(item){
