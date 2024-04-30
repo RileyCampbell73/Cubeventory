@@ -16,6 +16,7 @@
   #button-bar {
       flex-direction: column;
       gap: 3px;
+      display: flex;
   }
   #button-bar button:disabled {
     background-color: grey;

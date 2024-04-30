@@ -158,49 +158,65 @@
     <div id="content">
 
       <nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <div id="left-side">
-            <div id="title-box">
+        <div class="container d-block">
+
+          <div class="row">
+            <div class="col-1">
               <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <i class="fas fa-align-left"></i>
               </button>
-              <div class="d-none d-lg-block col-lg-3">
-                <h1>Cubeventory</h1>
-              </div>
-            </div> <!--end of title box-->
-            <div id="input-stuff">
-              <div>
-                <label>Grid Size</label><br>
-                <div>
-                  <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
-                  <input type="range" min="20" max="80" value="60" step="10" class="slider" id="GridSize"
-                    style="pointer-events: none;">
-                  <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
+            </div>
+            <div class="d-none d-lg-block col-11">
+              <h1>Cubeventory</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-9 col-sm-6">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label>Grid Size</label><br>
+                  <div>
+                    <input type="button" value="-" class="btn btn-info" onclick="decreaseGridSize()">
+                    <input type="range" min="20" max="80" value="60" step="10" class="slider" id="GridSize"
+                      style="pointer-events: none;">
+                    <input type="button" value="+" class="btn btn-info" onclick="increaseGridSize()">
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <label>Add Item:</label><br>
+                  <select id="EquipmentComboBox"></select>
                 </div>
               </div>
-              <div>
-                <label>Add Item:</label><br>
-                <select id="EquipmentComboBox"></select>
+            </div>
+
+            <div class="col-3 col-sm-6">
+              <div class="row btn-group" >
+                <div class="col-sm-6">
+                  <div id="button-bar" style="margin-bottom: 3;">
+                    <div>
+                      <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="RotateItem(SelectedItem)">Rotate</button>
+                    </div>
+                    <div>
+                    <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="FlipItem(SelectedItem)">Flip</button>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div id="button-bar">
+                    <div>
+                    <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="CloneItem(SelectedItem)">Clone</button>
+                  </div>
+                  <div>
+                    <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="DeleteItem(SelectedItem)">Delete</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div> <!--end of input stuff-->
+            </div>
           </div>
-          <div class="row" id="button-bar">
-            <!-- for debugging -->
-            <!-- <div>
-              <span>Selected Item:</span><label id="SelectedItem">____</label> 
-            </div> -->
 
-            <button class="ItemManipulateButtons btn btn-info" disabled
-              onclick="RotateItem(SelectedItem)">Rotate</button>
-
-            <button class="ItemManipulateButtons btn btn-info" disabled onclick="FlipItem(SelectedItem)">Flip</button>
-
-            <button class="ItemManipulateButtons btn btn-info" disabled onclick="CloneItem(SelectedItem)">Clone</button>
-
-            <button class="ItemManipulateButtons btn btn-info" disabled
-              onclick="DeleteItem(SelectedItem)">Delete</button>
-
-          </div> <!--end of button bar-->
         </div>
       </nav>
 
