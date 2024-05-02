@@ -358,6 +358,7 @@ function ResizeGrid() {
 
     stage.destroy();
     GRID_SIZE = parseInt($('#GridSize')[0].value)
+    GRID_PADDING = Math.round((GRID_SIZE + GRID_SIZE / 3) / 10) * 10; //adjusting padding. rounding to nearest 10. 
     SetStage();
 
     Itemlayer = Konva.Node.create(items);
