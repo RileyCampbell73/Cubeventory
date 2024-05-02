@@ -71,10 +71,7 @@ $(document).ready(function () {
 
     //SIDEBAR
     $('#dismiss, .overlay').on('click', function () {
-        // hide sidebar
-        $('#sidebar').removeClass('active');
-        // hide overlay
-        $('.overlay').removeClass('active');
+        closeSidebar()
     });
 
     $('#sidebarCollapse').on('click', function () {
@@ -113,6 +110,13 @@ $(document).ready(function () {
         }
     }
 });
+
+function closeSidebar(){
+    // hide sidebar
+    $('#sidebar').removeClass('active');
+    // hide overlay
+    $('.overlay').removeClass('active');
+}
 
 function getCenter(p1, p2) {
     return {
@@ -425,6 +429,8 @@ function makeSave() {
 }
 
 function SaveDownload() {
+    closeSidebar();
+
     var name = $('#CharacterName')[0].value
 
     var saveJSON = makeSave();
@@ -443,6 +449,8 @@ function SaveDownload() {
 }
 
 function SaveLocal() {
+    closeSidebar();
+    
     const saveJson = makeSave();
 
     window.localStorage.setItem("local-save", saveJson);
@@ -505,10 +513,14 @@ function LoadSaveFile(str) {
 
 function ShowGenericItemModal(itemName) {
 
+    closeSidebar();
+
     //set name in modal
     $('#ItemName')[0].value = itemName
 
     $('#genericItemModal').modal('show');
+
+
 }
 
 function SpawnGenericItem() {
@@ -528,6 +540,8 @@ function SpawnGenericItem() {
 
 
 function ResetEverything() {
+    closeSidebar()
+
     if (confirm("SAVED CHANGES WILL BE LOST FOREVER! DOWNLOAD YOUR INVENTORY IF YOU WANT TO KEEP IT!\n\nproceed with reset?")) {
         window.localStorage.removeItem("local-save");
 

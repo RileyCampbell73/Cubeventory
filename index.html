@@ -98,7 +98,7 @@
         </li>
         <li>
 
-          <input type="file" id="saveUploadFile" accept=".json" style="display: none;">
+          <input type="file" id="saveUploadFile" accept=".json" style="display: none;" onclick="closeSidebar()">
           <a onclick="document.getElementById('saveUploadFile').click();">Load</a>
 
         </li>
@@ -109,7 +109,7 @@
         </li>
         <li>
 
-          <a data-toggle="modal" data-target="#helpModal">Help</a>
+          <a data-toggle="modal" data-target="#helpModal" onclick="closeSidebar()">Help</a>
 
         </li>
 
