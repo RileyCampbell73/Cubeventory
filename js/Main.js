@@ -1,4 +1,4 @@
-var VERSION_NUM = "1.1.0"
+var VERSION_NUM = "1.1.1"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
@@ -359,6 +359,7 @@ function ResizeGrid() {
 
     var items = Itemlayer.toJSON();
     var prevGridSize = GRID_SIZE;
+    var prevGridPadding = GRID_PADDING;
 
     stage.destroy();
     GRID_SIZE = parseInt($('#GridSize')[0].value)
@@ -367,14 +368,13 @@ function ResizeGrid() {
 
     Itemlayer = Konva.Node.create(items);
 
-    //for (var shape of Itemlayer.children) {
     for (let i = Itemlayer.children.length - 1; i >= 0; i--) {//loop backwards because we may delete shapes in container
         var shape = Itemlayer.children[i]
         shape = ResizeItem(shape, prevGridSize, i)
 
         var shapeX = shape.x();
         //take off padding 
-        shapeX -= GRID_PADDING;
+        shapeX -= prevGridPadding;
         //mod rest off
         var access = shapeX % prevGridSize
         shapeX -= access
@@ -388,11 +388,11 @@ function ResizeGrid() {
         else if (access === prevGridSize / 2) // for half items
             access = (GRID_SIZE / 2)
 
-        shapeX = (Xplacment * GRID_SIZE) + GRID_PADDING + (access)
+        shapeX = (Xplacment * GRID_SIZE) + (GRID_PADDING) + (access)
         shape.x(shapeX)
 
         var shapeY = shape.y();
-        shapeY -= GRID_PADDING;
+        shapeY -= prevGridPadding;
         var access = shapeY % prevGridSize
         shapeY -= access
         var Xplacment = shapeY / prevGridSize
@@ -492,6 +492,7 @@ function LoadSaveFile(str) {
 
     $('#GridSize')[0].value = json.gridSize
     GRID_SIZE = json.gridSize
+    GRID_PADDING = Math.round((GRID_SIZE + GRID_SIZE / 3) / 10) * 10; //adjusting padding. rounding to nearest 10. 
     stage.destroy();
     SetStage();
 
