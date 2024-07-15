@@ -1,6 +1,6 @@
 <head>
 
-  <!-- Version Num: 1.1.1 -->
+  <!-- Version Num: 1.2.0 -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
@@ -33,6 +33,7 @@
   <script src="js/ComplexItemShapes.js"></script>
   <script src="js/ItemSpawner.js"></script>
   <script src="js/AutofillCombobox.js"></script>
+  <script src="js/Utils.js"></script>
 
   <link rel="icon" type="image/x-icon" href="./cube-3d.png" />
 
@@ -84,6 +85,12 @@
         <li>
 
           <a onclick="ShowGenericItemModal('')">Create Item</a>
+
+        </li>
+
+        <li>
+
+          <a onclick="ShowAllItemsModal()">List All Items</a>
 
         </li>
         <li>
@@ -264,70 +271,104 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Generic Item Modal -->
-  <div class="modal fade" id="genericItemModal" tabindex="-1" role="dialog" aria-labelledby="genericItemModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create an Item</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <div>
-            <label>Name</label>
-            <input type="text" id="ItemName" name="ItemName">
+  
+    <!-- Generic Item Modal -->
+    <div class="modal fade" id="genericItemModal" tabindex="-1" role="dialog" aria-labelledby="genericItemModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create an Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <div class="modal-body">
 
-          <div>
-            <label>Weight</label>
-            <input type="number" id="ItemWeight" name="ItemWeight">
+            <div>
+              <label>Name</label>
+              <input type="text" id="ItemName" name="ItemName">
+            </div>
+
+            <div>
+              <label>Weight</label>
+              <input type="number" id="ItemWeight" name="ItemWeight">
+            </div>
+
+            <div>
+              <label>Colour</label>
+              <input type="color" id="ItemColour" name="ItemColour" value="#ADD8E6">
+            </div>
+
           </div>
-
-          <div>
-            <label>Colour</label>
-            <input type="color" id="ItemColour" name="ItemColour" value="#ADD8E6">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal"
+              onclick="SpawnGenericItem()">Create</button>
           </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal"
-            onclick="SpawnGenericItem()">Create</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Mobile User Help Modal -->
-  <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Mobile User Help</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    <!-- Mobile User Help Modal -->
+    <div class="modal fade" id="mobileUserModal" tabindex="-1" role="dialog" aria-labelledby="mobileUserModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mobile User Help</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
 
-          <p>Welcome to Cubeventory on mobile! Drag items around with one finger and move the grid around with two
-            fingers.</p>
+            <p>Welcome to Cubeventory on mobile! Drag items around with one finger and move the grid around with two
+              fingers.</p>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SpawnGenericItem()">Create</button> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- All Items Modal -->
+    <div class="modal fade" id="AllItemsModal" tabindex="-1" role="dialog" aria-labelledby="AllItemsModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">All Items</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <table id="AllItemsTable">
+              <thead>
+                <tr>
+                  <th>Item Name</th>
+                  <th>Weight</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="menu">

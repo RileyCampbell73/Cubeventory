@@ -1,11 +1,11 @@
 
 //some items may have odd shapes and require their own function
-function spawnPaddedArmor(index, name, colour) {
+function spawnPaddedArmor(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -98,12 +98,12 @@ function spawnPaddedArmor(index, name, colour) {
 
 }
 
-function spawnLeatherArmor(index, name, colour) {
+function spawnLeatherArmor(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -206,12 +206,12 @@ function spawnLeatherArmor(index, name, colour) {
 
 }
 
-function spawnStuddedArmor(index, name, colour) {
+function spawnStuddedArmor(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -338,12 +338,12 @@ function spawnStuddedArmor(index, name, colour) {
 
 }
 
-function spawnHideArmor(index, name, colour) {
+function spawnHideArmor(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -449,12 +449,12 @@ function spawnHideArmor(index, name, colour) {
 
 }
 
-function spawnChainShirtArmor(index, name, colour) {
+function spawnChainShirtArmor(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -602,12 +602,12 @@ function spawnChainShirtArmor(index, name, colour) {
 
 }
 
-function spawnShield(index, name, colour) {
+function spawnShield(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -685,12 +685,12 @@ function spawnShield(index, name, colour) {
 
 }
 
-function spawnMace(index, name, colour) {
+function spawnMace(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -741,7 +741,7 @@ function spawnLineItem(index, name, colour, weight) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -789,12 +789,12 @@ function spawnLineItem(index, name, colour, weight) {
 
 }
 
-function spawnLightCrossbow(index, name, colour) {
+function spawnLightCrossbow(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -865,12 +865,12 @@ function spawnLightCrossbow(index, name, colour) {
 
 }
 
-function spawnGlaive(index, name, colour) {
+function spawnGlaive(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -926,12 +926,12 @@ function spawnGlaive(index, name, colour) {
 
 }
 
-function spawnGreataxe(index, name, colour) {
+function spawnGreataxe(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1009,12 +1009,12 @@ function spawnGreataxe(index, name, colour) {
 
 }
 
-function spawnGreatsword(index, name, colour) {
+function spawnGreatsword(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1091,12 +1091,14 @@ function spawnGreatsword(index, name, colour) {
 
 }
 
-function spawnMultiLineItem(index, name, colour, columns, rows) {
+function spawnMultiLineItem(index, name, colour, weight, rows) {
 
     var randItemSpawn = randomSpawnLocation();
 
+    var columns = weight / 2;
+
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1144,11 +1146,11 @@ function spawnMultiLineItem(index, name, colour, columns, rows) {
 
 }
 
-function spawnHeavyCrossbow(index, name, colour) {
+function spawnHeavyCrossbow(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1293,12 +1295,12 @@ function spawnHeavyCrossbow(index, name, colour) {
 
 }
 
-function spawnMaul(index, name, colour) {
+function spawnMaul(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1400,12 +1402,12 @@ function spawnMaul(index, name, colour) {
 
 }
 
-function spawnCrowbar(index, name, colour) {
+function spawnCrowbar(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1456,12 +1458,12 @@ function spawnCrowbar(index, name, colour) {
 
 }
 
-function spawnMinersPick(index, name, colour) {
+function spawnMinersPick(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1567,12 +1569,12 @@ function spawnMinersPick(index, name, colour) {
 
 }
 
-function spawnIronPot(index, name, colour) {
+function spawnIronPot(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1671,12 +1673,12 @@ function spawnIronPot(index, name, colour) {
 
 }
 
-function spawnHempRope(index, name, colour) {
+function spawnHempRope(index, name, colour, weight) {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();

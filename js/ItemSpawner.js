@@ -22,27 +22,27 @@ function determineSpawnMethod(index, name, colour, weight)
     
     switch (index) {
         case 'padded-armor':
-            return spawnPaddedArmor(index, name, colour)
+            return spawnPaddedArmor(index, name, colour, weight)
             break;
         case 'leather-armor':
-            return spawnLeatherArmor(index, name, colour)
+            return spawnLeatherArmor(index, name, colour, weight)
             break;
         case 'studded-leather-armor':
-            return spawnStuddedArmor(index, name, colour)
+            return spawnStuddedArmor(index, name, colour, weight)
             break;
         case 'hide-armor':
-            return spawnHideArmor(index, name, colour)
+            return spawnHideArmor(index, name, colour, weight)
             break;
         case 'chain-shirt':
         case 'breastplate':
-            return spawnChainShirtArmor(index, name, colour)
+            return spawnChainShirtArmor(index, name, colour, weight)
             break;
         case 'shield':
-            return spawnShield(index, name, colour)
+            return spawnShield(index, name, colour, weight)
             break;
         case 'mace':
         case 'battleaxe':
-            return spawnMace(index, name, colour)
+            return spawnMace(index, name, colour, weight)
             break;
         case 'quarterstaff':
         case 'spear':
@@ -53,45 +53,45 @@ function determineSpawnMethod(index, name, colour, weight)
             return spawnLineItem(index, name, colour, weight)
             break;
         case 'crossbow-light':
-            return spawnLightCrossbow(index, name, colour)
+            return spawnLightCrossbow(index, name, colour, weight)
             break;
         case 'glaive':
         case 'halberd':
-            return spawnGlaive(index, name, colour)
+            return spawnGlaive(index, name, colour, weight)
             break;
         case 'greataxe':
-            return spawnGreataxe(index, name, colour)
+            return spawnGreataxe(index, name, colour, weight)
             break;
         case 'greatsword':
-            return spawnGreatsword(index, name, colour)
+            return spawnGreatsword(index, name, colour, weight)
             break;
         case 'maul':
-            return spawnMaul(index, name, colour)
+            return spawnMaul(index, name, colour, weight)
             break;
         case 'pike':
         case 'chain-10-feet':
         case 'climbers-kit':
         case 'greatclub':
-            return spawnMultiLineItem(index, name, colour, weight / 2, 2)
+            return spawnMultiLineItem(index, name, colour, weight, 2)
             break;
         case 'crossbow-heavy':// too bulky?
-            return spawnHeavyCrossbow(index, name, colour)
+            return spawnHeavyCrossbow(index, name, colour, weight)
             break;
         case 'crowbar':
-            return spawnCrowbar(index, name, colour)
+            return spawnCrowbar(index, name, colour, weight)
             break;
         case 'pick-miners':
-            return spawnMinersPick(index, name, colour)
+            return spawnMinersPick(index, name, colour, weight)
             break;
         case 'pot-iron':
-            return spawnIronPot(index, name, colour)
+            return spawnIronPot(index, name, colour, weight)
             break;
         case 'rope-hempen-50-feet':
-            return spawnHempRope(index, name, colour)
+            return spawnHempRope(index, name, colour, weight)
             break;
 
         default:
-            return spawnGenericItem(name, weight, colour);
+            return spawnGenericItem(name, weight, colour, weight);
     }
 }
 
@@ -113,7 +113,7 @@ function spawnGenericItem(name, weight, colour) {
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -639,13 +639,14 @@ function addItemText(name, itemShapes){
 
 }
 
-function createBaseItemGroup(x,y, name, index = undefined){
+function createBaseItemGroup(x,y, name, weight, index = undefined){
 
     return new Konva.Group({
         x: x,
         y: y,
         draggable: true,
         itemName: name,
+        itemWeight: weight,
         isSelected: false,
         complexItem: index
     });

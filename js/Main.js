@@ -1,4 +1,4 @@
-var VERSION_NUM = "1.1.1"
+var VERSION_NUM = "1.2.0"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
@@ -269,9 +269,9 @@ function ResizeItem(itemShape, prevGridSize) {
 
     //check if complex
     if (itemShape.getAttr('complexItem') != undefined) {
-        var name = itemShape.children[1].children[0].text()
+        var name = itemShape.children[1].children[0].text() // Change this to be name in metadata
         var colour = itemShape.children[0].children[0].fill();
-        var weight = itemShape.children[0].find('.fillShape').length
+        var weight = itemShape.children[0].find('.fillShape').length // Change this to be weight in metadata
 
         //how to determine which one to spawn 
         var complexItem = determineSpawnMethod(itemShape.getAttr('complexItem'), name, colour, weight)
@@ -479,8 +479,6 @@ function uploadSaveFile() {
 function LoadSaveFile(str) {
     let json = JSON.parse(str);
 
-   
-
     //update fields with save data
     $('#CharacterName')[0].value = json.name
 
@@ -503,11 +501,18 @@ function LoadSaveFile(str) {
     InitializeMenu();
     InitializeCollisionSnapping()
 
-     //check version number
-     if (json.version == "1.0.1"){
+    //check version number and do any changes to saves continue to work.
+    if (json.version == "1.0.1"){ 
         //add 'name': "shapeOutline" to the complex items
         //changing grid size fixes this...
-        ResizeGrid()
+        ResizeGrid();
+
+        // To make this cascading, I just update the version to be the next that requires changes. That way, the next condition is hit.
+        json.version = "1.1.1"
+    }
+    if (json.version == "1.1.1"){
+        //missing 'itemWeight' attribute
+        DetermineItemWeightByShapes();
     }
 
 }
@@ -590,5 +595,21 @@ function onShapeClick(item) {
         
         SelectedItem = item;
     }
+
+}
+
+function ShowAllItemsModal(){
+
+    
+    Itemlayer.children.forEach(element => {
+        debugger;
+
+        var row = "<tr> <td>"+ element.attrs.itemName +"</td> <td>"+ element.attrs.itemWeight +"</td> <td></td> </tr>"
+
+        $("#AllItemsTable").find('tbody').append(row)
+
+    });
+
+    $('#AllItemsModal').modal('show');
 
 }
