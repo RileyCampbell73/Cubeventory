@@ -100,7 +100,6 @@ $(document).ready(function () {
 
     window.addEventListener("beforeunload", SaveLocal);
 
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         //check local storage 
         if (window.localStorage.getItem("shownMobileHelpModal") == null){
@@ -600,15 +599,37 @@ function onShapeClick(item) {
 
 function ShowAllItemsModal(){
 
-    
-    Itemlayer.children.forEach(element => {
-        debugger;
+    //clear table
+    $("#AllItemsTable").find('tbody').empty();
 
-        var row = "<tr> <td>"+ element.attrs.itemName +"</td> <td>"+ element.attrs.itemWeight +"</td> <td></td> </tr>"
+    //sory by weight then name
+    var sortedItems = Itemlayer.children.sort((itemA, itemB) =>
+        itemB.attrs.itemWeight - itemA.attrs.itemWeight ||
+        itemA.attrs.itemName.localeCompare(itemB.attrs.itemName)
+    )
+
+    //Should combine the same Item and show quantity?
+    //  makes "editing" hard tho. if your showing one row for six candles - which are you editing. 
+    //      Make it a dropdown, a sub table, where they can edit specific candles. 
+    //          this would change table, causing a refresh at worse, or a live change which is tough
+    //              refresh is fine, it will open another modal anyway
+
+    for (let i = 0; i < sortedItems.length; i++) {
+
+   
+        var row = "<tr data-toggle=\"collapse\" data-target=\"#demo"+ i +"\"> <td>"+ sortedItems[i].attrs.itemName +"</td> <td>"+ sortedItems[i].attrs.itemWeight +"</td> <td></td> <td></td> </tr>" +
+        "<tr> <td class=\"hiddenRow\"><div id=\"demo"+ i +"\"class=\"collapse\">Demo1</div></td></tr>"
+
 
         $("#AllItemsTable").find('tbody').append(row)
 
+    };
+
+
+    $('.collapse').on('show.bs.collapse', function () {
+        $('.collapse.in').collapse('hide');
     });
+
 
     $('#AllItemsModal').modal('show');
 
