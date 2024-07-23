@@ -602,26 +602,61 @@ function ShowAllItemsModal(){
     //clear table
     $("#AllItemsTable").find('tbody').empty();
 
-    //sory by weight then name
-    var sortedItems = Itemlayer.children.sort((itemA, itemB) =>
-        itemB.attrs.itemWeight - itemA.attrs.itemWeight ||
-        itemA.attrs.itemName.localeCompare(itemB.attrs.itemName)
-    )
-
-    //Should combine the same Item and show quantity?
+     //Should combine the same Item and show quantity?
     //  makes "editing" hard tho. if your showing one row for six candles - which are you editing. 
     //      Make it a dropdown, a sub table, where they can edit specific candles. 
     //          this would change table, causing a refresh at worse, or a live change which is tough
     //              refresh is fine, it will open another modal anyway
 
-    for (let i = 0; i < sortedItems.length; i++) {
+    //maintain a dict of all items? 
+    //  key = itemname
+    //  value = array of shapes?
+
+    var itemDict = {}
+
+    Itemlayer.children.forEach(item => {
+        
+        if (itemDict == undefined || itemDict[item.attrs.itemName] == undefined)
+        {
+            itemDict[item.attrs.itemName] = [item]
+        }
+        else
+        {
+            itemDict[item.attrs.itemName].push(item)
+        }
+
+    });
+
+
+    //sory by weight then name
+    // var sortedItems = Itemlayer.children.sort((itemA, itemB) =>
+    //     itemB.attrs.itemWeight - itemA.attrs.itemWeight ||
+    //     itemA.attrs.itemName.localeCompare(itemB.attrs.itemName)
+    // )
 
    
-        var row = "<tr data-toggle=\"collapse\" data-target=\"#demo"+ i +"\"> <td>"+ sortedItems[i].attrs.itemName +"</td> <td>"+ sortedItems[i].attrs.itemWeight +"</td> <td></td> <td></td> </tr>" +
-        "<tr> <td class=\"hiddenRow\"><div id=\"demo"+ i +"\"class=\"collapse\">Demo1</div></td></tr>"
+    var iterator = 0;
+    for (var key in itemDict)
+    {
+   
+        var row = "<tr data-toggle=\"collapse\" data-target=\"#demo"+ iterator +"\"> <td>"+ key +"</td> <td>"+ itemDict[key][0].attrs.itemWeight +"</td> <td>"+ itemDict[key].length +"</td> <td>"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
+
+        if (itemDict[key].length > 1)
+        {
+            var subItemRows = "test";
+            itemDict[key].forEach(element => {
+                
+            });
+            //just use these as the extra riws
+          
+            row +=  "<tr> <td class=\"hiddenRow\"><div id=\"demo"+ iterator +"\"class=\"collapse\">"+subItemRows +"</div></td></tr>"
+            row +=  "<tr> <td class=\"hiddenRow\"><div id=\"demo"+ iterator +"\"class=\"collapse\">"+subItemRows +"</div></td></tr>"
+        }
+
 
 
         $("#AllItemsTable").find('tbody').append(row)
+        iterator++;
 
     };
 
