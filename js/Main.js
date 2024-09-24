@@ -333,7 +333,7 @@ function ResizeItem(itemShape, prevGridSize) {
         var name = itemShape.children[1].children[0].text()
         itemShape.children[1].children[0].destroy()
         //add text
-        itemShape.children[1].add(addItemText(name, itemShape.children[0]))
+        itemShape.children[1].add(addItemText(name, "", itemShape.children[0]))
 
         //remove all lines
         itemShape.children[2].children = []
@@ -516,21 +516,69 @@ function LoadSaveFile(str) {
 
 }
 
-function ShowGenericItemModal(itemName) {
+function ShowItemModal(itemName = "", itemID = undefined) {
 
     closeSidebar();
+    $('#AllItemsModal').modal('hide');
 
-    //set name in modal
-    $('#ItemName')[0].value = itemName
+    if (itemID != undefined){
 
-    $('#genericItemModal').modal('show');
+        //get Item with itemID
+        var item = Itemlayer.find(item => item._id == itemID)[0]
+
+        //set title
+        $('#itemModalTitle').html("Edit Item")
+
+        //set button
+        $('#ItemModalSubmit').attr("onclick","EditItem(" + itemID + ")");
+        $('#ItemModalSubmit').html("Submit");
+
+        //set all the fields
+        $('#ItemName')[0].value = item.attrs.itemName
+        $('#ItemWeight')[0].value = item.attrs.itemWeight
+        if (item.attrs.altName != undefined)
+            $('#AltItemName')[0].value = item.attrs.altName
+        $('#ItemColour')[0].value = item.children.find(x => x.attrs.name == "itemShapes").children[0].attrs.fill
+
+        if (item.attrs.complexItem != undefined){
+            $('#ItemName').prop('disabled', true);
+            $('#ItemWeight').prop('disabled', true);
+        }
+
+        
+    }
+    else{
+        //set title
+        $('#itemModalTitle').html("Create Item")
+
+        //set button
+        $('#ItemModalSubmit').attr("onclick","SpawnGenericItem()");
+        $('#ItemModalSubmit').html("Create");
+
+        //set name in modal
+        $('#ItemName')[0].value = itemName
+
+        $('#ItemName').prop('disabled', false);
+        $('#ItemWeight').prop('disabled', false);
+
+    }
+
+    $('#itemModal').modal('show');
 
 
 }
 
 function SpawnGenericItem() {
 
-    Itemlayer.add(spawnGenericItem($('#ItemName')[0].value, $('#ItemWeight')[0].value, $('#ItemColour')[0].value))
+    Itemlayer.add(spawnGenericItem(
+        $('#ItemName')[0].value, 
+        $('#ItemWeight')[0].value, 
+        $('#ItemColour')[0].value,
+        $('#AltItemName')[0].value
+    ))
+
+    //clear title
+    $('#itemModalTitle')[0].value = ""
 
     //clear modal fields
     $('#ItemName')[0].value = ''
@@ -543,6 +591,75 @@ function SpawnGenericItem() {
     $('.overlay').removeClass('active');
 }
 
+function RespawnGenericItem(prevItem) {
+    //TODO: put a lot duplicate code in this and SpawnGenericItem.
+    
+    var item = spawnGenericItem(
+        $('#ItemName')[0].value, 
+        $('#ItemWeight')[0].value, 
+        $('#ItemColour')[0].value,
+        $('#AltItemName')[0].value
+    )
+
+    item.x(prevItem.x())
+    item.y(prevItem.y())
+
+    Itemlayer.add(item);
+
+    DeleteItem(prevItem)
+    //clear title
+    $('#itemModalTitle')[0].value = ""
+
+    //clear modal fields
+    $('#ItemName')[0].value = ''
+    $('#ItemWeight')[0].value = ''
+    $('#ItemColour')[0].value = '#ADD8E6'
+
+    // hide sidebar
+    $('#sidebar').removeClass('active');
+    // hide overlay
+    $('.overlay').removeClass('active');
+
+}
+
+function EditItem(itemID){
+    var sadfglikj = 0;
+
+    //get Item with itemID
+    var item = Itemlayer.find(item => item._id == itemID)[0] // Put in its own method
+
+
+
+    //how to edit? Delete & remake? then place at same coords?
+    //  how to deal w changing weight of custom stuff
+    //      some kind of fusing system? 
+    //      ignore it. There are workarounds
+    //      disable weight change for custom items?
+    
+
+    // if weight unchanged
+    if ($('#ItemWeight')[0].value == item.attrs.itemWeight){
+        
+        //just change name and colour
+        //put all this into it's own method
+        item.attrs.itemName = $('#ItemName')[0].value
+        item.attrs.altName = $('#AltItemName')[0].value
+
+        item.children.find(x => x.attrs.name == "itemText").children = []
+        item.children.find(x => x.attrs.name == "itemText").add(addItemText($('#ItemName')[0].value, $('#AltItemName')[0].value, item.children.find(x => x.attrs.name == "itemShapes")));
+        
+        //change colour
+        item.children.find(x => x.attrs.name == "itemShapes").children.forEach( shape => {shape.setAttr('fill',$('#ItemColour')[0].value)})// make it's own method
+    }
+    else{
+        //else - remake item through 'create new item'
+        //  place new item at same coords of prev one. 
+        RespawnGenericItem(item)
+        //  Delete prev one
+    }
+
+
+}
 
 function ResetEverything() {
     closeSidebar()
@@ -602,11 +719,19 @@ function ShowAllItemsModal(){
     //clear table
     $("#AllItemsTable").find('tbody').empty();
 
-     //Should combine the same Item and show quantity?
+    //Should combine the same Item and show quantity?
     //  makes "editing" hard tho. if your showing one row for six candles - which are you editing. 
     //      Make it a dropdown, a sub table, where they can edit specific candles. 
     //          this would change table, causing a refresh at worse, or a live change which is tough
     //              refresh is fine, it will open another modal anyway
+
+    //put all buttons on sub row?
+    //  What buttons
+    //      Edit, Delete, Clone(?)
+    //  means an extra click but also saves space on mobile. 
+    //What is on this Subrow, for individual & multiple items?
+    //  Item Name, Buttons
+    //      this item name can be the different one given by user in Edit. 
 
     //maintain a dict of all items? 
     //  key = itemname
@@ -639,23 +764,34 @@ function ShowAllItemsModal(){
     for (var key in itemDict)
     {
    
-        var row = "<tr data-toggle=\"collapse\" data-target=\"#demo"+ iterator +"\"> <td>"+ key +"</td> <td>"+ itemDict[key][0].attrs.itemWeight +"</td> <td>"+ itemDict[key].length +"</td> <td>"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
+        var row = ""
+        row +=  "<tr data-toggle=\"collapse\" data-target=\"#row"+ iterator +"\" class=\"accordion-toggle collapsed collapse-icon\"> <td><i class=\"material-icons\">keyboard_arrow_right</i></td> <td>"+ key +"</td> <td>"+ itemDict[key].length +"</td> <td>"+ itemDict[key][0].attrs.itemWeight +"</td> <td>"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
+        
+        // if (itemDict[key].length > 1)
+        // {
+            
+            
+            row +=  "<tr><td colspan=\"5\" class=\"hiddenRow\"><div class=\"accordian-body collapse\" id=\"row"+ iterator +"\">"
+            row += "<table>"
 
-        if (itemDict[key].length > 1)
-        {
-            var subItemRows = "test";
-            itemDict[key].forEach(element => {
-                
+            itemDict[key].forEach(item => {
+
+                //row += item.attrs.itemName + "<br>"
+
+                row += "<tr><td>" + ((item.attrs.altName != "") ?  item.attrs.altName : item.attrs.itemName) + "</td><td> <button class=\"btn btn-info btn-sm btn-block\" onclick=\"ShowItemModal(''," + item._id +")\">Edit</button> </td> <td> <button class=\"btn btn-danger btn-sm btn-block\" onclick=\"\">Delete</button> </td> </tr>"
+
             });
-            //just use these as the extra riws
-          
-            row +=  "<tr> <td class=\"hiddenRow\"><div id=\"demo"+ iterator +"\"class=\"collapse\">"+subItemRows +"</div></td></tr>"
-            row +=  "<tr> <td class=\"hiddenRow\"><div id=\"demo"+ iterator +"\"class=\"collapse\">"+subItemRows +"</div></td></tr>"
-        }
+            
+            row += "</table>"
+            row +=  "</div></td></tr>"
+        // }
+        // else{
+        //    //row =  "<tr><td></td> <td>"+ key +"</td> <td>"+ itemDict[key].length +"</td> <td>"+ itemDict[key][0].attrs.itemWeight +"</td> <td>"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
+        // }
 
 
 
-        $("#AllItemsTable").find('tbody').append(row)
+        $("#AllItemsTableBody").append(row)
         iterator++;
 
     };

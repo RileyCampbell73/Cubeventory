@@ -91,7 +91,7 @@ function determineSpawnMethod(index, name, colour, weight)
             break;
 
         default:
-            return spawnGenericItem(name, weight, colour, weight);
+            return spawnGenericItem(name, weight, colour);
     }
 }
 
@@ -108,12 +108,12 @@ function SpawnPackContents(packJson) {
     }
 }
 
-function spawnGenericItem(name, weight, colour) {
+function spawnGenericItem(name, weight, colour, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, undefined, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -138,7 +138,7 @@ function spawnGenericItem(name, weight, colour) {
             ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2, GRID_SIZE / 2));
         }
 
-        ItemText.add(addItemText(name, ItemShapes))
+        ItemText.add(addItemText(name, altName, ItemShapes))
 
         ItemLines.add(generateOutline(ItemShapes))
 
@@ -225,7 +225,7 @@ function spawnGenericItem(name, weight, colour) {
     }
 
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, altName, ItemShapes))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -537,7 +537,7 @@ function generateOutline(shapelayer) { // this out outta hand fast
     return line;
 }
 
-function addItemText(name, itemShapes){
+function addItemText(name, altName = "", itemShapes){
 
     var avaliableWidth;
     var textX = 0;
@@ -585,7 +585,7 @@ function addItemText(name, itemShapes){
         var context = $('.konvajs-content')[0].children[0].getContext("2d")
         //use context.font = "italic 19pt Calibri";
         context.font = fontsize + "px Calibri"
-        var textwidth = context.measureText(name); 
+        var textwidth = context.measureText(((altName != "") ? altName : name)); 
 
         //get Square diagonal width
         var diagonalLength = (Math.sqrt(2) * avaliableWidth) - 5 // 5 is for a lil padding
@@ -595,7 +595,7 @@ function addItemText(name, itemShapes){
                 x: textX + fontsize / 1.2,
                 y: textY + fontsize / 3.5,
                 rotation: 45,
-                text: name,
+                text: ((altName != "") ? altName : name),
                 fontSize: fontsize,
                 fontFamily: 'Calibri',
                 fill: '#000',
@@ -609,7 +609,7 @@ function addItemText(name, itemShapes){
             return new Konva.Text({
                 x: textX,
                 y: textY,
-                text: name,
+                text: ((altName != "") ? altName : name),
                 fontSize: fontsize,
                 fontFamily: 'Calibri',
                 fill: '#000',
@@ -626,7 +626,7 @@ function addItemText(name, itemShapes){
     return new Konva.Text({
         x: textX,
         y: textY,
-        text: name,
+        text: ((altName != "") ? altName : name),
         fontSize: fontsize,
         fontFamily: 'Calibri',
         fill: '#000',
@@ -639,7 +639,7 @@ function addItemText(name, itemShapes){
 
 }
 
-function createBaseItemGroup(x,y, name, weight, index = undefined){
+function createBaseItemGroup(x,y, name, weight, index = undefined, altName = ""){
 
     return new Konva.Group({
         x: x,
@@ -648,7 +648,8 @@ function createBaseItemGroup(x,y, name, weight, index = undefined){
         itemName: name,
         itemWeight: weight,
         isSelected: false,
-        complexItem: index
+        complexItem: index,
+        altName: altName,
     });
 
 }

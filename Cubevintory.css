@@ -298,6 +298,17 @@
 
   .hiddenRow {
     padding: 0 !important;
+    border-top: 0px !important;
+}
+
+.collapse-icon td i{
+    transform: rotate(90deg);
+    transition: .3s transform ease-in-out;
+    display: inline-block;
+}
+
+.collapse-icon.collapsed td i{
+    transform: rotate(0deg);
 }
 
   /* ---------------------------------------------------

@@ -216,12 +216,14 @@ function InitializeMenu() {
   var rotateButton = document.getElementById('rotate-button')
   var flipButton = document.getElementById('flip-button')
   var duplicateButton = document.getElementById('duplicate-button')
+  var editButton = document.getElementById('editItem-button')
   var deleteButton = document.getElementById('delete-button')
 
   //remove old listeners
   rotateButton.replaceWith(rotateButton.cloneNode(true));
   flipButton.replaceWith(flipButton.cloneNode(true));
   duplicateButton.replaceWith(duplicateButton.cloneNode(true));
+  editButton.replaceWith(editButton.cloneNode(true));
   deleteButton.replaceWith(deleteButton.cloneNode(true));
 
   // setup menu
@@ -241,6 +243,10 @@ function InitializeMenu() {
   
   document.getElementById('delete-button').addEventListener('click', () => {
     DeleteItem(currentShape.parent.parent);
+  });
+
+  document.getElementById('editItem-button').addEventListener('click', () => {
+    ShowItemModal('', currentShape.parent.parent._id);
   });
 
   window.addEventListener('click', () => {

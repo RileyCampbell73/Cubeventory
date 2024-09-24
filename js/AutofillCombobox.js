@@ -39,7 +39,7 @@ function initializeItemCombobox() {
 
                         if (ui.item.value === -2){
                             //generic item
-                            ShowGenericItemModal($("#AutoBox")[0].value)
+                            ShowItemModal($("#AutoBox")[0].value)
                         }
                         else if (ui.item.value != -1){//check if clicking 'no result
 
