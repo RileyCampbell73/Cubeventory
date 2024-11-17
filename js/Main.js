@@ -1,4 +1,4 @@
-var VERSION_NUM = "1.1.1"
+var VERSION_NUM = "1.1.2"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
@@ -53,10 +53,10 @@ $(document).ready(function () {
 
         strength = $('#CharacterStrength')[0].value;
 
-        if (strength > 50) {
-            $('#CharacterStrength')[0].value = 50
-            strength = 50
-        }
+        // if (strength > 50) {
+        //     $('#CharacterStrength')[0].value = 50
+        //     strength = 50
+        // }
 
         STAGE_HEIGHT = calcStageHeight()
         stage.height(STAGE_HEIGHT);
