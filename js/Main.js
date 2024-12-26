@@ -543,6 +543,12 @@ function ShowItemModal(itemName = "", itemID = undefined) {
         if (item.attrs.complexItem != undefined){
             $('#ItemName').prop('disabled', true);
             $('#ItemWeight').prop('disabled', true);
+            $('#ItemModalComplexInfo').show();
+        }
+        else {
+            $('#ItemName').prop('disabled', false);
+            $('#ItemWeight').prop('disabled', false);
+            $('#ItemModalComplexInfo').hide();
         }
 
         
@@ -623,7 +629,6 @@ function RespawnGenericItem(prevItem) {
 }
 
 function EditItem(itemID){
-    var sadfglikj = 0;
 
     //get Item with itemID
     var item = Itemlayer.find(item => item._id == itemID)[0] // Put in its own method
