@@ -203,7 +203,7 @@
 
             <div class="col-3 col-sm-6">
               <div class="row btn-group" >
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div id="button-bar" style="margin-bottom: 3;">
                     <div>
                       <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="RotateItem(SelectedItem)">Rotate</button>
@@ -213,19 +213,24 @@
                   </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div id="button-bar">
-                  <div>
-                    <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="CloneItem(SelectedItem)">Clone</button>
-                  </div>
-                  <!-- TODO: Add this button without messing up header. -->
-                  <!-- <div>
-                    <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="ShowItemModal('', SelectedItem._id);">Edit</button>
-                  </div> -->
-                  <div>
-                    <button class="ItemManipulateButtons btn btn-danger btn-block" disabled onclick="DeleteItem(SelectedItem)">Delete</button>
+                <div class="col-sm-4">
+                  <div id="button-bar" style="margin-bottom: 3;">
+                    <div>
+                      <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="CloneItem(SelectedItem)">Clone</button>
+                    </div>
+                    <!-- TODO: Add this button without messing up header. -->
+                    
+                    <div>
+                      <button class="ItemManipulateButtons btn btn-danger btn-block" disabled onclick="DeleteItem(SelectedItem)">Delete</button>
                     </div>
                   </div>
+                </div>
+                <div class="col-sm-4">
+                  <div id="button-bar" style="margin-bottom: 3;">
+                    <div>
+                        <button class="ItemManipulateButtons btn btn-info btn-block" disabled onclick="ShowItemModal('', SelectedItem._id);">Edit</button>
+                    </div>
+                </div>
                 </div>
               </div>
             </div>
