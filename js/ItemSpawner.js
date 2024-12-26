@@ -138,7 +138,7 @@ function spawnGenericItem(name, weight, colour, altName = "") {
             ItemShapes.add(createCube(0, 0, colour, GRID_SIZE / 2, GRID_SIZE / 2));
         }
 
-        ItemText.add(addItemText(name, altName, ItemShapes))
+        ItemText.add(addItemText(name, ItemShapes, altName))
 
         ItemLines.add(generateOutline(ItemShapes))
 
@@ -225,7 +225,7 @@ function spawnGenericItem(name, weight, colour, altName = "") {
     }
 
 
-    ItemText.add(addItemText(name, altName, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -537,7 +537,7 @@ function generateOutline(shapelayer) { // this out outta hand fast
     return line;
 }
 
-function addItemText(name, altName = "", itemShapes){
+function addItemText(name, itemShapes, altName = ""){
 
     var avaliableWidth;
     var textX = 0;

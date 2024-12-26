@@ -268,9 +268,9 @@ function ResizeItem(itemShape, prevGridSize) {
 
     //check if complex
     if (itemShape.getAttr('complexItem') != undefined) {
-        var name = itemShape.children[1].children[0].text() // Change this to be name in metadata
+        var name = itemShape.getAttr('itemName');
         var colour = itemShape.children[0].children[0].fill();
-        var weight = itemShape.children[0].find('.fillShape').length // Change this to be weight in metadata
+        var weight = itemShape.getAttr('itemWeight')
 
         //how to determine which one to spawn 
         var complexItem = determineSpawnMethod(itemShape.getAttr('complexItem'), name, colour, weight)
@@ -333,7 +333,7 @@ function ResizeItem(itemShape, prevGridSize) {
         var name = itemShape.children[1].children[0].text()
         itemShape.children[1].children[0].destroy()
         //add text
-        itemShape.children[1].add(addItemText(name, "", itemShape.children[0]))
+        itemShape.children[1].add(addItemText(name, itemShape.children[0]))
 
         //remove all lines
         itemShape.children[2].children = []
@@ -646,7 +646,7 @@ function EditItem(itemID){
         item.attrs.altName = $('#AltItemName')[0].value
 
         item.children.find(x => x.attrs.name == "itemText").children = []
-        item.children.find(x => x.attrs.name == "itemText").add(addItemText($('#ItemName')[0].value, $('#AltItemName')[0].value, item.children.find(x => x.attrs.name == "itemShapes")));
+        item.children.find(x => x.attrs.name == "itemText").add(addItemText($('#ItemName')[0].value,  item.children.find(x => x.attrs.name == "itemShapes"), $('#AltItemName')[0].value));
         
         //change colour
         item.children.find(x => x.attrs.name == "itemShapes").children.forEach( shape => {shape.setAttr('fill',$('#ItemColour')[0].value)})// make it's own method
