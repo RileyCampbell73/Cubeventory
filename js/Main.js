@@ -633,20 +633,10 @@ function EditItem(itemID){
     //get Item with itemID
     var item = Itemlayer.find(item => item._id == itemID)[0] // Put in its own method
 
-
-
-    //how to edit? Delete & remake? then place at same coords?
-    //  how to deal w changing weight of custom stuff
-    //      some kind of fusing system? 
-    //      ignore it. There are workarounds
-    //      disable weight change for custom items?
-    
-
     // if weight unchanged
     if ($('#ItemWeight')[0].value == item.attrs.itemWeight){
         
         //just change name and colour
-        //put all this into it's own method
         item.attrs.itemName = $('#ItemName')[0].value
         item.attrs.altName = $('#AltItemName')[0].value
 
@@ -654,7 +644,10 @@ function EditItem(itemID){
         item.children.find(x => x.attrs.name == "itemText").add(addItemText($('#ItemName')[0].value,  item.children.find(x => x.attrs.name == "itemShapes"), $('#AltItemName')[0].value));
         
         //change colour
-        item.children.find(x => x.attrs.name == "itemShapes").children.forEach( shape => {shape.setAttr('fill',$('#ItemColour')[0].value)})// make it's own method
+        item.children.find(x => x.attrs.name == "itemShapes").children.forEach( shape => {
+            shape.setAttr('fill',$('#ItemColour')[0].value)
+            shape.setAttr('fillColour',$('#ItemColour')[0].value)
+        })
     }
     else{
         //else - remake item through 'create new item'
