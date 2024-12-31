@@ -1,11 +1,11 @@
 
 //some items may have odd shapes and require their own function
-function spawnPaddedArmor(index, name, colour, weight) {
+function spawnPaddedArmor(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -68,7 +68,7 @@ function spawnPaddedArmor(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -98,12 +98,12 @@ function spawnPaddedArmor(index, name, colour, weight) {
 
 }
 
-function spawnLeatherArmor(index, name, colour, weight) {
+function spawnLeatherArmor(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -178,7 +178,7 @@ function spawnLeatherArmor(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -206,12 +206,12 @@ function spawnLeatherArmor(index, name, colour, weight) {
 
 }
 
-function spawnStuddedArmor(index, name, colour, weight) {
+function spawnStuddedArmor(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -300,7 +300,7 @@ function spawnStuddedArmor(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -338,13 +338,12 @@ function spawnStuddedArmor(index, name, colour, weight) {
 
 }
 
-function spawnHideArmor(index, name, colour, weight) {
+function spawnHideArmor(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
-
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
     //group for shape
     var ItemShapes = createItemShapesGroup();
 
@@ -421,7 +420,7 @@ function spawnHideArmor(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -449,12 +448,12 @@ function spawnHideArmor(index, name, colour, weight) {
 
 }
 
-function spawnChainShirtArmor(index, name, colour, weight) {
+function spawnChainShirtArmor(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -574,7 +573,7 @@ function spawnChainShirtArmor(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -602,12 +601,12 @@ function spawnChainShirtArmor(index, name, colour, weight) {
 
 }
 
-function spawnShield(index, name, colour, weight) {
+function spawnShield(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -653,7 +652,7 @@ function spawnShield(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -685,12 +684,12 @@ function spawnShield(index, name, colour, weight) {
 
 }
 
-function spawnMace(index, name, colour, weight) {
+function spawnMace(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -726,7 +725,7 @@ function spawnMace(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -736,12 +735,12 @@ function spawnMace(index, name, colour, weight) {
 
 }
 
-function spawnLineItem(index, name, colour, weight) {
+function spawnLineItem(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -765,7 +764,7 @@ function spawnLineItem(index, name, colour, weight) {
         ));
     }
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -789,12 +788,12 @@ function spawnLineItem(index, name, colour, weight) {
 
 }
 
-function spawnLightCrossbow(index, name, colour, weight) {
+function spawnLightCrossbow(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -835,7 +834,7 @@ function spawnLightCrossbow(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -865,12 +864,12 @@ function spawnLightCrossbow(index, name, colour, weight) {
 
 }
 
-function spawnGlaive(index, name, colour, weight) {
+function spawnGlaive(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -916,7 +915,7 @@ function spawnGlaive(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -926,12 +925,12 @@ function spawnGlaive(index, name, colour, weight) {
 
 }
 
-function spawnGreataxe(index, name, colour, weight) {
+function spawnGreataxe(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -982,7 +981,7 @@ function spawnGreataxe(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1009,12 +1008,12 @@ function spawnGreataxe(index, name, colour, weight) {
 
 }
 
-function spawnGreatsword(index, name, colour, weight) {
+function spawnGreatsword(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1060,7 +1059,7 @@ function spawnGreatsword(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1091,14 +1090,14 @@ function spawnGreatsword(index, name, colour, weight) {
 
 }
 
-function spawnMultiLineItem(index, name, colour, weight, rows) {
+function spawnMultiLineItem(index, name, colour, weight, rows, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     var columns = weight / 2;
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1123,7 +1122,7 @@ function spawnMultiLineItem(index, name, colour, weight, rows) {
         }
     }
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1146,11 +1145,11 @@ function spawnMultiLineItem(index, name, colour, weight, rows) {
 
 }
 
-function spawnHeavyCrossbow(index, name, colour, weight) {
+function spawnHeavyCrossbow(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1260,7 +1259,7 @@ function spawnHeavyCrossbow(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1295,12 +1294,12 @@ function spawnHeavyCrossbow(index, name, colour, weight) {
 
 }
 
-function spawnMaul(index, name, colour, weight) {
+function spawnMaul(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1375,7 +1374,7 @@ function spawnMaul(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1402,12 +1401,12 @@ function spawnMaul(index, name, colour, weight) {
 
 }
 
-function spawnCrowbar(index, name, colour, weight) {
+function spawnCrowbar(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1448,7 +1447,7 @@ function spawnCrowbar(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1458,12 +1457,12 @@ function spawnCrowbar(index, name, colour, weight) {
 
 }
 
-function spawnMinersPick(index, name, colour, weight) {
+function spawnMinersPick(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1533,7 +1532,7 @@ function spawnMinersPick(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1569,12 +1568,12 @@ function spawnMinersPick(index, name, colour, weight) {
 
 }
 
-function spawnIronPot(index, name, colour, weight) {
+function spawnIronPot(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1646,7 +1645,7 @@ function spawnIronPot(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 
@@ -1673,12 +1672,12 @@ function spawnIronPot(index, name, colour, weight) {
 
 }
 
-function spawnHempRope(index, name, colour, weight) {
+function spawnHempRope(index, name, colour, weight, altName = "") {
 
     var randItemSpawn = randomSpawnLocation();
 
     //first make a group, everything will be a group.
-    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index)
+    var Item = createBaseItemGroup(randItemSpawn.x, randItemSpawn.y, name, weight, index, altName)
 
     //group for shape
     var ItemShapes = createItemShapesGroup();
@@ -1747,7 +1746,7 @@ function spawnHempRope(index, name, colour, weight) {
         colour
     ));
 
-    ItemText.add(addItemText(name, ItemShapes))
+    ItemText.add(addItemText(name, ItemShapes, altName))
 
     createInnerDashedLines(ItemShapes, ItemLines)
 

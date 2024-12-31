@@ -271,9 +271,12 @@ function ResizeItem(itemShape, prevGridSize) {
         var name = itemShape.getAttr('itemName');
         var colour = itemShape.children[0].children[0].fill();
         var weight = itemShape.getAttr('itemWeight')
+        var altName = itemShape.getAttr('altName')
+        
 
         //how to determine which one to spawn 
-        var complexItem = determineSpawnMethod(itemShape.getAttr('complexItem'), name, colour, weight)
+        var complexItem = determineSpawnMethod(itemShape.getAttr('complexItem'), name, colour, weight, altName)
+
         complexItem.x(itemShape.x())
         complexItem.y(itemShape.y())
         complexItem.rotation(itemShape.rotation())
@@ -717,24 +720,6 @@ function ShowAllItemsModal(){
     //clear table
     $("#AllItemsTable").find('tbody').empty();
 
-    //Should combine the same Item and show quantity?
-    //  makes "editing" hard tho. if your showing one row for six candles - which are you editing. 
-    //      Make it a dropdown, a sub table, where they can edit specific candles. 
-    //          this would change table, causing a refresh at worse, or a live change which is tough
-    //              refresh is fine, it will open another modal anyway
-
-    //put all buttons on sub row?
-    //  What buttons
-    //      Edit, Delete, Clone(?)
-    //  means an extra click but also saves space on mobile. 
-    //What is on this Subrow, for individual & multiple items?
-    //  Item Name, Buttons
-    //      this item name can be the different one given by user in Edit. 
-
-    //maintain a dict of all items? 
-    //  key = itemname
-    //  value = array of shapes?
-
     var itemDict = {}
 
     Itemlayer.children.forEach(item => {
@@ -776,7 +761,7 @@ function ShowAllItemsModal(){
 
                 //row += item.attrs.itemName + "<br>"
 
-                row += "<tr><td>" + ((item.attrs.altName != "") ?  item.attrs.altName : item.attrs.itemName) + "</td><td> <button class=\"btn btn-info btn-sm btn-block\" onclick=\"ShowItemModal(''," + item._id +")\">Edit</button> </td> <td> <button class=\"btn btn-danger btn-sm btn-block\" onclick=\"\">Delete</button> </td> </tr>"
+                row += "<tr><td>" + ((item.attrs.altName != "" && item.attrs.altName != undefined) ?  item.attrs.altName : item.attrs.itemName) + "</td><td> <button class=\"btn btn-info btn-sm btn-block\" onclick=\"ShowItemModal(''," + item._id +")\">Edit</button> </td> <td> <button class=\"btn btn-danger btn-sm btn-block\" onclick=\"\">Delete</button> </td> </tr>"
 
             });
             

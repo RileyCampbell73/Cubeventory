@@ -17,32 +17,32 @@ function SpawnItemfromJSON(json) {
     
 }
 
-function determineSpawnMethod(index, name, colour, weight)
+function determineSpawnMethod(index, name, colour, weight, altName = "")
 {
     
     switch (index) {
         case 'padded-armor':
-            return spawnPaddedArmor(index, name, colour, weight)
+            return spawnPaddedArmor(index, name, colour, weight, altName)
             break;
         case 'leather-armor':
-            return spawnLeatherArmor(index, name, colour, weight)
+            return spawnLeatherArmor(index, name, colour, weight, altName)
             break;
         case 'studded-leather-armor':
-            return spawnStuddedArmor(index, name, colour, weight)
+            return spawnStuddedArmor(index, name, colour, weight, altName)
             break;
         case 'hide-armor':
-            return spawnHideArmor(index, name, colour, weight)
+            return spawnHideArmor(index, name, colour, weight, altName)
             break;
         case 'chain-shirt':
         case 'breastplate':
-            return spawnChainShirtArmor(index, name, colour, weight)
+            return spawnChainShirtArmor(index, name, colour, weight, altName)
             break;
         case 'shield':
-            return spawnShield(index, name, colour, weight)
+            return spawnShield(index, name, colour, weight, altName)
             break;
         case 'mace':
         case 'battleaxe':
-            return spawnMace(index, name, colour, weight)
+            return spawnMace(index, name, colour, weight, altName)
             break;
         case 'quarterstaff':
         case 'spear':
@@ -50,48 +50,48 @@ function determineSpawnMethod(index, name, colour, weight)
         case 'longsword':
         case 'staff':
         case 'pole-10-foot':
-            return spawnLineItem(index, name, colour, weight)
+            return spawnLineItem(index, name, colour, weight, altName)
             break;
         case 'crossbow-light':
-            return spawnLightCrossbow(index, name, colour, weight)
+            return spawnLightCrossbow(index, name, colour, weight, altName)
             break;
         case 'glaive':
         case 'halberd':
-            return spawnGlaive(index, name, colour, weight)
+            return spawnGlaive(index, name, colour, weight, altName)
             break;
         case 'greataxe':
-            return spawnGreataxe(index, name, colour, weight)
+            return spawnGreataxe(index, name, colour, weight, altName)
             break;
         case 'greatsword':
-            return spawnGreatsword(index, name, colour, weight)
+            return spawnGreatsword(index, name, colour, weight, altName)
             break;
         case 'maul':
-            return spawnMaul(index, name, colour, weight)
+            return spawnMaul(index, name, colour, weight, altName)
             break;
         case 'pike':
         case 'chain-10-feet':
         case 'climbers-kit':
         case 'greatclub':
-            return spawnMultiLineItem(index, name, colour, weight, 2)
+            return spawnMultiLineItem(index, name, colour, weight, 2, altName)
             break;
         case 'crossbow-heavy':// too bulky?
-            return spawnHeavyCrossbow(index, name, colour, weight)
+            return spawnHeavyCrossbow(index, name, colour, weight, altName)
             break;
         case 'crowbar':
-            return spawnCrowbar(index, name, colour, weight)
+            return spawnCrowbar(index, name, colour, weight, altName)
             break;
         case 'pick-miners':
-            return spawnMinersPick(index, name, colour, weight)
+            return spawnMinersPick(index, name, colour, weight, altName)
             break;
         case 'pot-iron':
-            return spawnIronPot(index, name, colour, weight)
+            return spawnIronPot(index, name, colour, weight, altName)
             break;
         case 'rope-hempen-50-feet':
-            return spawnHempRope(index, name, colour, weight)
+            return spawnHempRope(index, name, colour, weight, altName)
             break;
 
         default:
-            return spawnGenericItem(name, weight, colour);
+            return spawnGenericItem(name, weight, colour, altName)
     }
 }
 
