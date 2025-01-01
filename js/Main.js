@@ -577,6 +577,25 @@ function ShowItemModal(itemName = "", itemID = undefined) {
 
 }
 
+function RemoveIteminRow(ItemID, rowIterator){
+
+    $("#"+ItemID).remove();
+
+    var quantity = parseInt($("#ItemRow"+rowIterator+"Quantity").text())
+    var weight = parseFloat($("#ItemRow"+rowIterator+"Weight").text())
+
+    if (quantity == 1){
+        //remove row
+        $("#ItemRow"+rowIterator).remove();
+    }
+    else{
+        quantity--;
+        $("#ItemRow"+rowIterator+"Quantity").text(quantity)
+        //update total weight
+        $("#ItemRow"+rowIterator+"TotalWeight").text(quantity * weight)
+    }
+}
+
 function SpawnGenericItem() {
 
     Itemlayer.add(spawnGenericItem(
@@ -735,50 +754,28 @@ function ShowAllItemsModal(){
 
     });
 
-
-    //sory by weight then name
-    // var sortedItems = Itemlayer.children.sort((itemA, itemB) =>
-    //     itemB.attrs.itemWeight - itemA.attrs.itemWeight ||
-    //     itemA.attrs.itemName.localeCompare(itemB.attrs.itemName)
-    // )
-
-   
     var iterator = 0;
     for (var key in itemDict)
     {
-   
         var row = ""
-        row +=  "<tr data-toggle=\"collapse\" data-target=\"#row"+ iterator +"\" class=\"accordion-toggle collapsed collapse-icon\"> <td><i class=\"material-icons\">keyboard_arrow_right</i></td> <td>"+ key +"</td> <td>"+ itemDict[key].length +"</td> <td>"+ itemDict[key][0].attrs.itemWeight +"</td> <td>"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
+        row +=  "<tr id=\"ItemRow"+iterator+"\" data-toggle=\"collapse\" data-target=\"#row"+ iterator +"\" class=\"accordion-toggle collapsed collapse-icon\"> <td><i class=\"material-icons\">keyboard_arrow_right</i></td> <td>"+ key +"</td> <td id=\"ItemRow"+iterator+"Quantity\">"+ itemDict[key].length +"</td> <td id=\"ItemRow"+iterator+"Weight\">"+ itemDict[key][0].attrs.itemWeight +"</td> <td id=\"ItemRow"+iterator+"TotalWeight\">"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
         
-        // if (itemDict[key].length > 1)
-        // {
-            
-            
-            row +=  "<tr><td colspan=\"5\" class=\"hiddenRow\"><div class=\"accordian-body collapse\" id=\"row"+ iterator +"\">"
-            row += "<table>"
+        row +=  "<tr><td colspan=\"5\" class=\"hiddenRow\"><div class=\"accordian-body collapse\" id=\"row"+ iterator +"\">"
+        row += "<table>"
 
-            itemDict[key].forEach(item => {
+        itemDict[key].forEach(item => {
 
-                //row += item.attrs.itemName + "<br>"
+            row += "<tr id=\""+ item._id +"\"><td>" + ((item.attrs.altName != "" && item.attrs.altName != undefined) ?  item.attrs.altName : item.attrs.itemName) + "</td><td> <button class=\"btn btn-info btn-sm btn-block\" onclick=\"ShowItemModal(''," + item._id +")\">Edit</button> </td> <td> <button class=\"btn btn-danger btn-sm btn-block\" onclick=\"DeleteItemByID("+ item._id +"); RemoveIteminRow("+ item._id +", "+ iterator +")\">Delete</button> </td> </tr>"
 
-                row += "<tr><td>" + ((item.attrs.altName != "" && item.attrs.altName != undefined) ?  item.attrs.altName : item.attrs.itemName) + "</td><td> <button class=\"btn btn-info btn-sm btn-block\" onclick=\"ShowItemModal(''," + item._id +")\">Edit</button> </td> <td> <button class=\"btn btn-danger btn-sm btn-block\" onclick=\"\">Delete</button> </td> </tr>"
-
-            });
-            
-            row += "</table>"
-            row +=  "</div></td></tr>"
-        // }
-        // else{
-        //    //row =  "<tr><td></td> <td>"+ key +"</td> <td>"+ itemDict[key].length +"</td> <td>"+ itemDict[key][0].attrs.itemWeight +"</td> <td>"+ itemDict[key].length * itemDict[key][0].attrs.itemWeight+"</td> </tr>"
-        // }
-
-
+        });
+        
+        row += "</table>"
+        row +=  "</div></td></tr>"
 
         $("#AllItemsTableBody").append(row)
         iterator++;
 
     };
-
 
     $('.collapse').on('show.bs.collapse', function () {
         $('.collapse.in').collapse('hide');

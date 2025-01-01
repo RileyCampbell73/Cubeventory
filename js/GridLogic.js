@@ -211,6 +211,11 @@ function DeleteItem(item){
   unselectAll()
 }
 
+function DeleteItemByID(itemID){
+  var item = Itemlayer.find(item => item._id == itemID)[0]
+  DeleteItem(item)
+}
+
 function InitializeMenu() {
 
   var rotateButton = document.getElementById('rotate-button')
