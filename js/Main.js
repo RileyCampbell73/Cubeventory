@@ -539,8 +539,12 @@ function ShowItemModal(itemName = "", itemID = undefined) {
         //set all the fields
         $('#ItemName')[0].value = item.attrs.itemName
         $('#ItemWeight')[0].value = item.attrs.itemWeight
+        
         if (item.attrs.altName != undefined)
             $('#AltItemName')[0].value = item.attrs.altName
+        else 
+            $('#AltItemName')[0].value = ""
+
         $('#ItemColour')[0].value = item.children.find(x => x.attrs.name == "itemShapes").children[0].attrs.fill
 
         if (item.attrs.complexItem != undefined){
