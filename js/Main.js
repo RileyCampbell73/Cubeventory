@@ -515,6 +515,16 @@ function LoadSaveFile(str) {
     if (json.version == "1.1.1"){
         //missing 'itemWeight' attribute
         DetermineItemWeightByShapes();
+        json.version = "1.1.2"
+    }
+    if (json.version == "1.1.2"){
+        //missing 'itemWeight' and 'itemName' attribute
+        DetermineItemWeightByShapes();
+        Itemlayer.children.forEach(item => {
+            var itemText = item.children.find(x => x.attrs.name == "itemText")
+            item.setAttr("itemName", itemText.children[0].getText())
+        });
+        json.version = "1.2.0"
     }
 
 }
@@ -539,7 +549,7 @@ function ShowItemModal(itemName = "", itemID = undefined) {
         //set all the fields
         $('#ItemName')[0].value = item.attrs.itemName
         $('#ItemWeight')[0].value = item.attrs.itemWeight
-        
+
         if (item.attrs.altName != undefined)
             $('#AltItemName')[0].value = item.attrs.altName
         else 
