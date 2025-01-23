@@ -1,4 +1,4 @@
-var VERSION_NUM = "1.2.0"
+var VERSION_NUM = "1.2.1"
 
 var GUIDELINE_OFFSET = 10;
 var GRID_PADDING = 80;
